@@ -1,10 +1,9 @@
-import TestComponent from "./Components/TestComponent"
-import TestAPI from "./Components/TestAPI"
+// import TestComponent from "./Components/TestComponent"
+import MovieAPI from "./Components/MovieAPI"
 
 function App() {
   return (
-    <TestComponent/>,
-    <TestAPI/>
+    <MovieAPI/>
   );
 }
 
