@@ -18,7 +18,6 @@ sendRequest=(title)=>{
   render() {
       return(
           <div className = "App">
-            {/* <p className="App-intro">{this.state.apiResponse}</p> */}
               <header className="App-header">
               {
               this.state.movies.map((movie) => {
