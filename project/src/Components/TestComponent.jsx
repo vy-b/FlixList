@@ -9,8 +9,8 @@ class TestComponent extends React.Component {
 
     onSubmit(){
         const registered = {
-            username: "TestUsername",
-            password: "TestPassword"
+            username: "TestUsername123",
+            password: "TestPassword123"
         }
         axios.post('http://localhost:3001/signup', registered).then( (response) => {
             console.log(response.data);
