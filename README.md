@@ -11,3 +11,7 @@ API_KEY = '16721c88c9msh639b77d27c7427cp1bc563jsnd47d06966083'
 6. Create a second terminal, and navigate to the project/ directory.
 7. Run the command `npm install`.
 8. Run the command `npm start` to start the front-end.
+
+## Run tests
+1. Navigate a terminal into the project/ directory.
+2. Run the command `npm test`.
