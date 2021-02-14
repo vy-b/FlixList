@@ -11,7 +11,7 @@ class MovieAPI extends React.Component {
 
 sendRequest=(title)=>{
     axios.get("http://localhost:3001/testAPI",{params: {title: title}})
-    .then(res => {const movies = res.data;
+    .then(res => {const movies = res.data; console.log(res.data);
     this.setState({movies});})
 }
 
