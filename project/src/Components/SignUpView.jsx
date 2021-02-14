@@ -19,7 +19,7 @@ export function SignUpView() {
           <Form.Control type="password" placeholder="Password" />
         </Form.Group>
         <Form.Group>
-          <Form.Label>Retype password</Form.Label>
+          <Form.Label>Confirm password</Form.Label>
           <Form.Control type="password" placeholder="Password" />
         </Form.Group>
       </Form>

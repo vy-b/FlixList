@@ -2,6 +2,7 @@ import TestComponent from "./Components/TestComponent"
 import MovieAPI from "./Components/MovieAPI"
 import { SignUpView } from "./Components/SignUpView"
 import './App.css'
+import TopNavView from "./Components/TopNavView"
 function App() {
   return(
   <div className="App">
@@ -9,6 +10,7 @@ function App() {
     <TestComponent />
     <MovieAPI />
     <SignUpView/>
+    <TopNavView />
     </header>
   </div>
   )
