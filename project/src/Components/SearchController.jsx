@@ -3,7 +3,7 @@ import React from 'react';
 import Movie from "./Movie.jsx";
 import Search from "./Search.jsx";
 
-class MovieAPI extends React.Component {
+class SearchController extends React.Component {
   constructor(props) {
     super(props);
     this.state = { movies: [] };
@@ -31,4 +31,4 @@ sendRequest=(title)=>{
   }
 }
 
-export default MovieAPI
+export default SearchController
