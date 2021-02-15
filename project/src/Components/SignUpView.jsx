@@ -2,8 +2,9 @@ import React from 'react';
 import { Button, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-export function SignUpView() {
-  return (
+class SignUpView extends React.Component {
+  render() {
+    return (
     <div className="App">
     <header className="App-header">
       <Form>
@@ -26,8 +27,8 @@ export function SignUpView() {
       <Button type="submit"> Sign Up </Button>
       
     </header>
-  </div>
-  );
+    </div>
+    );
+  }
 }
-
-export default SignUpView;
+export default SignUpView

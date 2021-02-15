@@ -4,7 +4,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import TopNavView from "./Components/TopNavView"
 import TestComponent from "./Components/TestComponent"
 import SearchController from "./Components/SearchController"
-import { SignUpView } from "./Components/SignUpView"
+import SignUpView from "./Components/SignUpView"
 
 function App() {
     return(
