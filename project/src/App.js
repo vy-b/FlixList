@@ -7,18 +7,18 @@ import SearchController from "./Components/SearchController"
 import SignUpView from "./Components/SignUpView"
 
 function App() {
-    return(
-      <React.Fragment>
-        <Router>
-          <TopNavView />
-          <Switch>
-            <Route exact path="/" component={TestComponent} />
-            <Route exact path="/SignUp" component={SignUpView} />
-            <Route exact path="/Search" component={SearchController} />
-          </Switch>
-        </Router>
-      </React.Fragment>
-    )
+  return(
+    <React.Fragment>
+      <Router>
+        <TopNavView />
+        <Switch>
+          <Route exact path="/" component={TestComponent} />
+          <Route exact path="/SignUp" component={SignUpView} />
+          <Route exact path="/Search" component={SearchController} />
+        </Switch>
+      </Router>
+    </React.Fragment>
+  )
 }
 
 export default App;
