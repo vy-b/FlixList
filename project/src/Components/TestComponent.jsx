@@ -18,7 +18,13 @@ class TestComponent extends React.Component {
     }
     
     render(){
-        return <button onClick={this.onSubmit}> Click to test connection to database.</button>
+        return( 
+            <div className="App">
+                <header className="App-header">
+                    <button onClick={this.onSubmit}> Click to test connection to database.</button>
+                </header>
+            </div>
+        )
     }
 
 }

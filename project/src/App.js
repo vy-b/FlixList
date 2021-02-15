@@ -1,19 +1,24 @@
+import './App.css'
+import React from 'react'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import TopNavView from "./Components/TopNavView"
 import TestComponent from "./Components/TestComponent"
 import MovieAPI from "./Components/MovieAPI"
 import { SignUpView } from "./Components/SignUpView"
-import './App.css'
-import TopNavView from "./Components/TopNavView"
+
 function App() {
-  return(
-  <div className="App">
-    <header className="App-header">
-    <TestComponent />
-    <MovieAPI />
-    <SignUpView/>
-    <TopNavView />
-    </header>
-  </div>
-  )
+    return(
+      <React.Fragment>
+        <Router>
+          <TopNavView />
+          <Switch>
+            <Route exact path="/" component={TestComponent} />
+            <Route exact path="/SignUp" component={SignUpView} />
+            <Route exact path="/Search" component={MovieAPI} />
+          </Switch>
+        </Router>
+      </React.Fragment>
+    )
 }
 
 export default App;
