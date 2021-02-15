@@ -5,7 +5,6 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 router.get('/testAPI', function(req, res, next) {
-  // res.send("success")
     const target = req.query.title;
 
     axios.request({

@@ -13,6 +13,7 @@ class Movie extends React.Component {
                    <img src={Poster} alt="movie cover"/>
                </div>
            </div>
+
        )
    }
 }
