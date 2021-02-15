@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import Movie from "./Movie.jsx";
-import Search from "./Search.jsx";
+import SearchView from "./SearchView.jsx";
 
 class SearchController extends React.Component {
   constructor(props) {
@@ -11,11 +11,8 @@ class SearchController extends React.Component {
 
 sendRequest=(title)=>{
     axios.get("http://localhost:3001/testAPI",{params: {title: title}})
-    .then(res => {
-        const movies = res.data; 
-        console.log(res.data);
-        this.setState({movies});
-    })
+    .then(res => {const movies = res.data;
+    this.setState({movies});})
 }
 
   render() {
@@ -23,12 +20,11 @@ sendRequest=(title)=>{
           <div className = "App">
               <header className="App-header">
               {
-              this.state.movies.map(
-                  (movie) => {
-                    return <Movie {...movie}/>
-                  })
+              this.state.movies.map((movie) => {
+              return <Movie {...movie}/>
+              })
               }
-              <Search onRequest={this.sendRequest}/>
+              <SearchView onRequest={this.sendRequest}/>
               </header>
           </div>
       )

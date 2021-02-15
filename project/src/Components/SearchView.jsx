@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Search extends React.Component {
+class SearchView extends React.Component {
    state= {
        title: ''
    }
@@ -24,4 +24,4 @@ class Search extends React.Component {
        )
    }
 }
-export default Search;
+export default SearchView;
