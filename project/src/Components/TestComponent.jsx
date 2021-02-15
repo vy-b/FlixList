@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import UserTableEntry from '../Objects/UserTableEntry'
+import RatingTableEntry from '../Objects/RatingTableEntry'
 
 class TestComponent extends React.Component {
     constructor(){
@@ -8,11 +10,8 @@ class TestComponent extends React.Component {
     }
 
     onSubmit(){
-        const registered = {
-            username: "TestUsername123",
-            password: "TestPassword123"
-        }
-        axios.post('http://localhost:3001/signup', registered).then( (response) => {
+        var user = new UserTableEntry('testUsername', 'testPassword');
+        axios.post('http://localhost:3001/signup', user).then( (response) => {
             console.log(response.data);
         });
     }
