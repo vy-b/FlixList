@@ -29,4 +29,18 @@ function getFriends(username){
     });
 }
 
-export {addFriend, getFriends}
+function addRating(ratingTableEntry){
+    return new Promise((resolve, reject) => {
+        axios.post('http://localhost:3001/addRating', ratingTableEntry).then( (response) => {
+            if(response.status === 200){
+                resolve(response);
+            }else{
+                reject(response);
+            }
+        }).catch( err => {
+            reject(err);
+        });
+    });
+}
+
+export {addFriend, getFriends, addRating}

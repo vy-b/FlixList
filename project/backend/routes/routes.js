@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const signupTemplateCopy = require('../models/signup.js')
+const signupTemplateCopy = require('../models/signup.js');
 const friendTableEntry = require('../models/FriendTableEntry');
-const axios = require('axios')
+const ratingTableEntry = require('../models/RatingTableEntry');
+const axios = require('axios');
 const dotenv = require('dotenv');
 dotenv.config();
 
@@ -34,6 +35,19 @@ router.get('/getFriends', (req, res, next) => {
     friendTableEntry.find({username: req.query.username}).exec().then(doc => {
         res.json(doc)
     }).catch( err => console.log(err));
+})
+
+router.post('/addRating', (request, response) => {
+    const ratingEntry = new ratingTableEntry({
+        movieId: request.body.movieId,
+        username: request.body.username,
+        rating: request.body.rating
+    })
+    ratingEntry.save().then(data => {
+        response.json(data);
+    }).catch( error => {
+        response.json(error);
+    });
 })
 
 router.get('/testAPI', function(req, res, next) {
