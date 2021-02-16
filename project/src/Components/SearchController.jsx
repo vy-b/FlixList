@@ -11,7 +11,7 @@ class SearchController extends React.Component {
 
 sendRequest=(title)=>{
     axios.get("http://localhost:3001/testAPI",{params: {title: title}})
-    .then(res => {const movies = res.data;
+    .then(res => {const movies = res.data; console.log(res.data);
     this.setState({movies});})
 }
 
@@ -19,12 +19,12 @@ sendRequest=(title)=>{
       return(
           <div className = "App">
               <header className="App-header">
+              <SearchView onRequest={this.sendRequest}/>
               {
               this.state.movies.map((movie) => {
               return <Movie {...movie}/>
               })
               }
-              <SearchView onRequest={this.sendRequest}/>
               </header>
           </div>
       )
