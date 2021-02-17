@@ -6,7 +6,7 @@ class LoginView extends React.Component{
     render(){
         return(
             <div className = "App">
-            <header className = "App-Header">
+            <header className = "App-header">
                 <Form>
                     <Form.Group>
                         <Form.Label>Username</Form.Label>
