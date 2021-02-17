@@ -1,18 +1,22 @@
 import React from 'react';
-import { Button, Form } from "react-bootstrap";
+import { Alert, Breadcrumb, Button, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import './SignUp.css'
 class SignUpView extends React.Component {
   constructor(props){
+    
     super(props)
     this.state = {
         username: '',
         password: '',
-        confirmPassword:''
+        confirmPassword:'',
+        redirect:'/'
     }
     this.changeUsername = this.changeUsername.bind(this)
     this.changePassword = this.changePassword.bind(this)
     this.changeConfirmPassword = this.changeConfirmPassword.bind(this)
   }
+  
 
   changeUsername(event){
     event.preventDefault();
@@ -41,18 +45,17 @@ class SignUpView extends React.Component {
       confirmPassword: this.state.confirmPassword
     }
     this.props.onSignUp(signUpUser);
-    this.setState({
-      username:'',
-      password:'',
-      confirmPassword:''
-    })
+
 
   }
 
-  render() {
+  render(props) {
+    const {errorMessage} = this.props;
     return (
+      
     <div className="App">
     <header className="App-header">
+    
       <Form>
         <Form.Group>
           <Form.Label>Username</Form.Label>
@@ -70,7 +73,14 @@ class SignUpView extends React.Component {
           <Form.Control type="password" placeholder="Confirm Password" onChange={this.changeConfirmPassword}/>
         </Form.Group>
       </Form>
-      <Button type="submit" onClick={this.onSubmit}> Sign Up </Button>
+      <Button type="submit" onClick={this.onSubmit} > Sign Up </Button>
+      {
+        errorMessage==='success'
+        ? <Breadcrumb  className="error"><Breadcrumb.Item href="#login">login</Breadcrumb.Item></Breadcrumb>
+        : <div className="error">{errorMessage}</div>
+      }
+      
+
       
     </header>
     </div>
