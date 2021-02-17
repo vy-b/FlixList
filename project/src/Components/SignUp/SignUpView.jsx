@@ -9,8 +9,7 @@ class SignUpView extends React.Component {
     this.state = {
         username: '',
         password: '',
-        confirmPassword:'',
-        redirect:'/'
+        confirmPassword:''
     }
     this.changeUsername = this.changeUsername.bind(this)
     this.changePassword = this.changePassword.bind(this)
