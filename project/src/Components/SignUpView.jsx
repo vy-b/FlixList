@@ -1,10 +1,9 @@
 import React from 'react';
 import { Button, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-
 class SignUpView extends React.Component {
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state = {
         username: '',
         password: '',
@@ -16,17 +15,20 @@ class SignUpView extends React.Component {
   }
 
   changeUsername(event){
+    event.preventDefault();
     this.setState({
         username:event.target.value
     })
   }
 
   changePassword(event){
+    event.preventDefault();
     this.setState({
         password:event.target.value
     })
   }
   changeConfirmPassword(event){
+    event.preventDefault();
     this.setState({
         confirmPassword:event.target.value
     })
@@ -38,8 +40,13 @@ class SignUpView extends React.Component {
       password: this.state.password,
       confirmPassword: this.state.confirmPassword
     }
-    console.log(signUpUser)
     this.props.onSignUp(signUpUser);
+    this.setState({
+      username:'',
+      password:'',
+      confirmPassword:''
+    })
+
   }
 
   render() {

@@ -9,6 +9,7 @@ import SignUpController from "./Components/SignUpController"
 function App() {
   return(
     <React.Fragment>
+
       <Router>
         <TopNavView />
         <Switch>

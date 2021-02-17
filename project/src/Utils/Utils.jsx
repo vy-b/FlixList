@@ -29,4 +29,21 @@ function getFriends(username){
     });
 }
 
-export {addFriend, getFriends}
+// Returns an array of users
+function getUser(username){
+    return new Promise((resolve, reject) => {
+        axios.get('http://localhost:3001/getUser', {params: {username: username}}).then( (response) => {
+            if(response.status === 200){
+                resolve(response.data.map(result => result.username));
+            }else{
+                reject(response);
+            }    
+        }).catch( err => {
+            reject(err);
+        });
+    });
+}
+
+
+
+export {addFriend, getFriends, getUser}
