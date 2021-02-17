@@ -1,10 +1,11 @@
 import React from 'react';
-import { Alert, Breadcrumb, Button, Form } from "react-bootstrap";
+import { Breadcrumb, Button, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import './SignUp.css'
+
 class SignUpView extends React.Component {
-  constructor(props){
-    super(props)
+  constructor(){
+    super()
     this.state = {
         username: '',
         password: '',
@@ -44,11 +45,9 @@ class SignUpView extends React.Component {
       confirmPassword: this.state.confirmPassword
     }
     this.props.onSignUp(signUpUser);
-
-
   }
 
-  render(props) {
+  render() {
     const {errorMessage} = this.props;
     return (
       
@@ -72,20 +71,17 @@ class SignUpView extends React.Component {
           <Form.Control type="password" placeholder="Confirm Password" onChange={this.changeConfirmPassword}/>
         </Form.Group>
       </Form>
-      <Button type="submit" onClick={this.onSubmit} > Sign Up </Button>
+      <Button type="submit" onClick={this.onSubmit} href="/Login"> Sign Up </Button>
       {
-        errorMessage==='success'
+        errorMessage==="You're signed up! Click the link below to login."
         ? <div className="error">
-          {errorMessage} 
+          {errorMessage}
           <Breadcrumb  className="error">
-            <Breadcrumb.Item href="#login">login</Breadcrumb.Item>
+            <Breadcrumb.Item href="/Login">login</Breadcrumb.Item>
           </Breadcrumb>
           </div>
         : <div className="error">{errorMessage}</div>
       }
-      
-
-      
     </header>
     </div>
     );

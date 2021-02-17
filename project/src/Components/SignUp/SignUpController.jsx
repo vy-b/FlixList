@@ -1,8 +1,7 @@
 import React from 'react';
 import SignUpView from './SignUpView'
 import axios from 'axios'
-import {getUser} from '../Utils/Utils';
-// import Alert from 'react-bootstrap/Alert';
+import {getUser} from '../../Utils/Utils';
 
 class SignUpController extends React.Component {
     constructor(props){
@@ -28,7 +27,7 @@ class SignUpController extends React.Component {
                     this.setState({errorMessage: 'passwords must be 6 characters or more'})
                 }
                 else{
-                    this.setState({errorMessage: 'success'})
+                    this.setState({errorMessage: "You're signed up! Click the link below to login."})
                     resolve(axios.post('http://localhost:3001/signup', signUpUser))
                 }    
             }).catch( err => {

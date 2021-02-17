@@ -4,8 +4,8 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import TopNavView from "./Components/TopNavView"
 import TestComponent from "./Components/TestComponent"
 import SearchController from "./Components/SearchController"
-import SignUpController from "./Components/SignUpController"
-
+import SignUpController from "./Components/SignUp/SignUpController"
+import LoginView from "./Components/LoginView"
 function App() {
   return(
     <React.Fragment>
@@ -16,6 +16,7 @@ function App() {
           <Route exact path="/" component={TestComponent} />
           <Route exact path="/SignUp" component={SignUpController} />
           <Route exact path="/Search" component={SearchController} />
+          <Route exact path="/Login" component={LoginView} />
         </Switch>
       </Router>
     </React.Fragment>
