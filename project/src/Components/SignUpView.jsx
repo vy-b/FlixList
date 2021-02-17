@@ -4,7 +4,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import './SignUp.css'
 class SignUpView extends React.Component {
   constructor(props){
-    
     super(props)
     this.state = {
         username: '',
@@ -76,7 +75,12 @@ class SignUpView extends React.Component {
       <Button type="submit" onClick={this.onSubmit} > Sign Up </Button>
       {
         errorMessage==='success'
-        ? <Breadcrumb  className="error"><Breadcrumb.Item href="#login">login</Breadcrumb.Item></Breadcrumb>
+        ? <div className="error">
+          {errorMessage} 
+          <Breadcrumb  className="error">
+            <Breadcrumb.Item href="#login">login</Breadcrumb.Item>
+          </Breadcrumb>
+          </div>
         : <div className="error">{errorMessage}</div>
       }
       
