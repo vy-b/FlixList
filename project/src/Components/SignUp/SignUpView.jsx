@@ -1,5 +1,5 @@
 import React from 'react';
-import { Breadcrumb, Button, Form } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import './SignUp.css'
 
@@ -71,17 +71,10 @@ class SignUpView extends React.Component {
           <Form.Control type="password" placeholder="Confirm Password" onChange={this.changeConfirmPassword}/>
         </Form.Group>
       </Form>
-      <Button type="submit" onClick={this.onSubmit} href="/Login"> Sign Up </Button>
-      {
-        errorMessage==="You're signed up! Click the link below to login."
-        ? <div className="error">
-          {errorMessage}
-          <Breadcrumb  className="error">
-            <Breadcrumb.Item href="/Login">login</Breadcrumb.Item>
-          </Breadcrumb>
-          </div>
-        : <div className="error">{errorMessage}</div>
-      }
+      <Button type="submit" onClick={this.onSubmit} > Sign Up </Button>
+      <div className="error">Already have an account? <a href="Login">Login</a> </div>
+      <div className="error">{errorMessage}</div>
+      
     </header>
     </div>
     );

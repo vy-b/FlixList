@@ -27,8 +27,8 @@ class SignUpController extends React.Component {
                     this.setState({errorMessage: 'passwords must be 6 characters or more'})
                 }
                 else{
-                    this.setState({errorMessage: "You're signed up! Click the link below to login."})
                     resolve(axios.post('http://localhost:3001/signup', signUpUser))
+                    this.redirectToHome();
                 }    
             }).catch( err => {
                 reject(err);
@@ -36,6 +36,10 @@ class SignUpController extends React.Component {
         });
     }
     
+    redirectToHome = () => {
+        this.props.history.push('/Login');
+    }
+
     render() {
         return (
             <SignUpView onSignUp={this.sendSignUp} errorMessage={this.state.errorMessage} success={this.state.success}/>
