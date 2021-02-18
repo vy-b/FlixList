@@ -5,6 +5,7 @@ import TopNavView from "./Components/TopNavView"
 import TestComponent from "./Components/TestComponent"
 import SearchController from "./Components/SearchController"
 import SignUpView from "./Components/SignUpView"
+import LoginView from "./Components/LoginView"
 
 function App() {
   return(
@@ -14,6 +15,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={TestComponent} />
           <Route exact path="/SignUp" component={SignUpView} />
+          <Route exact path="/Login" component={LoginView} />
           <Route exact path="/Search" component={SearchController} />
         </Switch>
       </Router>
