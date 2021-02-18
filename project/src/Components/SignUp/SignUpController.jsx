@@ -46,7 +46,7 @@ class SignUpController extends React.Component {
 
     render() {
         return (
-            <SignUpView onSignUp={this.sendSignUp} errorMessage={this.state.errorMessage} success={this.state.success}/>
+            <SignUpView onSignUp={this.sendSignUp} errorMessage={this.state.errorMessage}/>
         )
     }
 }
