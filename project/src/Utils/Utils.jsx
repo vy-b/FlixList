@@ -50,7 +50,7 @@ function getRatings(movieId, usernameList){
         usernameList: usernameList
     }
     return new Promise((resolve, reject) => {
-        axios.get('http://localhost:3001/getRating', {params: searchParamaters}).then( (response) => {
+        axios.get('http://localhost:3001/getRatings', {params: searchParamaters}).then( (response) => {
             if(response.status === 200){
                 resolve(response.data.map(result => {
                     return new RatingTableEntry(result.movieId, result.username, result.rating.stars, result.rating.review);

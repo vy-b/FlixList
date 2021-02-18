@@ -38,10 +38,11 @@ router.get('/getFriends', (req, res, next) => {
 })
 
 router.post('/addRating', (request, response) => {
+    const {movieId, username, rating} = request.body;
     const ratingEntry = new ratingTableEntry({
-        movieId: request.body.movieId,
-        username: request.body.username,
-        rating: request.body.rating
+        movieId: movieId,
+        username: username,
+        rating: rating
     })
     ratingEntry.save().then(data => {
         response.json(data);
