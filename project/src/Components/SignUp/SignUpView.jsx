@@ -64,6 +64,9 @@ class SignUpView extends React.Component {
         <Form.Group>
           <Form.Label>Password</Form.Label>
           <Form.Control type="password" placeholder="Password" onChange={this.changePassword}/>
+          <Form.Text className="text-muted" >
+            Password should be at least 6 characters
+          </Form.Text>
         </Form.Group>
         <Form.Group>
           <Form.Label>Confirm password</Form.Label>

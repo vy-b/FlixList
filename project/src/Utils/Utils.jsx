@@ -29,12 +29,12 @@ function getFriends(username){
     });
 }
 
-// Returns an array of users
+// Returns user
 function getUser(username){
     return new Promise((resolve, reject) => {
         axios.get('http://localhost:3001/getUser', {params: {username: username}}).then( (response) => {
             if(response.status === 200){
-                resolve(response.data.map(result => result.username));
+                resolve(response);
             }else{
                 reject(response);
             }    
