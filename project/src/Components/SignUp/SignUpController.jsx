@@ -20,14 +20,14 @@ class SignUpController extends React.Component {
             getUser(username).then( (response) => {
                 if(response.length !== 0){
                     this.setState({errorMessage: 'username taken'})
-                    reject(response)
+                    reject(this.state.errorMessage)
                 }
                 else if(password !== confirmPassword){
                     this.setState({errorMessage: "passwords don't match"})
-                    reject(response)
+                    reject(this.state.errorMessage)
                 }else if (password.length < 6){
                     this.setState({errorMessage: 'passwords must be 6 characters or more'})
-                    reject(response)
+                    reject(this.state.errorMessage)
                 }
                 else{
                     resolve(axios.post('http://localhost:3001/signup', signUpUser))
