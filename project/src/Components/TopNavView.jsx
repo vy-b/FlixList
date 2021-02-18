@@ -3,7 +3,7 @@ import {Nav, Navbar, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {Link} from 'react-router-dom'
 import {FaSearch} from 'react-icons/fa';
-import FlixListLogo from '../Logos/Logo2.svg';
+import FlixListLogo from '../Logos/Logo.svg';
 
 class TopNavView extends React.Component {
     render() {
