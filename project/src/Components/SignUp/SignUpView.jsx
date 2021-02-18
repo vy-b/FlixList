@@ -70,9 +70,10 @@ class SignUpView extends React.Component {
           <Form.Control type="password" placeholder="Confirm Password" onChange={this.changeConfirmPassword}/>
         </Form.Group>
       </Form>
-      <Button type="submit" onClick={this.onSubmit} > Sign Up </Button>
-      <div className="error">Already have an account? <a href="Login">Login</a> </div>
       <div className="error">{errorMessage}</div>
+      <Button className="button" type="submit" onClick={this.onSubmit} > Sign Up </Button>
+      <div className="words">Already have an account? <a href="Login">Login</a> </div>
+      
       
     </header>
     </div>

@@ -38,9 +38,9 @@ function getUser(username){
             }else{
                 reject(response);
             }    
+        })
         }).catch( err => {
-            reject(err);
-        });
+            console.log(err);
     });
 }
 
