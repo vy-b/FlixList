@@ -34,7 +34,7 @@ router.post('/addFriend', (request, response) => {
 router.get('/getFriends', (req, res, next) => {
     friendTableEntry.find({username: req.query.username}).exec().then(doc => {
         res.json(doc)
-    }).catch( err => console.log(err));
+    }).catch( err => res.json(err));
 })
 
 router.post('/addRating', (request, response) => {
@@ -48,6 +48,12 @@ router.post('/addRating', (request, response) => {
     }).catch( error => {
         response.json(error);
     });
+})
+
+router.get('/getRatings', (req, res, next) => {
+    ratingTableEntry.find({movieId: req.query.movieId, username: {$in: req.query.usernameList}}).exec().then(doc => {
+        res.json(doc)
+    }).catch( err => res.json(err));
 })
 
 router.get('/testAPI', function(req, res, next) {
