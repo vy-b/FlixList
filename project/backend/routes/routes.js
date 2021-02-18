@@ -18,6 +18,12 @@ router.post('/signup', (request, response) => {
     });
 });
 
+router.get('/getUser', (req, res, next) =>{
+    signupTemplateCopy.findOne({username: req.query.username}).exec().then(doc => {
+        res.json(doc)
+    }).catch( err => console.log(err));
+})
+
 router.post('/addFriend', (request, response) => {
     const friendEntry = new friendTableEntry({
         username: request.body.username,

@@ -19,12 +19,12 @@ sendRequest=(title)=>{
       return(
           <div className = "App">
               <header className="App-header">
+              <SearchView onRequest={this.sendRequest}/>
               {
               this.state.movies.map((movie) => {
               return <Movie {...movie}/>
               })
               }
-              <SearchView onRequest={this.sendRequest}/>
               </header>
           </div>
       )
