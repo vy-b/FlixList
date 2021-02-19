@@ -1,0 +1,19 @@
+.error{
+    font-size: calc(5px + 1vmin);
+    color: red;
+}
+
+.words{
+    text-align: auto;
+    margin-top:10px;
+    font-size: calc(5px + 1vmin);
+    opacity: 0.5;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.button{
+    margin-top:10px
+}

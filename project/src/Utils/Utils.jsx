@@ -62,4 +62,18 @@ function getRatings(movieId, usernameList){
     }).catch(err => console.log(err));
 }
 
-export {addFriend, getFriends, addRating, getRatings}
+
+// Returns user
+function getUser(username){
+    return new Promise((resolve, reject) => {
+        axios.get('http://localhost:3001/getUser', {params: {username: username}}).then( (response) => {
+            if(response.status === 200){
+                resolve(response);
+            }else{
+                reject(response);
+            }
+        });
+    }).catch(err => console.log(err));
+}
+
+export {addFriend, getFriends, getUser, addRating, getRatings}

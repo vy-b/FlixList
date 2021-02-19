@@ -10,7 +10,7 @@ class TestComponent extends React.Component {
 
     onSubmit(){
         addRating(new RatingTableEntry('testId', 'bob', 4, 'Decent.'));
-        getRatings('testId', ['testUsername', 'testUsername1']).then( response => {
+        getRatings('testId', ['testUsername', 'testUsername1', 'bob']).then( response => {
             console.log(response);
         }).catch(err => console.log(err));
     }
