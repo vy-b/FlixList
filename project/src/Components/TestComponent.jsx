@@ -1,5 +1,6 @@
 import React from 'react';
-import {getFriends} from '../Utils/Utils';
+import RatingTableEntry from '../Objects/RatingTableEntry';
+import {addRating, getRatings} from '../Utils/Utils';
 
 class TestComponent extends React.Component {
     constructor(){
@@ -8,9 +9,10 @@ class TestComponent extends React.Component {
     }
 
     onSubmit(){
-        getFriends('testUsername').then( response => {
+        addRating(new RatingTableEntry('testId', 'bob', 4, 'Decent.'));
+        getRatings('testId', ['testUsername', 'testUsername1', 'bob']).then( response => {
             console.log(response);
-        });
+        }).catch(err => console.log(err));
     }
     
     render(){
