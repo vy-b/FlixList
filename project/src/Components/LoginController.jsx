@@ -42,7 +42,6 @@ class LoginController extends React.Component {
 
     render() {
         return (
-            
             <LoginView onLogin={this.sendLogin} errorMessage={this.state.errorMessage}/>
         )
     }
