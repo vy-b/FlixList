@@ -9,7 +9,6 @@ import LoginController from "./Components/LoginController"
 
 function App() {
   const [username,setUsername] = useState('')
-  console.log(username)
   return(
     <React.Fragment>
 

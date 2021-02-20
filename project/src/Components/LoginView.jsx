@@ -46,8 +46,6 @@ class LoginView extends React.Component{
                         <Form.Label>Username</Form.Label>
                         <Form.Control type="username" placeholder="examplename123" onChange={this.changeUsername}/>
                     </Form.Group>
-
-
                     <Form.Group>
                         <Form.Label>Password</Form.Label>
                         <Form.Control type = "password" placeholder = "Password" onChange={this.changePassword}/>
