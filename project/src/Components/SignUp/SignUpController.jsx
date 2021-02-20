@@ -18,7 +18,6 @@ class SignUpController extends React.Component {
 
         new Promise((resolve, reject) => {
             getUser(username).then( (response) => {
-                console.log(response)
                 if(response.data !== null){
                     this.setState({errorMessage: 'username taken'})
                     reject(this.state.errorMessage)
