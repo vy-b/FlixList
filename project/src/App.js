@@ -15,7 +15,7 @@ function App() {
         <TopNavView />
         <Switch>
           <Route exact path="/" component={TestComponent} />
-          <Route exact path="/SignUp" component={SignUpController} />
+          <Route exact path="/SignUp" component={SignUpController}/>
           <Route exact path="/Login" component={LoginView} />
           <Route exact path="/Search" component={SearchController} />
         </Switch>

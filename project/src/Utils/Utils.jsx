@@ -76,4 +76,30 @@ function getUser(username){
     }).catch(err => console.log(err));
 }
 
-export {addFriend, getFriends, getUser, addRating, getRatings}
+// Returns the movie results from the search query.
+function getSearchResults(movieTitle){
+    return new Promise((resolve, reject) => {
+        axios.get('http://localhost:3001/getSearchResults', {params: {title: movieTitle}}).then( (response) => {
+            if(response.status === 200){
+                resolve(response.data);
+            }else{
+                reject(response);
+            }
+        });
+    }).catch(err => console.log(err));
+}
+
+// Returns a MovieTableEntry object.
+function getMovieDetails(imdbID){
+    return new Promise((resolve, reject) => {
+        axios.get('http://localhost:3001/getMovieDetails', {params: {imdbID: imdbID}}).then( (response) => {
+            if(response.status === 200){
+                resolve(response.data);
+            }else{
+                reject(response);
+            }
+        });
+    }).catch(err => console.log(err));
+}
+
+export {addFriend, getFriends, getUser, addRating, getRatings, getSearchResults, getMovieDetails}

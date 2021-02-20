@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const signupTemplate = new mongoose.Schema({
+const userTableEntry = new mongoose.Schema({
     username: {
         type: String,
         require: true
@@ -8,12 +8,8 @@ const signupTemplate = new mongoose.Schema({
     password: {
         type: String,
         require: true
-    },
-    date: {
-        type: Date,
-        default: Date.now
     }
 })
 
 
-module.exports = mongoose.model('signup', signupTemplate);
+module.exports = mongoose.model('Users', userTableEntry);

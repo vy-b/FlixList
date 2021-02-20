@@ -31,7 +31,7 @@ class SignUpController extends React.Component {
                     reject(this.state.errorMessage)
                 }
                 else{
-                    resolve(axios.post('http://localhost:3001/signup', signUpUser))
+                    resolve(axios.post('http://localhost:3001/addUser', signUpUser))
                     this.redirectToHome();
                 }    
             })
