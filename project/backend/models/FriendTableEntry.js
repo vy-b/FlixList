@@ -3,11 +3,11 @@ const mongoose = require('mongoose');
 const friendTableEntry = new mongoose.Schema({
     username: {
         type: String,
-        require: true
+        required: true
     },
     friendUsername: {
         type: String,
-        require: true
+        required: true
     }
 })
 

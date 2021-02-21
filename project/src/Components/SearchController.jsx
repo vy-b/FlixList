@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React from 'react';
 import { getSearchResults, getMovieDetails } from '../Utils/Utils.jsx';
 import Movie from "./Movie.jsx";

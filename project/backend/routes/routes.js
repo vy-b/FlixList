@@ -5,6 +5,7 @@ const friendTableEntry = require('../models/FriendTableEntry');
 const ratingTableEntry = require('../models/RatingTableEntry');
 const axios = require('axios');
 const dotenv = require('dotenv');
+const movieTableEntry = require('../models/MovieTableEntry.js');
 dotenv.config();
 
 router.post('/addUser', (request, response) => {
@@ -80,7 +81,7 @@ router.get('/getSearchResults', function(req, res, next) {
     });
 });
 
-router.get('/getMovieDetails', function(req, res, next) {
+router.get('/getRapidApiMovieDetails', function(req, res, next) {
     const target = req.query.imdbID;
     axios.request({
       method: 'GET',
@@ -96,5 +97,31 @@ router.get('/getMovieDetails', function(req, res, next) {
     	console.error(error);
     });
 });
+
+router.get('/getTableMovieDetails', function(req, res, next) {
+    movieTableEntry.findOne({imdbID: req.query.imdbID}).exec().then( doc => {
+        res.json(doc);
+    }).catch(err => res.json(err));
+});
+
+router.post('/addMovieDetails', (request, response) => {
+    const {imdbID, title, plot, poster, rated, year, runtime, genre, actors} = request.body;
+    const movieEntry = new movieTableEntry({
+        imdbID: imdbID,
+        title: title,
+        plot: plot,
+        poster: poster,
+        rated: rated,
+        year: year,
+        runtime: runtime,
+        genre: genre,
+        actors: actors
+    })
+    movieEntry.save().then(data => {
+        response.json(data);
+    }).catch( error => {
+        response.json(error);
+    });
+})
 
 module.exports = router;

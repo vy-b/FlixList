@@ -1,4 +1,5 @@
 import axios from 'axios';
+import MovieTableEntry from '../Objects/MovieTableEntry';
 import RatingTableEntry from '../Objects/RatingTableEntry';
 
 function addFriend(friendTableEntry){
@@ -92,13 +93,26 @@ function getSearchResults(movieTitle){
 // Returns a MovieTableEntry object.
 function getMovieDetails(imdbID){
     return new Promise((resolve, reject) => {
-        axios.get('http://localhost:3001/getMovieDetails', {params: {imdbID: imdbID}}).then( (response) => {
-            if(response.status === 200){
+        // First search our own movie table in mongoDB
+        axios.get('http://localhost:3001/getTableMovieDetails', {params: {imdbID: imdbID}}).then( (response) => {
+            if(response.status === 200 && response.data){
                 resolve(response.data);
             }else{
-                reject(response);
+                // If can't find in mongoDB, get from rapidApi
+                axios.get('http://localhost:3001/getRapidApiMovieDetails', {params: {imdbID: imdbID}}).then( (response) => {
+                    console.log(response);
+                    if(response.status === 200 && response.data){
+                        const {imdbID, Title, Plot, Poster, Rated, Year, Runtime, Genre, Actors} = response.data;
+                        const movieTableEntry = new MovieTableEntry(imdbID, Title, Plot, Poster, Rated, Year, Runtime, Genre, Actors);
+                        // Add result to mongoDB for next time.
+                        axios.post('http://localhost:3001/addMovieDetails', movieTableEntry).catch( err => console.log(err));
+                        resolve(movieTableEntry);
+                    }else{
+                        reject(response);
+                    }
+                }).catch(err => reject(err));
             }
-        });
+        }).catch(err => reject(err));
     }).catch(err => console.log(err));
 }
 

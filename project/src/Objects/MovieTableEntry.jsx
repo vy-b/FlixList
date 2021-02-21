@@ -1,5 +1,5 @@
-function MovieTableEntry(movieId, title, plot, poster, rated, year, runtime, genre, actors){
-    this.movieId = movieId;
+function MovieTableEntry(imdbID, title, plot, poster, rated, year, runtime, genre, actors){
+    this.imdbID = imdbID;
     this.title = title;
     this.plot = plot;
     this.poster = poster;
