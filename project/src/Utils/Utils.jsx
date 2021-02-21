@@ -100,7 +100,6 @@ function getMovieDetails(imdbID){
             }else{
                 // If can't find in mongoDB, get from rapidApi
                 axios.get('http://localhost:3001/getRapidApiMovieDetails', {params: {imdbID: imdbID}}).then( (response) => {
-                    console.log(response);
                     if(response.status === 200 && response.data){
                         const {imdbID, Title, Plot, Poster, Rated, Year, Runtime, Genre, Actors} = response.data;
                         const movieTableEntry = new MovieTableEntry(imdbID, Title, Plot, Poster, Rated, Year, Runtime, Genre, Actors);
