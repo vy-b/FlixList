@@ -1,14 +1,15 @@
 const mongoose = require('mongoose');
 
-const friendTableEntry = new mongoose.Schema({
+const userTableEntry = new mongoose.Schema({
     username: {
         type: String,
         required: true
     },
-    friendUsername: {
+    password: {
         type: String,
         required: true
     }
 })
 
-module.exports = mongoose.model('Friends', friendTableEntry);
+
+module.exports = mongoose.model('Users', userTableEntry);

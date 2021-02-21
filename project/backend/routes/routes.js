@@ -1,18 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const signupTemplateCopy = require('../models/signup.js');
+const userTableEntry = require('../models/UserTableEntry.js');
 const friendTableEntry = require('../models/FriendTableEntry');
 const ratingTableEntry = require('../models/RatingTableEntry');
 const axios = require('axios');
 const dotenv = require('dotenv');
+const movieTableEntry = require('../models/MovieTableEntry.js');
 dotenv.config();
 
-router.post('/signup', (request, response) => {
-    const signupUser = new signupTemplateCopy({
+router.post('/addUser', (request, response) => {
+    const user = new userTableEntry({
         username: request.body.username,
         password: request.body.password
     })
-    signupUser.save().then(data => {
+    user.save().then(data => {
         response.json(data);
     }).catch( error => {
         response.json(error);
@@ -20,7 +21,7 @@ router.post('/signup', (request, response) => {
 });
 
 router.get('/getUser', (req, res, next) =>{
-    signupTemplateCopy.findOne({username: req.query.username}).exec().then(doc => {
+    userTableEntry.findOne({username: req.query.username}).exec().then(doc => {
         res.json(doc)
     }).catch( err => console.log(err));
 })
@@ -63,7 +64,7 @@ router.get('/getRatings', (req, res, next) => {
     }).catch( err => res.json(err));
 })
 
-router.get('/testAPI', function(req, res, next) {
+router.get('/getSearchResults', function(req, res, next) {
     const target = req.query.title;
     axios.request({
       method: 'GET',
@@ -79,5 +80,48 @@ router.get('/testAPI', function(req, res, next) {
     	console.error(error);
     });
 });
+
+router.get('/getRapidApiMovieDetails', function(req, res, next) {
+    const target = req.query.imdbID;
+    axios.request({
+      method: 'GET',
+      url: 'https://movie-database-imdb-alternative.p.rapidapi.com/',
+      params: {i: target, r: 'json'},
+      headers: {
+        'x-rapidapi-key': process.env.API_KEY,
+        'x-rapidapi-host': 'movie-database-imdb-alternative.p.rapidapi.com'
+      }
+    }).then(movie=> {
+    	res.json(movie.data);
+    }).catch(function (error) {
+    	console.error(error);
+    });
+});
+
+router.get('/getTableMovieDetails', function(req, res, next) {
+    movieTableEntry.findOne({imdbID: req.query.imdbID}).exec().then( doc => {
+        res.json(doc);
+    }).catch(err => res.json(err));
+});
+
+router.post('/addMovieDetails', (request, response) => {
+    const {imdbID, title, plot, poster, rated, year, runtime, genre, actors} = request.body;
+    const movieEntry = new movieTableEntry({
+        imdbID: imdbID,
+        title: title,
+        plot: plot,
+        poster: poster,
+        rated: rated,
+        year: year,
+        runtime: runtime,
+        genre: genre,
+        actors: actors
+    })
+    movieEntry.save().then(data => {
+        response.json(data);
+    }).catch( error => {
+        response.json(error);
+    });
+})
 
 module.exports = router;

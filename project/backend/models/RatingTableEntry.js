@@ -3,26 +3,26 @@ const mongoose = require('mongoose');
 const rating = new mongoose.Schema({
     stars: {
         type: Number,
-        require: true
+        required: true
     },
     review: {
         type: String,
-        requrie: false
+        requried: false
     }
 })
 
 const ratingTableEntry = new mongoose.Schema({
     movieId: {
         type: String,
-        require: true
+        required: true
     },
     username: {
         type: String,
-        require: true
+        required: true
     },
     rating: {
         type: rating,
-        require: true
+        required: true
     }
 })
 
