@@ -6,26 +6,47 @@ import SearchView from "./SearchView.jsx";
 class SearchController extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { movies: [] };
+        this.state = { movies: [], error: '' };
     }
 
     sendRequest=(title)=>{
-        getSearchResults(title).then(movies => this.setState({movies: movies}, () => {
-            this.state.movies.forEach( movie => {
-                getMovieDetails(movie.imdbID).then( details => console.log(details));
-            });
-        }));
+        if (title.length < 3){
+            this.setState({error:'Please enter 3 characters or more'})
+        }
+        else{
+        getSearchResults(title).then(movies => {
+            if(!movies)
+            {
+                this.setState({error:'Movie not found'})
+            }
+            else{
+                this.setState({error:''})
+                movies.forEach( movie => {
+                getMovieDetails(movie.imdbID).then( details => {
+                    this.setState({ movies: [...this.state.movies, details] })
+                });
+                
+        })
+        }
+    });
     }
+}
 
     render() {
+        let Err;
+        this.state.error !== ''
+        ? Err = <Movie error={this.state.error}/>
+        : Err = false;
         return(
             <div className = "App">
                 <header className="App-header">
                 <SearchView onRequest={this.sendRequest}/>
                 {
-                this.state.movies.map((movie, i) => {
-                return <Movie {...movie} key={i}/>
+                Err === false
+                ? this.state.movies.map((movie, i) => {
+                return <Movie {...movie} error={this.state.error} key={i}/>
                 })
+                : Err
                 }
                 </header>
             </div>
