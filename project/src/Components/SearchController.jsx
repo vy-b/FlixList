@@ -12,12 +12,14 @@ class SearchController extends React.Component {
     sendRequest=(title)=>{
         if (title.length < 3){
             this.setState({error:'Please enter 3 characters or more'})
+            return null;
         }
         else{
         getSearchResults(title).then(movies => {
             if(!movies)
             {
                 this.setState({error:'Movie not found'})
+                return null;
             }
             else{
                 this.setState({error:''})
@@ -33,20 +35,14 @@ class SearchController extends React.Component {
 }
 
     render() {
-        let Err;
-        this.state.error !== ''
-        ? Err = <Movie error={this.state.error}/>
-        : Err = false;
         return(
             <div className = "App">
                 <header className="App-header">
-                <SearchView onRequest={this.sendRequest}/>
+                <SearchView onRequest={this.sendRequest} error={this.state.error}/>
                 {
-                Err === false
-                ? this.state.movies.map((movie, i) => {
-                return <Movie {...movie} error={this.state.error} key={i}/>
+                this.state.movies.map((movie, i) => {
+                return <Movie {...movie} key={i}/>
                 })
-                : Err
                 }
                 </header>
             </div>
