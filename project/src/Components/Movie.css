@@ -18,3 +18,9 @@ img {
 #other {
     font-weight: lighter;
 }
+a{
+    color:white;
+}
+a:hover{
+    color:white;
+}

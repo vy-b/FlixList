@@ -6,23 +6,25 @@ class Movie extends React.Component {
        const {title, poster, year,plot,rated,runtime,genre,actors} = this.props;
        return (
         <div className="card">
-        <div className="row no-gutters">
-            <div className="col-auto">
-            <div className="card-block px-2">
-                <img src={poster} alt="movie cover"/> 
-                </div>
-            </div>
-            <div className="col">
+        <a class="card-block stretched-link text-decoration-none" href="#Review">
+            <div className="row no-gutters">
+                <div className="col-auto">
                 <div className="card-block px-2">
-                    <h1 >{title}</h1>
-                    <h5 className="text-muted" >{year} | {rated}</h5>
-                    <p >{plot}</p>
-                    <p id="other"><span className="font-weight-bold">Cast: </span>{actors}</p>
-                    <p id="other"><span className="font-weight-bold">Runtime: </span>{runtime}</p>
-                    <p id="other"><span className="font-weight-bold">Genre: </span>{genre}</p>
+                    <img src={poster} alt="movie cover"/> 
+                </div>
+                </div>
+                <div className="col">
+                    <div className="card-block px-2">
+                        <h1 >{title}</h1>
+                        <h5 className="text-muted" >{year} | {rated}</h5>
+                        <p >{plot}</p>
+                        <p id="other"><span className="font-weight-bold">Cast: </span>{actors}</p>
+                        <p id="other"><span className="font-weight-bold">Runtime: </span>{runtime}</p>
+                        <p id="other"><span className="font-weight-bold">Genre: </span>{genre}</p>
+                    </div>
                 </div>
             </div>
-        </div>
+        </a>
         </div>
         
        )
