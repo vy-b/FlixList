@@ -9,7 +9,7 @@ class TopNavView extends React.Component {
     render() {
         return (
         <div>
-            <Navbar fixed="top" bg="dark" variant="dark">
+            <Navbar fixed="top" variant="dark" id="topNav">
                 <Navbar.Brand as={Link} to="/SignUp">
                     <img src = {FlixListLogo} alt = "FlixList Logo" />
                 </Navbar.Brand>

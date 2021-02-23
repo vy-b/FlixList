@@ -17,9 +17,9 @@ class Movie extends React.Component {
                     <h1 >{title}</h1>
                     <h5 className="text-muted" >{year} | {rated}</h5>
                     <p>{plot}</p>
-                    <p>Cast: {actors}</p>
-                    <p>Runtime: {runtime}</p>
-                    <p>{genre}</p>
+                    <p><span className="font-weight-bold">Cast: </span>{actors}</p>
+                    <p><span className="font-weight-bold">Runtime: </span>{runtime}</p>
+                    <p><span className="font-weight-bold">Genre: </span>{genre}</p>
                 </div>
             </div>
         </div>

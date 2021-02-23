@@ -2,8 +2,12 @@
     text-align: auto;
 }
 
+#topNav {
+    background-color: #343434 !important;
+}
+
 .App-header {
-    background-color: #282c34;
+    background-color: #181818;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -11,5 +15,5 @@
     justify-content: center;
     font-size: calc(5px + 2vmin);
     color: white;
-    margin-top: 50px;
+    margin-top: 71px;
 }
