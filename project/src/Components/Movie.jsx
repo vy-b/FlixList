@@ -5,7 +5,7 @@ class Movie extends React.Component {
    render() {
        const {title, poster, year,plot,rated,runtime,genre,actors} = this.props;
        return (
-        <div className="card"style={{width: '1000px'}}>
+        <div className="card">
         <div className="row no-gutters">
             <div className="col-auto">
             <div className="card-block px-2">
@@ -16,10 +16,10 @@ class Movie extends React.Component {
                 <div className="card-block px-2">
                     <h1 >{title}</h1>
                     <h5 className="text-muted" >{year} | {rated}</h5>
-                    <p>{plot}</p>
-                    <p><span className="font-weight-bold">Cast: </span>{actors}</p>
-                    <p><span className="font-weight-bold">Runtime: </span>{runtime}</p>
-                    <p><span className="font-weight-bold">Genre: </span>{genre}</p>
+                    <p >{plot}</p>
+                    <p id="other"><span className="font-weight-bold">Cast: </span>{actors}</p>
+                    <p id="other"><span className="font-weight-bold">Runtime: </span>{runtime}</p>
+                    <p id="other"><span className="font-weight-bold">Genre: </span>{genre}</p>
                 </div>
             </div>
         </div>
