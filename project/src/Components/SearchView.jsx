@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './SignUp/SignUp.css'
 class SearchView extends React.Component {
     state= {
         title: ''
@@ -16,10 +16,12 @@ class SearchView extends React.Component {
     }
     render() {
         const {title} = this.state;
+        const {error} = this.props
         return (
             <div className="search">
                 <input className="search-box" type="text" onChange={this.onInput} value={title}/>
                 <input className="button" type="submit" onClick={this.onSubmit} value="Search"/>
+                <div className="error">{error}</div>
             </div>
         )
     }
