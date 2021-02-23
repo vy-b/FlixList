@@ -1,25 +1,30 @@
 import React from 'react';
-
+import "bootstrap/dist/css/bootstrap.min.css";
+import './Movie.css'
 class Movie extends React.Component {
    render() {
        const {title, poster, year,plot,rated,runtime,genre,actors} = this.props;
        return (
-        <div className="App">
-            <header className="App-header">
-            <div >
-                <h1 >{title}</h1>
-                <h2 >{year}</h2>
-                <h3 >{plot}</h3>
-                <h3 >Rated: {rated}</h3>
-                <h3 >Runtime: {runtime}</h3>
-                <h3 >Genre: {genre}</h3>
-                <h3 >Cast: {actors}</h3>
+        <div className="card"style={{width: '1000px'}}>
+        <div className="row no-gutters">
+            <div className="col-auto">
+            <div className="card-block px-2">
+                <img src={poster} alt="movie cover"/> 
+                </div>
             </div>
-            <div >
-                <img src={poster} alt="movie cover"/>
+            <div className="col">
+                <div className="card-block px-2">
+                    <h1 >{title}</h1>
+                    <h5 className="text-muted" >{year} | {rated}</h5>
+                    <p>{plot}</p>
+                    <p>Cast: {actors}</p>
+                    <p>Runtime: {runtime}</p>
+                    <p>{genre}</p>
+                </div>
             </div>
-            </header>
         </div>
+        </div>
+        
        )
    }
 }
