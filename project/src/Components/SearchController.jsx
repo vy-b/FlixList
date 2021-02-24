@@ -22,7 +22,7 @@ class SearchController extends React.Component {
                 return null;
             }
             else{
-                this.setState({error:''})
+                this.setState({movies:[], error:''})
                 movies.forEach( movie => {
                 getMovieDetails(movie.imdbID).then( details => {
                     this.setState({ movies: [...this.state.movies, details] })
