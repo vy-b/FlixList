@@ -18,8 +18,11 @@ We are planning to make a website that allows users to easily rate and recommend
 
 #### User Stories:
 As a user, I want to be able to have a social media platform where I can share with my friends the movies that I like so that we can find mutual interests, share our thoughts on movies and share recommendations to each other.
+
 As a first-time user, I want to be able to easily find a link to create an account from the first view I have of the website, so that I don't have to navigate through many things to create an account.
+
 As a signed-in user, I want to be able to write reviews for movies that I have seen so that my friends can see my thoughts on the movie. I want to be able to search for movies by title and select them to write a review on.
+
 As a signed-in user, I want to be able to add my friends and keep a friend list so that I can connect with my friends about the movies that we like. I want to be able to see their reviews so that I can get movie recommendations directly from my friends.
 
 ## Implemented Features:
