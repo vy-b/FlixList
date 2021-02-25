@@ -18,14 +18,13 @@ class LoginController extends React.Component {
             getUser(username).then( (response) => {
                 if(response.data === null){
                     this.setState({errorMessage: 'user does not exist'})
-                    reject(this.state.errorMessage)
                 }
                 else if (password !== response.data.password){
                     this.setState({errorMessage: 'wrong password'})
-                    reject(this.state.errorMessage)
                 }
                 else{
                     this.props.setUsername(username)
+                    this.setState({errorMessage: 'login successful'})
                     resolve(this.redirectToBrowse());
                     
                 }    
