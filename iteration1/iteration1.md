@@ -23,13 +23,13 @@ As a signed-in user, I want to be able to write reviews for movies that I have s
 As a signed-in user, I want to be able to add my friends and keep a friend list so that I can connect with my friends about the movies that we like. I want to be able to see their reviews so that I can get movie recommendations directly from my friends.
 
 ## Implemented Features:
-[x] Login
-[x] Sign in
-[x] Movie Search
-[ ] Display Movie Details
-[ ] Rate Movies
-[ ] Add Friends
-[ ] Search Friends
+- [x] Login
+- [x] Sign in
+- [x] Movie Search
+- [ ] Display Movie Details
+- [ ] Rate Movies
+- [ ] Add Friends
+- [ ] Search Friends
 
 ## Planned Features:
-[ ] Create a profile
+- [ ] Create a profile
