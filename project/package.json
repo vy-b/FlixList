@@ -9,6 +9,7 @@
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "enzyme": "^3.11.0",
+    "msw": "^0.26.2",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.3",
     "react-dom": "^17.0.1",
@@ -42,7 +43,14 @@
       "last 1 safari version"
     ]
   },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "identity-obj-proxy"
+    }
+  },
   "devDependencies": {
-    "@wojtekmaj/enzyme-adapter-react-17": "^0.4.1"
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.4.1",
+    "babel-plugin-transform-class-properties": "^6.24.1"
   }
 }
