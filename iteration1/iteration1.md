@@ -1,15 +1,17 @@
 # Iteration1
 
 ## Screenshots:
-![Login](https://csil-git1.cs.surrey.sfu.ca/sjanke/301396991_group_project/-/blob/master/iteration1/images/login.jpg?raw=true)
+![Login](https://csil-git1.cs.surrey.sfu.ca/sjanke/301396991_group_project/-/blob/master/iteration1/images/login.png?raw=true)
 
-![Signup](https://csil-git1.cs.surrey.sfu.ca/sjanke/301396991_group_project/-/blob/master/iteration1/images/signup.jpg?raw=true)
+![Signup](https://csil-git1.cs.surrey.sfu.ca/sjanke/301396991_group_project/-/blob/master/iteration1/images/signup.png?raw=true)
 
-![Search Results](https://csil-git1.cs.surrey.sfu.ca/sjanke/301396991_group_project/-/blob/master/iteration1/images/searchResult.jpg?raw=true)
+![Search](https://csil-git1.cs.surrey.sfu.ca/sjanke/301396991_group_project/-/blob/master/iteration1/images/search.png?raw=true)
 
-![Trello Board 1](https://csil-git1.cs.surrey.sfu.ca/sjanke/301396991_group_project/-/blob/master/iteration1/images/Trello1.jpg?raw=true)
+![Search Results](https://csil-git1.cs.surrey.sfu.ca/sjanke/301396991_group_project/-/blob/master/iteration1/images/searchResult.png?raw=true)
 
-![Trello Board 2](https://csil-git1.cs.surrey.sfu.ca/sjanke/301396991_group_project/-/blob/master/iteration1/images/Trello2.jpg?raw=true)
+![Trello Board 1](https://csil-git1.cs.surrey.sfu.ca/sjanke/301396991_group_project/-/blob/master/iteration1/images/Trello1.png?raw=true)
+
+![Trello Board 2](https://csil-git1.cs.surrey.sfu.ca/sjanke/301396991_group_project/-/blob/master/iteration1/images/Trello2.png?raw=true)
 
 ## Requirements:
 
