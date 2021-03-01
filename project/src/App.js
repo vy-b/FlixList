@@ -6,6 +6,7 @@ import TestComponent from "./Components/TestComponent"
 import SearchController from "./Components/SearchController"
 import SignUpController from "./Components/SignUp/SignUpController"
 import LoginController from "./Components/LoginController"
+import ProfileTabController from "./Components/ProfileTab/ProfileTabController"
 
 function App() {
   const [username,setUsername] = useState('')
@@ -19,6 +20,9 @@ function App() {
           <Route exact path="/SignUp" component={SignUpController} />
           <Route exact path="/Login">
             <LoginController setUsername={setUsername}/>
+          </Route>
+          <Route exact path="/Profile">
+            <ProfileTabController username={username}/>
           </Route>
           <Route exact path="/Search" component={SearchController} />
         </Switch>
