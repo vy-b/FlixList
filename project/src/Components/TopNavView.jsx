@@ -22,6 +22,7 @@ class TopNavView extends React.Component {
                         <FaSearch className = "searchIcon" />
                     </Nav.Link>
                     <Nav.Link as={Link} to="/Login">Login</Nav.Link>
+                    <Nav.Link as={Link} to="/Profile">Profile</Nav.Link>
                     <Button as={Link} to="/SignUp" variant="outline-light">Sign Up</Button>
                 </Nav>
             </Navbar>
