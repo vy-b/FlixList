@@ -3,7 +3,6 @@
     color: white;
     min-height: 100vh;
     display: flex;
-    align-items: left;
 }
 
 .name{
@@ -15,17 +14,21 @@
 }
 
 .friendSearch{
+    margin-top: 1vh;
     margin-left: 20vh;
-    align-items: left;
-    justify-content: left;
+    position: relative;
 }
 
 .friends{
     margin-top: 20vh;
-    font-size: calc(5px + 1.5vmin);
+    margin-left: 20vh;
+    font-size: calc(5px + 1.75vmin);
+
 }
 
 .User{
+    margin-top: 1vh;
+    margin-left: 0.2vh;
     text-align: left;
     display: flex;
     justify-content: left;
@@ -46,6 +49,6 @@
 }
 
 .error{
-    font-size: calc(5px + 1vmin);
     color: red;
+    font-size: calc(5px + 1vmin);
 }
