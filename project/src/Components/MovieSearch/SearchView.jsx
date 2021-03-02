@@ -1,5 +1,5 @@
 import React from 'react';
-import './SignUp/SignUp.css'
+import '../SignUp/SignUp.css'
 class SearchView extends React.Component {
     state= {
         title: ''

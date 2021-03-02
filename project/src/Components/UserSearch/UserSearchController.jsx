@@ -1,5 +1,5 @@
 import React from 'react';
-import { getFriends } from '../Utils/Utils.jsx';
+import { getFriends } from '../../Utils/Utils.jsx';
 import User from "./User.jsx";
 import UserSearchView from "./UserSearchView.jsx";
 
@@ -13,11 +13,10 @@ class UserSearchController extends React.Component {
         if (searchUser.length < 3){
             this.setState({error:'Please enter valid username'})
             return null;
-        }
-        else{
+        } else{
             const friendsList = getFriends(this.props.username);
             friendsList.filter((val) => {
-                if (!users){
+                if (!this.props.users){
                     this.setState({error: 'User not found'})
                     return null;
                 }
@@ -27,7 +26,6 @@ class UserSearchController extends React.Component {
             })
         }
     };
-}
 
     render() {
         return(
