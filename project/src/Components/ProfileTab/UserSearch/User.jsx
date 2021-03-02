@@ -1,5 +1,5 @@
 import React from 'react';
-import './User.css'
+import '.././ProfileTab.css'
 
 class User extends React.Component {
    render() {

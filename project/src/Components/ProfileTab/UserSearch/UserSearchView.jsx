@@ -1,5 +1,5 @@
 import React from 'react';
-import './User.css'
+import '.././ProfileTab.css'
 
 class UserSearchView extends React.Component {
     state= {
@@ -20,8 +20,8 @@ class UserSearchView extends React.Component {
         const {error} = this.props
         return (
             <div className="search">
-                <input className="search-box" type="text" onChange={this.onInput} placeholder="User name" value={searchUser}/>
-                <input className="button" type="submit" onClick={this.onSubmit} value="Search"/>
+                <input className="search-box" type="text" onChange={this.onInput} placeholder="Friend name" value={searchUser}/>
+                <input className="button" type="submit" onClick={this.onSubmit} value="Add"/>
                 <div className="error">{error}</div>
             </div>
         )

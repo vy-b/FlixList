@@ -1,7 +1,51 @@
+.profile{
+    background-color: #191414;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    align-items: left;
+}
+
 .name{
+    margin-top: 20vh;
+    margin-left: 22vh;
     position: relative;
-    height: 10em;
-    margin-left: 147px; 
-    margin-right: auto;
-    bottom:40px;
+    font-size: calc(5px + 1.75vmin);
+    font-weight: 500;
+}
+
+.friendSearch{
+    margin-left: 20vh;
+    align-items: left;
+    justify-content: left;
+}
+
+.friends{
+    margin-top: 20vh;
+    font-size: calc(5px + 1.5vmin);
+}
+
+.User{
+    text-align: left;
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    font-size: calc(5px + 1.5vmin);
+}
+
+.search{
+    font-size: calc(5px + 1.5vmin);
+}
+
+.search-box{
+    padding-left: 10px;
+}
+
+.button{
+    margin-top:10px
+}
+
+.error{
+    font-size: calc(5px + 1vmin);
+    color: red;
 }

@@ -3,7 +3,6 @@ import {Nav, Navbar, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {Link} from 'react-router-dom'
 import {FaSearch} from 'react-icons/fa';
-import {RiUserSearchLine} from 'react-icons/ri';
 import FlixListLogo from '../Logos/Logo.svg';
 
 class TopNavView extends React.Component {
@@ -21,9 +20,6 @@ class TopNavView extends React.Component {
                 <Nav>
                     <Nav.Link as={Link} to="/Search">
                         <FaSearch className = "searchIcon" />
-                    </Nav.Link>
-                    <Nav.Link as={Link} to="/SearchUser">
-                        <RiUserSearchLine className = "UserSearchIcon" />
                     </Nav.Link>
                     <Nav.Link as={Link} to="/Login">Login</Nav.Link>
                     <Nav.Link as={Link} to="/Profile">Profile</Nav.Link>
