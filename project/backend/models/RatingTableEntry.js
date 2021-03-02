@@ -23,6 +23,10 @@ const ratingTableEntry = new mongoose.Schema({
     rating: {
         type: rating,
         required: true
+    },
+    date: {
+        type: Date,
+        default: Date.now
     }
 })
 
