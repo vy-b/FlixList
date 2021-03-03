@@ -59,3 +59,8 @@
     color: red;
     font-size: calc(5px + 1vmin);
 }
+
+.success{
+    color: chartreuse;
+    font-size: calc(5px + 1vmin);
+}

@@ -17,12 +17,15 @@ class UserSearchView extends React.Component {
     }
     render() {
         const {searchUser} = this.state;
-        const {error} = this.props
+        const {error, success} = this.props
         return (
             <div className="search">
                 <input className="search-box" type="text" onChange={this.onInput} placeholder="Friend name" value={searchUser}/>
-                <input className="button" type="submit" onClick={this.onSubmit} value="Add"/>
-                <div className="error">{error}</div>
+                <input className="button" type="submit" onClick={this.onSubmit} value="Add"/>  
+                <div className="message">
+                    <div className="error">{error}</div>
+                    <div className="success">{success}</div>
+                </div>
             </div>
         )
     }

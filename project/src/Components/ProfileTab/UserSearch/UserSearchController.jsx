@@ -7,7 +7,7 @@ import UserSearchView from "./UserSearchView.jsx";
 class UserSearchController extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { users: [], error: '' };
+        this.state = { users: [], error: '', success: '' };
     }
 
     componentDidMount(){
@@ -19,7 +19,7 @@ class UserSearchController extends React.Component {
     sendRequest=(searchUser)=>{        
         const friendTableEntry = new FriendTableEntry(this.props.username, searchUser);
         addFriend(friendTableEntry).then((response) => {
-            this.setState({error: 'User added!'});
+            this.setState({success: 'User added!'});
             const addToList = this.state.users;
             addToList.push(searchUser);
             this.setState({users: addToList});
@@ -30,7 +30,7 @@ class UserSearchController extends React.Component {
         return(
             <div className = "App">
                 <header className="friendSearch">
-                <UserSearchView onRequest={this.sendRequest} error={this.state.error} />
+                <UserSearchView onRequest={this.sendRequest} error={this.state.error} success={this.state.success} />
                 {
                 this.state.users.map((searchUser, i) => {
                 return <User username={searchUser} key={i}/>
