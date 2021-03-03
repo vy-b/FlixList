@@ -36,7 +36,16 @@ const movieTableEntry = new mongoose.Schema({
     actors: {
         type: String,
         required: false
+    },
+    totalRating: {
+        type: Number,
+        required: true
+    },
+    totalUsersRated: {
+        type: Number,
+        required: true
     }
+    
 })
 
 module.exports = mongoose.model('Movies', movieTableEntry);

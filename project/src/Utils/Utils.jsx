@@ -45,7 +45,7 @@ usernameList: The array of usernames of the users who wrote the reviews.
 
 Returns a list of RatingTableEntry objects.
 */
-function getRatings(movieId, usernameList){
+function getRatings(usernameList, movieId=undefined){
     const searchParamaters = {
         movieId: movieId,
         usernameList: usernameList
@@ -54,7 +54,7 @@ function getRatings(movieId, usernameList){
         axios.get('http://localhost:3001/getRatings', {params: searchParamaters}).then( (response) => {
             if(response.status === 200){
                 resolve(response.data.map(result => {
-                    return new RatingTableEntry(result.movieId, result.username, result.rating.stars, result.rating.review);
+                    return new RatingTableEntry(result.movieId, result.username, result.rating.stars, result.rating.review, result.date);
                 }));
             }else{
                 reject(response);
@@ -102,7 +102,7 @@ function getMovieDetails(imdbID){
                 axios.get('http://localhost:3001/getRapidApiMovieDetails', {params: {imdbID: imdbID}}).then( (response) => {
                     if(response.status === 200 && response.data){
                         const {imdbID, Title, Plot, Poster, Rated, Year, Runtime, Genre, Actors} = response.data;
-                        const movieTableEntry = new MovieTableEntry(imdbID, Title, Plot, Poster, Rated, Year, Runtime, Genre, Actors);
+                        const movieTableEntry = new MovieTableEntry(imdbID, Title, Plot, Poster, Rated, Year, Runtime, Genre, Actors, 0, 0);
                         // Add result to mongoDB for next time.
                         axios.post('http://localhost:3001/addMovieDetails', movieTableEntry).catch( err => console.log(err));
                         resolve(movieTableEntry);
