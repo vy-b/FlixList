@@ -11,37 +11,37 @@ class SearchController extends React.Component {
 
     sendRequest=(title)=>{
         if (title.length < 3){
-            this.setState({error:'Please enter 3 characters or more'});
+            this.setState({error:'Please enter 3 characters or more'})
             return null;
-        }else{
-            getSearchResults(title).then(movies => {
-                if(!movies)
-                {
-                    this.setState({error:'Movie not found'})
-                    return null;
-                }
-                else{
-                    this.setState({movies:[], error:''})
-                    movies.forEach( movie => {
-                        getMovieDetails(movie.imdbID).then( details => {
-                            this.setState({ movies: [...this.state.movies, details] })
-                        });
-                    });
-                }
-            });
         }
+        else{
+        getSearchResults(title).then(movies => {
+            if(!movies)
+            {
+                this.setState({error:'Movie not found'})
+                return null;
+            }
+            else{
+                this.setState({movies:[], error:''})
+                movies.forEach( movie => {
+                getMovieDetails(movie.imdbID).then( details => {
+                    this.setState({ movies: [...this.state.movies, details] })
+                });
+                
+        })
+        }
+    });
     }
+}
 
-    render = () => {
+    render() {
         return(
             <div className = "App">
                 <header className="App-header">
-                <SearchView onRequest={this.sendRequest} error={this.state.error}/>
-                {
-                this.state.movies.map((movie, i) => {
-                    return <Movie {...movie} key={i}/>
-                })
-                }
+                    <SearchView onRequest={this.sendRequest} error={this.state.error}/>
+                    {this.state.movies.map((movie, i) => {
+                        return <Movie movieInfo={movie} clickable={true} key={i}/>
+                    })}
                 </header>
             </div>
         )

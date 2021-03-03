@@ -1,7 +1,7 @@
 import React from 'react';
 import '../SignUp/SignUp.css'
 import "bootstrap/dist/css/bootstrap.min.css";
-import './SignUp/SignUp.css'
+import '../SignUp/SignUp.css'
 class SearchView extends React.Component {
     state= {
         title: ''
