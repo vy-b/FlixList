@@ -1,0 +1,29 @@
+.rating-box{
+    max-width: 20%;
+}
+
+.user-reviewcard{
+    max-width:35% !important;
+    padding: 20px !important;
+}
+
+.review-message{
+    font-size:80%;
+}
+
+.review-box{
+    margin-top:10px;
+}
+
+.my-button{
+    color:rgb(236, 96, 3);
+    border-radius:50px;
+    border-color:rgb(236, 96, 3);
+}
+
+.my-button:hover{
+    background-color: rgb(236, 96, 3);;
+    color:white;
+    border-radius:50px;
+    border-color:rgb(236, 96, 3);
+}

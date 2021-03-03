@@ -16,7 +16,9 @@ function App() {
       <Router>
         <TopNavView />
         <Switch>
-          <Route exact path="/" component={TestComponent} />
+          <Route exact path="/">
+            <TestComponent username={username}/>
+          </Route>
           <Route exact path="/SignUp" component={SignUpController} />
           <Route exact path="/Login">
             <LoginController setUsername={setUsername}/>

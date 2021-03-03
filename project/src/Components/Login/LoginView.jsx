@@ -54,7 +54,7 @@ class LoginView extends React.Component{
                 <div className="error">{errorMessage}</div> 
                 
                 <Button className="button" type = "submit" onClick={this.onSubmit}>Login</Button>
-                
+                <div className="words">Don't have an account? <a href="/SignUp">Sign Up</a> </div>
             </header>
             </div>
         );
