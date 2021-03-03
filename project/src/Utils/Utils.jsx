@@ -4,10 +4,10 @@ import RatingTableEntry from '../Objects/RatingTableEntry';
 
 function addFriend(friendTableEntry){
     return new Promise((resolve, reject) => {
-        if (friendTableEntry.username === friendTableEntry.friendUsername){
+        if (friendTableEntry.username.trim() === friendTableEntry.friendUsername.trim()){
             reject("You cannot follow yourself");
         }
-        else if(friendTableEntry.friendUsername === ''){
+        else if(friendTableEntry.friendUsername.trim() === ''){
             reject("Please enter a valid username");
         }
         else{
