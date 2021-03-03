@@ -6,13 +6,12 @@ class TestComponent extends React.Component {
     contructor(){
 
     }
-    
+
     sendReview=(userReview)=>{
         const {rating,review} = userReview;
         const ratingTableEntry = new RatingTableEntry('testID',this.props.username,rating,review);
-        console.log(addRating(ratingTableEntry));
-        console.log(ratingTableEntry);
-
+        addRating(ratingTableEntry);
+        //note: since this uses the props username, it only works if you are logged in
     }
 
     render() {
