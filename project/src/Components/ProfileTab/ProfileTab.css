@@ -3,25 +3,29 @@
     color: white;
     min-height: 100vh;
     display: flex;
+    margin-top: 71px;
 }
 
 .name{
     margin-top: 20vh;
-    margin-left: 22vh;
-    position: relative;
+    margin-left: 20vh;
+    position: absolute;
     font-size: calc(5px + 1.75vmin);
     font-weight: 500;
+    border: 0.2vh white;
+    border-radius: 1vh;
+    border-style: solid;
+    padding: 2vh;
 }
 
 .friendSearch{
-    margin-top: 1vh;
-    margin-left: 20vh;
+    margin: auto;
+    margin-top: 2vh;
     position: relative;
 }
 
 .friends{
     margin-top: 20vh;
-    margin-left: 20vh;
     font-size: calc(5px + 1.75vmin);
 
 }
@@ -29,6 +33,7 @@
 .User{
     margin-top: 1vh;
     margin-left: 0.2vh;
+    padding-left: 10px;
     text-align: left;
     display: flex;
     justify-content: left;
@@ -42,6 +47,8 @@
 
 .search-box{
     padding-left: 10px;
+    width: auto;
+    height: auto;
 }
 
 .button{
