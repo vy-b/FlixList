@@ -5,20 +5,20 @@ import RatingTableEntry from '../Objects/RatingTableEntry';
 function addFriend(friendTableEntry){
     return new Promise((resolve, reject) => {
         if (friendTableEntry.username.trim() === friendTableEntry.friendUsername.trim()){
-            reject("You cannot follow yourself");
+            reject(`You cannot follow yourself`);
         }
         else if(friendTableEntry.friendUsername.trim() === ''){
-            reject("Please enter a valid username");
+            reject(`Please enter a valid username`);
         }
         else{
             getUser(friendTableEntry.friendUsername.trim()).then((response) => {
                 if (response.data === null){
-                    reject("User '" + friendTableEntry.friendUsername + "' does not exist");
+                    reject(`User '${friendTableEntry.friendUsername}' does not exist`);
                 }
                 else{
                     getFriends(friendTableEntry.username.trim()).then((response) => {
                         if (response.includes(friendTableEntry.friendUsername.trim())){
-                            reject("You are already following " + friendTableEntry.friendUsername);
+                            reject(`You are already following ${friendTableEntry.friendUsername}`);
                         }
                         else{
                             axios.post('http://localhost:3001/addFriend', friendTableEntry).then( (response) => {
