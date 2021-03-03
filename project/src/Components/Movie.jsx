@@ -18,7 +18,7 @@ class Movie extends React.Component {
         const clickable = this.props.clickable;
         return (
         <div className= {"card".concat(clickable ? " movie-card" : "")}>
-            <div className={"card-block stretched-link text-decoration-none".concat(clickable ? " clickable-card" : "")} onClick={clickable && this.onMovieClick}>
+            <div className={"card-block stretched-link text-decoration-none".concat(clickable ? " clickable-card" : "")} onClick={clickable ? this.onMovieClick : undefined}>
                 <div className="row no-gutters">
                     <div className="col-auto">
                     <div className="card-block px-2">
