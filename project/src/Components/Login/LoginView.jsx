@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import './SignUp/SignUp.css'
+import '../SignUp/SignUp.css'
 
 class LoginView extends React.Component{
     constructor(){
