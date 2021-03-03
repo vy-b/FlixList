@@ -4,28 +4,34 @@ import RatingTableEntry from '../Objects/RatingTableEntry';
 
 function addFriend(friendTableEntry){
     return new Promise((resolve, reject) => {
-        getUser(friendTableEntry.friendUsername).then((response) => {
-            if (response.data === null){
-                reject("User does not exist");
-            }
-            else{
-                getFriends(friendTableEntry.username).then((response) => {
-                    if (response.includes(friendTableEntry.friendUsername)){
-                        reject("User is already added");
-                    }
-                    else{
-                        axios.post('http://localhost:3001/addFriend', friendTableEntry).then( (response) => {
-                            if(response.status === 200){
-                                resolve(response);
-                            }
-                            else{
-                                reject(response);
-                            }
-                        });
-                    }
-                })
-            }
-        })
+        if (friendTableEntry.username === friendTableEntry.friendUsername){
+            reject("You cannot add yourself");
+        }
+        else{
+            getUser(friendTableEntry.friendUsername).then((response) => {
+                if (response.data === null){
+                    reject("User does not exist");
+                }
+                else{
+                    getFriends(friendTableEntry.username).then((response) => {
+                        if (response.includes(friendTableEntry.friendUsername)){
+                            reject("User is already added");
+                        }
+                        else{
+                            axios.post('http://localhost:3001/addFriend', friendTableEntry).then( (response) => {
+                                if(response.status === 200){
+                                    resolve(response);
+                                }
+                                else{
+                                    reject(response);
+                                }
+                            });
+                        }
+                    })
+                }
+            })
+        }
+        
     })
 }
 
