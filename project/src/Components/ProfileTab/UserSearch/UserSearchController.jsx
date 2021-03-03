@@ -12,28 +12,25 @@ class UserSearchController extends React.Component {
 
     componentDidMount(){
         getFriends(this.props.username).then((response) => {
-            console.log(response);
             this.setState({users: response})
         })
     }
 
-    sendRequest=(searchUser)=>{
+    sendRequest=(searchUser)=>{        
         const friendTableEntry = new FriendTableEntry(this.props.username, searchUser);
         addFriend(friendTableEntry).then((response) => {
-            if (response.status === 200){
-                this.setState({error: 'User added!'});
-            }
-            else{
-                this.setState({error: 'User does not exist'});
-            }
-        })
-    };
+            this.setState({error: 'User added!'});
+            const addToList = this.state.users;
+            addToList.push(searchUser);
+            this.setState({users: addToList});
+        }).catch(err => this.setState({error: err}));
+    }
 
     render() {
         return(
             <div className = "App">
                 <header className="friendSearch">
-                <UserSearchView onRequest={this.sendRequest} error={this.state.error}/>
+                <UserSearchView onRequest={this.sendRequest} error={this.state.error} />
                 {
                 this.state.users.map((searchUser, i) => {
                 return <User username={searchUser} key={i}/>

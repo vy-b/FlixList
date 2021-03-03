@@ -4,14 +4,29 @@ import RatingTableEntry from '../Objects/RatingTableEntry';
 
 function addFriend(friendTableEntry){
     return new Promise((resolve, reject) => {
-        axios.post('http://localhost:3001/addFriend', friendTableEntry).then( (response) => {
-            if(response.status === 200){
-                resolve(response);
-            }else{
-                reject(response);
+        getUser(friendTableEntry.friendUsername).then((response) => {
+            if (response.data === null){
+                reject("User does not exist");
             }
-        });
-    }).catch(err => console.log(err));
+            else{
+                getFriends(friendTableEntry.username).then((response) => {
+                    if (response.includes(friendTableEntry.friendUsername)){
+                        reject("User is already added");
+                    }
+                    else{
+                        axios.post('http://localhost:3001/addFriend', friendTableEntry).then( (response) => {
+                            if(response.status === 200){
+                                resolve(response);
+                            }
+                            else{
+                                reject(response);
+                            }
+                        });
+                    }
+                })
+            }
+        })
+    })
 }
 
 // Returns an array of the friend usernames.
