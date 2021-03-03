@@ -36,7 +36,7 @@ class UserReview extends React.Component {
         this.props.onReview(userReview);
     }
    render() {
-       const {err} = this.props;
+       const {err,success} = this.props;
        return (
         <div className="card user-reviewcard">
             <Form>
@@ -59,7 +59,7 @@ class UserReview extends React.Component {
                     Submit
                 </Button>
             </Form>
-            
+            <div className="error" style={{color:"green"}}> {success}</div>
             {err==="You must log in before leaving a review."
             ? <div className="error">{err} <span> Click <a href="/Login">here</a> to log in.</span></div> 
             : <div className="error">{err}</div> }
