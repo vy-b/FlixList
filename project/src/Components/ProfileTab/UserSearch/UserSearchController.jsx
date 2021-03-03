@@ -16,18 +16,17 @@ class UserSearchController extends React.Component {
         })
     }
 
-    componentDidUpdate(){
-        setTimeout(() => this.setState({error:'', success: ''}), 3000);
-      }
-
     sendRequest=(searchUser)=>{        
         const friendTableEntry = new FriendTableEntry(this.props.username, searchUser);
         addFriend(friendTableEntry).then((response) => {
-            this.setState({success: 'User added!'});
+            if (this.state.error !== ''){
+                this.setState({error: ''});
+            }
+            this.setState({success: 'You are now following ' + searchUser});
             const addToList = this.state.users;
             addToList.push(searchUser);
             this.setState({users: addToList});
-        }).catch(err => this.setState({error: err}));
+        }).catch(err => this.setState({success: '', error: err}));
     }
 
     render() {
