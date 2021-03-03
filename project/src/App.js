@@ -7,17 +7,19 @@ import SearchController from "./Components/SearchController"
 import SignUpController from "./Components/SignUp/SignUpController"
 import LoginController from "./Components/LoginController"
 import ProfileTabController from "./Components/ProfileTab/ProfileTabController"
+import ReviewTab from "./Components/ReviewTab"
+import Movie from "./Components/Movie"
 
 function App() {
   const [username,setUsername] = useState('')
   return(
     <React.Fragment>
-
       <Router>
         <TopNavView />
         <Switch>
           <Route exact path="/" component={TestComponent} />
           <Route exact path="/SignUp" component={SignUpController} />
+          <Route exact path = "/Review" component = {ReviewTab}/>
           <Route exact path="/Login">
             <LoginController setUsername={setUsername}/>
           </Route>

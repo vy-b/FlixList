@@ -1,12 +1,21 @@
 import React from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import './Movie.css'
+import "./ReviewTab"
+import { withRouter } from "react-router-dom";
+
 class Movie extends React.Component {
    render() {
        const {title, poster, year,plot,rated,runtime,genre,actors} = this.props;
+       function onMovieClick(){
+            this.props.history.push({
+            pathname:"/Review",
+            state:{title:title, poster:poster, plot:plot, rated:rated, runtime:runtime, genre:genre, actor:actors}
+        })
+       }
        return (
         <div className="card">
-        <a className="card-block stretched-link text-decoration-none" href="#Review">
+        <a className="card-block stretched-link text-decoration-none" href="/Review" onClick = {this.onMovieClick}>
             <div className="row no-gutters">
                 <div className="col-auto">
                 <div className="card-block px-2">
@@ -26,8 +35,7 @@ class Movie extends React.Component {
             </div>
         </a>
         </div>
-        
        )
    }
 }
-export default Movie;
+export default withRouter(Movie);
