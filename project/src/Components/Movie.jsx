@@ -5,8 +5,8 @@ class Movie extends React.Component {
    render() {
        const {title, poster, year,plot,rated,runtime,genre,actors} = this.props;
        return (
-        <div className="card">
-        <a className="card-block stretched-link text-decoration-none" href="#Review">
+        <div className="card movie-card">
+        <a className="card-block stretched-link text-decoration-none clickable-card" href="#Review">
             <div className="row no-gutters">
                 <div className="col-auto">
                 <div className="card-block px-2">
