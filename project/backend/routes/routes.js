@@ -6,7 +6,7 @@ const ratingTableEntry = require('../models/RatingTableEntry');
 const axios = require('axios');
 const dotenv = require('dotenv');
 const movieTableEntry = require('../models/MovieTableEntry.js');
-const { response } = require('express');
+
 dotenv.config();
 
 router.post('/addUser', (request, response) => {
