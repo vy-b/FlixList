@@ -6,6 +6,7 @@ const ratingTableEntry = require('../models/RatingTableEntry');
 const axios = require('axios');
 const dotenv = require('dotenv');
 const movieTableEntry = require('../models/MovieTableEntry.js');
+
 dotenv.config();
 
 router.post('/addUser', (request, response) => {
@@ -45,21 +46,43 @@ router.get('/getFriends', (req, res, next) => {
 })
 
 router.post('/addRating', (request, response) => {
-    const {movieId, username, rating} = request.body;
-    const ratingEntry = new ratingTableEntry({
-        movieId: movieId,
-        username: username,
-        rating: rating
-    })
-    ratingEntry.save().then(data => {
-        response.json(data);
-    }).catch( error => {
-        response.json(error);
-    });
+    const {imdbID, username, rating} = request.body;
+    ratingTableEntry.findOne({imdbID: imdbID, username: username}).exec().then(doc => {
+        if(doc){
+            // Rating already exists for this imdbID and username -> need to update.
+            const oldStars = doc.rating.stars;
+            doc.rating = rating;
+            doc.date = Date.now();
+            doc.save().then(data => {
+                // Need to update the movie totalRating
+                movieTableEntry.findOne({imdbID: imdbID}).exec().then(movie => {
+                    movie.totalRating += rating.stars - oldStars;
+                    movie.save(); 
+                });
+                response.json(data);
+            }).catch(err => response.json(err));
+        }else{
+            // No rating exists for this imdbID and username -> need to add.
+            const ratingEntry = new ratingTableEntry({
+                imdbID: imdbID,
+                username: username,
+                rating: rating
+            });
+            ratingEntry.save().then(data => {
+                // Need to update the movie totalRating
+                movieTableEntry.findOne({imdbID: imdbID}).exec().then(movie => {
+                    movie.totalRating += rating.stars;
+                    movie.totalUsersRated += 1;
+                    movie.save(); 
+                });
+                response.json(data);
+            }).catch(err => response.json(err));
+        }
+    }).catch(err => response.json(err));
 })
 
 router.get('/getRatings', (req, res, next) => {
-    ratingTableEntry.find({movieId: req.query.movieId, username: {$in: req.query.usernameList}}).exec().then(doc => {
+    ratingTableEntry.find({movieId: req.query.imdbID, username: {$in: req.query.usernameList}}).exec().then(doc => {
         res.json(doc)
     }).catch( err => res.json(err));
 })
@@ -115,7 +138,9 @@ router.post('/addMovieDetails', (request, response) => {
         year: year,
         runtime: runtime,
         genre: genre,
-        actors: actors
+        actors: actors,
+        totalRating: 0,
+        totalUsersRated: 0
     })
     movieEntry.save().then(data => {
         response.json(data);

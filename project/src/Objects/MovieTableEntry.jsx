@@ -1,4 +1,4 @@
-function MovieTableEntry(imdbID, title, plot, poster, rated, year, runtime, genre, actors){
+function MovieTableEntry(imdbID, title, plot, poster, rated, year, runtime, genre, actors, totalRating, totalUsersRated){
     this.imdbID = imdbID;
     this.title = title;
     this.plot = plot;
@@ -8,5 +8,7 @@ function MovieTableEntry(imdbID, title, plot, poster, rated, year, runtime, genr
     this.runtime = runtime;
     this.genre = genre;
     this.actors = actors;
+    this.totalRating = totalRating;
+    this.totalUsersRated = totalUsersRated;
 }
 export default MovieTableEntry;

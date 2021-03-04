@@ -15,7 +15,7 @@ class TestComponent extends React.Component {
 
     sendReview=(userReview)=>{
         const {rating,review} = userReview;
-        const ratingTableEntry = new RatingTableEntry('testID',this.props.username,rating,review);
+        const ratingTableEntry = new RatingTableEntry("tt0319343",this.props.username,Number(rating),review);
         this.setState({errorMessage:'',success:''});
         new Promise((resolve, reject) => {
         addRating(ratingTableEntry).then((response)=> {

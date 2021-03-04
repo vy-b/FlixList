@@ -12,7 +12,7 @@ const rating = new mongoose.Schema({
 })
 
 const ratingTableEntry = new mongoose.Schema({
-    movieId: {
+    imdbID: {
         type: String,
         required: true
     },
@@ -23,6 +23,10 @@ const ratingTableEntry = new mongoose.Schema({
     rating: {
         type: rating,
         required: true
+    },
+    date: {
+        type: Date,
+        default: Date.now
     }
 })
 
