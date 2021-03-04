@@ -1,14 +1,19 @@
 import React from 'react';
-import "bootstrap/dist/css/bootstrap.min.css";
 import "./ProfileTab.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import UserSearchController from "./UserSearch/UserSearchController"
 
 class ProfileTabView extends React.Component{
     render(){
         return(
             <div>
-                <header className = "App-header">
-                    <div className = "name">{this.props.username}</div>
-                </header>
+                <header className = "profile">
+                        <div className = "name">{this.props.username}</div>
+                        <div className = "friendSearch">
+                            <div className = "friends">Friends List</div>
+                            <UserSearchController username = {this.props.username} />
+                        </div>
+               </header>
             </div>
         )
     }

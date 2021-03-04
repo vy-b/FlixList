@@ -1,6 +1,8 @@
 import React from 'react';
 import {mount} from 'enzyme';
 import Movie from '../Components/Movie'
+import MovieTableEntry from '../Objects/MovieTableEntry'
+import {BrowserRouter as Router} from 'react-router-dom'
 
 describe('Movie.jsx tests', () => {
     test('Renders without crashing', () => {
@@ -71,15 +73,8 @@ describe('Movie.jsx tests', () => {
 });
 
 function createWrapper(title, year, poster,plot,cast,runtime,genre,rated){
-    const movie = <Movie 
-        title = {title}
-        year ={year}
-        poster = {poster}
-        plot = {plot}
-        actors = {cast}
-        runtime={runtime}
-        genre = {genre}
-        rated = {rated} />
+    const movieTableEntry = new MovieTableEntry('testId', title, plot, poster, rated, year, runtime, genre, cast);
+    const movie = <Router><Movie movieInfo={movieTableEntry} clickable={false}/></Router>
     const wrapper = mount(movie);
     return wrapper;
 }

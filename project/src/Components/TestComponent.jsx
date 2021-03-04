@@ -1,26 +1,52 @@
 import React from 'react';
-import {getMovieDetails} from '../Utils/Utils';
+import UserReview from './UserReview'
+import {addRating} from '../Utils/Utils';
+import RatingTableEntry from '../Objects/RatingTableEntry.jsx';
+import { withRouter } from 'react-router-dom';
 
 class TestComponent extends React.Component {
     constructor(){
         super();
-        this.onSubmit = this.onSubmit.bind(this);
+        this.state = {
+            errorMessage:'',
+            success:''
+        }
     }
 
-    onSubmit(){
-        getMovieDetails("tt0848228").then( res => console.log(res));
+    sendReview=(userReview)=>{
+        const {rating,review} = userReview;
+        const ratingTableEntry = new RatingTableEntry('testID',this.props.username,rating,review);
+        this.setState({errorMessage:'',success:''});
+        new Promise((resolve, reject) => {
+        addRating(ratingTableEntry).then((response)=> {
+            if (response.data.errors){
+                if (response.data.errors.username){
+                    this.setState({errorMessage: "You must log in before leaving a review."})
+                }
+                else if(response.data.errors.rating){
+                    this.setState({errorMessage: 'A star rating out of five is required.'})
+                    reject("no star rating");
+                }
+            }
+            else{
+                this.setState({success:'Your review has been posted!'})
+            }
+        })
+    }).catch(err =>{
+        console.log(err)
+    })
     }
-    
-    render(){
-        return( 
+
+
+    render() {
+        return (
             <div className="App">
                 <header className="App-header">
-                    <button onClick={this.onSubmit}> Click to test connection to database.</button>
+                    <UserReview onReview={this.sendReview} err={this.state.errorMessage} success={this.state.success}/>
                 </header>
             </div>
         )
     }
-
 }
 
-export default TestComponent
+export default withRouter(TestComponent)

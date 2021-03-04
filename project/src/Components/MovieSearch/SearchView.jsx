@@ -1,5 +1,7 @@
 import React from 'react';
-import './SignUp/SignUp.css'
+import '../SignUp/SignUp.css'
+import "bootstrap/dist/css/bootstrap.min.css";
+import '../SignUp/SignUp.css'
 class SearchView extends React.Component {
     state= {
         title: ''
@@ -19,8 +21,10 @@ class SearchView extends React.Component {
         const {error} = this.props
         return (
             <div className="search">
-                <input className="search-box" type="text" onChange={this.onInput} value={title}/>
-                <input className="button" type="submit" onClick={this.onSubmit} value="Search"/>
+                <div class="input-group mb-3">
+                    <input className="form-control search-box" type="text" onChange={this.onInput} value={title}/>
+                    <div class="input-group-append"><button type="submit" class="btn btn-secondary" onClick={this.onSubmit} value="Search">Search </button></div>
+                </div>
                 <div className="error">{error}</div>
             </div>
         )
