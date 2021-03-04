@@ -6,6 +6,7 @@ const ratingTableEntry = require('../models/RatingTableEntry');
 const axios = require('axios');
 const dotenv = require('dotenv');
 const movieTableEntry = require('../models/MovieTableEntry.js');
+const { response } = require('express');
 dotenv.config();
 
 router.post('/addUser', (request, response) => {
@@ -51,11 +52,9 @@ router.post('/addRating', (request, response) => {
         username: username,
         rating: rating
     })
-    ratingEntry.save().then(data => {
-        response.json(data);
-    }).catch( error => {
-        response.json(error);
-    });
+    ratingTableEntry.findOneAndUpdate({movieId: movieId, username: username}, ratingEntry, {upsert: true}).exec().then(doc => {
+        res.json(doc)
+    }).catch( err => res.json(err));
 })
 
 router.get('/getRatings', (req, res, next) => {
