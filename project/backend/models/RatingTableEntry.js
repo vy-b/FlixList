@@ -12,7 +12,7 @@ const rating = new mongoose.Schema({
 })
 
 const ratingTableEntry = new mongoose.Schema({
-    movieId: {
+    imdbID: {
         type: String,
         required: true
     },

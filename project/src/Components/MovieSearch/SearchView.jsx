@@ -21,9 +21,9 @@ class SearchView extends React.Component {
         const {error} = this.props
         return (
             <div className="search">
-                <div class="input-group mb-3">
+                <div className="input-group mb-3">
                     <input className="form-control search-box" type="text" onChange={this.onInput} value={title}/>
-                    <div class="input-group-append"><button type="submit" class="btn btn-secondary" onClick={this.onSubmit} value="Search">Search </button></div>
+                    <div className="input-group-append"><button type="submit" className="btn btn-secondary" onClick={this.onSubmit} value="Search">Search </button></div>
                 </div>
                 <div className="error">{error}</div>
             </div>
