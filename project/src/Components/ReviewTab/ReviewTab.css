@@ -1,0 +1,51 @@
+.poster{
+    height:520px;
+    max-width: 100%;
+}
+.row{
+    max-width: 70%;
+}
+.ratings{
+    max-width: 100%;
+    margin-right: 15px;
+    margin-left: 100px;
+}
+.reviews{
+    max-width: 100%;
+    margin-left: 100px;
+}
+.user-reviewcard{
+    max-width:100% !important;
+    padding: 20px !important;
+}
+
+.review-message{
+    font-size:80%;
+}
+
+.review-box{
+    margin-top:10px;
+}
+
+.my-button{
+    color:#ff6400;
+    border-radius:50px;
+    border-color:#ff6400;
+}
+
+.my-button:hover{
+    background-color: #ff6400;
+    color:white;
+    border-radius:50px;
+    border-color:#ff6400;
+}
+.friend-review{
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.friend-review-cardbody{
+    padding:10px;
+}

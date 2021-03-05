@@ -7,7 +7,7 @@ import SearchController from "./Components/MovieSearch/SearchController"
 import SignUpController from "./Components/SignUp/SignUpController"
 import LoginController from "./Components/Login/LoginController"
 import ProfileTabController from "./Components/ProfileTab/ProfileTabController"
-import ReviewTab from "./Components/ReviewTab"
+import ReviewTabController from './Components/ReviewTab/ReviewTabController'
 
 function App() {
   const [username,setUsername] = useState('')
@@ -20,7 +20,9 @@ function App() {
             <TestComponent username={username}/>
           </Route>
           <Route exact path="/SignUp" component={SignUpController} />
-          <Route exact path = "/Review" component = {ReviewTab}/>
+          <Route exact path="/Review">
+            <ReviewTabController username={username}/>
+          </Route>
           <Route exact path="/Login">
             <LoginController setUsername={setUsername}/>
           </Route>

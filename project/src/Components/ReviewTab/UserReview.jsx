@@ -2,7 +2,7 @@ import React from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Form } from "react-bootstrap";
 import Rating from '@material-ui/lab/Rating'
-import './UserReview.css'
+import './ReviewTab.css'
 import Star from "@material-ui/icons/Star";
 
 class UserReview extends React.Component {

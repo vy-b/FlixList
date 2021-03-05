@@ -1,7 +1,6 @@
 import React from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import './Movie.css'
-import "./ReviewTab"
 import { withRouter } from "react-router-dom";
 
 class Movie extends React.Component {
