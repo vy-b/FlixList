@@ -9,14 +9,14 @@ class FriendReviews extends React.Component{
         const {username,rating,date} = this.props.review;
         return(
             <div>
-                <Card style={{ maxWidth:"100%" }}>
-                    <Card.Body className="friend-review-cardbody">
+                <Card className="reviews-card">
+                    <Card.Body className="reviews-cardbody">
                         <Card.Title>{username}</Card.Title>
                         <p className="text-muted" style={{fontSize:"12px"}}>{date}</p>
                         <Rating name="read-only customized" defaultValue={0}
                         emptyIcon={ <Star style={{ color: "grey" }} fontSize="inherit"/>} 
                         value={rating.stars} readOnly /> 
-                        <Card.Text>
+                        <Card.Text style={{fontSize:"20px"}}>
                         {rating.review}
                         </Card.Text>
                     </Card.Body>

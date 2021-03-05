@@ -13,11 +13,10 @@ class UserReviewController extends React.Component {
 
     sendReview=(userReview)=>{
         const {rating,review} = userReview;
-        const ratingTableEntry = new RatingTableEntry(this.props.imdbID,this.props.username,rating,review);
+        const ratingTableEntry = new RatingTableEntry(this.props.imdbID,this.props.username,Number(rating),review);
         this.setState({errorMessage:'',success:''});
         new Promise((resolve, reject) => {
         addRating(ratingTableEntry).then((response)=> {
-            console.log(response);
             if (response.data.errors){
                 if (response.data.errors.username){
                     this.setState({errorMessage: "You must log in before leaving a review."})

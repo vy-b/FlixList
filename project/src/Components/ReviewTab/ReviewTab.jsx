@@ -1,10 +1,13 @@
 import React from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
+import Rating from '@material-ui/lab/Rating'
+import Star from "@material-ui/icons/Star";
+import './ReviewTab.css'
 import { withRouter } from "react-router-dom";
 import UserReviewController from './UserReviewController';
 import { getFriends, getRatings } from '../../Utils/Utils.jsx';
 import FriendReviews from "./FriendReviews.jsx";
-import './ReviewTab.css'
+
 class ReviewTab extends React.Component{
     constructor(props) {
         super(props);
@@ -15,7 +18,6 @@ class ReviewTab extends React.Component{
         const username=this.props.username;
         const imdbID=this.props.location.state.movieInfo.imdbID;
         getFriends(username).then((friendsList) => {
-            console.log("my friends",username,friendsList);
             getRatings(imdbID, friendsList).then((friendreviews) =>{
             friendreviews.forEach(response => {
                 if(response.rating.review!==''){
@@ -39,52 +41,57 @@ class ReviewTab extends React.Component{
     }
     
     render(){
-        const {title, poster, year,plot,rated} = this.props.location.state.movieInfo;
-        console.log(this.state.reviews);
-        console.log(this.state.myRating)
+        const {title, poster, year,plot,rated,totalRating, totalUsersRated} = this.props.location.state.movieInfo;
+        const movieRating = totalRating/totalUsersRated;
         return (
             <div className = "App">
                 <header className = "Review-header">
-                <div className="row no-gutters">
+                <div className="row no-gutters review-page">
                     <div className="col-auto">
-                    <div className="card-block px-2" style={{marginRight:"10px"}}>
-                        <img className="poster" src={poster} alt="movie cover"/>
-                    
-                    </div>
-                    </div>
-                    <div className="col">
-                        <div className="card-block" >
-                            <h1 className="title">{title}</h1>
-                            <h5 className="text-muted"><span className="year">{year}</span> | <span className="rated">{rated}</span></h5>
-                            <p className="plot" >{plot}</p>
-                            <UserReviewController imdbID={this.props.location.state.movieInfo.imdbID} username={this.props.username}/>
-                            
-                        </div>
-                    </div>
-                </div>
-                <div className="row no-gutters">
-                    <div className="col-auto">
-                    <div className="card-block ratings" >
-                        {this.state.ratingsOnly.map((review, i) => {
-                            return <FriendReviews review={review} key={i}/>
-                        })}
-                    </div>
-                    </div>
-                    
-                    <div className="col">
-                        <div className="card-block reviews" >
-                            {this.state.myRating!==[]
-                            ? this.state.myRating.map((review, i) => {
-                                return <FriendReviews review={review} key={i}/>
-                            })
-                            :undefined
-                            }
-                            {this.state.reviews.map((review, i) => {
+                        <div className="card-block px-2" style={{marginRight:"10px"}}>
+                            <img className="poster" src={poster} alt="movie cover"/>
+
+                            <div style={{marginTop:"13px"}}>
+                            {this.state.ratingsOnly.map((review, i) => {
                                 return <FriendReviews review={review} key={i}/>
                             })}
-                            </div></div>
                             </div>
 
+                        </div>
+                    </div>
+                    <div className="col">
+                        <div className="card-block " style={{marginTop:"10px"}}>
+                            <h1 className="title">{title}</h1>
+                            <h5 className="text-muted"><span className="year">{year}</span> | <span className="rated">{rated}</span></h5>
+
+                            <Rating name="half-rating-read" value={movieRating} precision={0.5}
+                            emptyIcon={ <Star style={{ color: "grey" }} fontSize="inherit"/>} 
+                            readOnly /> 
+                            <p className="text-muted" style={{fontSize:"16px"}}>(from {totalUsersRated} total ratings)</p>
+
+                            <p className="plot" >{plot}</p>
+                            
+                            <UserReviewController imdbID={this.props.location.state.movieInfo.imdbID} username={this.props.username}/>
+
+                            <div style={{marginTop:"14px"}}>
+
+                                {this.state.myRating!==[]
+                                ? this.state.myRating.map((review, i) => {
+                                    return <FriendReviews review={review} key={i}/>
+                                })
+                                :undefined
+                                }
+
+                                {this.state.reviews.map((review, i) => {
+                                    return <FriendReviews review={review} key={i}/>
+                                })}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <div>
+                            </div>
                 
                 </header>
             </div>

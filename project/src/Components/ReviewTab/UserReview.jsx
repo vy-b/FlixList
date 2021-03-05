@@ -53,7 +53,7 @@ class UserReview extends React.Component {
                       }
                     onChange={this.changeRating}
                     />
-                    <Form.Control className="review-box" as="textarea" rows={3} placeholder="What did you think about the movie? (Optional)" onChange={this.changeReview}/>
+                    <Form.Control style={{marginTop:"10px"}} as="textarea" rows={3} placeholder="What did you think about the movie? (Optional)" onChange={this.changeReview}/>
                 </Form.Group>
                 <Button className="form-control my-button"variant="outline-dark" type="submit" onClick={this.onSubmit}>
                     Submit

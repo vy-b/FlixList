@@ -40,7 +40,7 @@ class SearchController extends React.Component {
                 <header className="App-header">
                     <SearchView onRequest={this.sendRequest} error={this.state.error}/>
                     {this.state.movies.map((movie, i) => {
-                        return <Movie movieInfo={movie} clickable={true} key={i}/>
+                        return <Movie movieInfo={movie} key={i}/>
                     })}
                 </header>
             </div>
