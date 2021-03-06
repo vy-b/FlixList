@@ -15,20 +15,23 @@ class ReviewTab extends React.Component {
   }
 
   componentDidMount() {
+    setTimeout(() => this.setState({ show: true}), 100)
+    let reviewArr = [];
+    let ratingsArr = [];
     const username = this.props.username;
     const imdbID = this.props.location.state.movieInfo.imdbID;
     getFriends(username).then((friendsList) => {
       getRatings(imdbID, friendsList).then((friendreviews) => {
         friendreviews.forEach((response) => {
           if (response.rating.review !== "") {
-            this.setState({ reviews: [...this.state.reviews, response] });
+            reviewArr.push(response);
           } else if (response.rating.review === "") {
-            this.setState({
-              ratingsOnly: [...this.state.ratingsOnly, response],
-            });
+            ratingsArr.push(response);
           }
         });
       });
+      this.setState({reviews: reviewArr});
+      this.setState({ratingsOnly: ratingsArr});
     });
     // get my rating
     getRatings(imdbID, username).then((myRating) => {
@@ -50,7 +53,8 @@ class ReviewTab extends React.Component {
     } = this.props.location.state.movieInfo;
     const movieRating = totalRating / totalUsersRated;
     return (
-      <div className="App">
+      <div className={this.state.show ? 'show' : null}>
+      <div className="App ">
         <header className="Review-header">
           <div className="row no-gutters review-page">
             <div className="col-auto">
@@ -93,11 +97,9 @@ class ReviewTab extends React.Component {
                 />
 
                 <div style={{ marginTop: "14px" }}>
-                  {this.state.myRating !== []
-                    ? this.state.myRating.map((review, i) => {
-                        return <FriendReviews review={review} key={i} />;
-                      })
-                    : undefined}
+                  {this.state.myRating.map((review, i) => {
+                    return <FriendReviews review={review} key={i} />;
+                  })}
 
                   {this.state.reviews.map((review, i) => {
                     return <FriendReviews review={review} key={i} />;
@@ -106,8 +108,8 @@ class ReviewTab extends React.Component {
               </div>
             </div>
           </div>
-          <div></div>
         </header>
+      </div>
       </div>
     );
   }

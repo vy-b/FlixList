@@ -12,14 +12,7 @@ class UserReview extends React.Component {
             rating:'',
             review:''
         }
-        this.changeRating = this.changeRating.bind(this)
         this.changeReview = this.changeReview.bind(this)
-    }
-    changeRating(event){
-        event.preventDefault();
-        this.setState({
-            rating:event.target.value
-        })
     }
     changeReview(event){
         event.preventDefault();
@@ -44,14 +37,13 @@ class UserReview extends React.Component {
                     <h3>Leave a review</h3>
                     <Rating
                     name="customized"
-                    defaultValue={0}
                     emptyIcon={
                         <Star
                           style={{ color: "#111111" }}
                           fontSize="inherit"
                         />
                       }
-                    onChange={this.changeRating}
+                    onChange={(event,newValue) => this.setState({rating: newValue})}
                     />
                     <Form.Control style={{marginTop:"10px"}} as="textarea" rows={3} placeholder="What did you think about the movie? (Optional)" onChange={this.changeReview}/>
                 </Form.Group>

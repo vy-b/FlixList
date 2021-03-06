@@ -8,7 +8,7 @@ class FriendReviews extends React.Component{
     render(){
         const {username,rating,date} = this.props.review;
         return(
-            <div>
+            <div style={{marginTop:"10px"}}>
                 <Card className="reviews-card">
                     <Card.Body className="reviews-cardbody">
                         <Card.Title>{username}</Card.Title>

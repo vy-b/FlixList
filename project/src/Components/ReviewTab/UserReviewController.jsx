@@ -12,9 +12,14 @@ class UserReviewController extends React.Component {
     }
 
     sendReview=(userReview)=>{
-        const {rating,review} = userReview;
-        const ratingTableEntry = new RatingTableEntry(this.props.imdbID,this.props.username,Number(rating),review);
         this.setState({errorMessage:'',success:''});
+        const {rating,review} = userReview;
+        if (rating === null){
+            this.setState({errorMessage: 'A star rating out of five is required.'})
+            return null;
+        }
+        const ratingTableEntry = new RatingTableEntry(this.props.imdbID,this.props.username,Number(rating),review);
+        
         new Promise((resolve, reject) => {
         addRating(ratingTableEntry).then((response)=> {
             if (response.data.errors){
@@ -23,7 +28,6 @@ class UserReviewController extends React.Component {
                 }
                 else if(response.data.errors.rating){
                     this.setState({errorMessage: 'A star rating out of five is required.'})
-                    reject("no star rating");
                 }
             }
             else{
