@@ -20,8 +20,10 @@ class UserSearchView extends React.Component {
         const {error, success} = this.props
         return (
             <div className="search">
-                <input className="search-box" type="text" onChange={this.onInput} placeholder="Friend name" value={searchUser}/>
-                <input className="button" type="submit" onClick={this.onSubmit} value="Add"/>  
+                <div className="input-group mb-3">
+                    <input className="form-control search-box" type="text" onChange={this.onInput} placeholder="Friend Username" value={searchUser}/>
+                    <div className="input-group-append"><button type="submit" className="btn btn-secondary" onClick={this.onSubmit} value="Add">Add</button></div>
+                </div>
                 <div className="message">
                     <div className="error">{error}</div>
                     <div className="success">{success}</div>
