@@ -65,10 +65,10 @@ function addRating(ratingTableEntry){
 }
 
 /*
-imdbID: The rapidapi id of the targeted movie.
+imdbID: The rapidapi id of the targeted movie. If undefined, returns ratings for all movies.
 usernameList: The array of usernames of the users who wrote the reviews. 
 
-Returns a list of RatingTableEntry objects.
+Returns a list of RatingTableEntry objects, sorted by date (most recent first).
 */
 function getRatings(imdbID, usernameList){
     const searchParamaters = {
@@ -78,9 +78,11 @@ function getRatings(imdbID, usernameList){
     return new Promise((resolve, reject) => {
         axios.get('http://localhost:3001/getRatings', {params: searchParamaters}).then( (response) => {
             if(response.status === 200){
-                resolve(response.data.map(result => {
+                let results = response.data.map(result => {
                     return new RatingTableEntry(result.imdbID, result.username, result.rating.stars, result.rating.review, result.date);
-                }));
+                })
+                results.sort((entry1, entry2) => ('' + entry2.date).localeCompare(entry1.date));
+                resolve(results);
             }else{
                 reject(response);
             }

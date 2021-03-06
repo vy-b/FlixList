@@ -1,6 +1,6 @@
 import React from 'react';
 import UserReview from './UserReview'
-import {addRating} from '../Utils/Utils';
+import {getRatings, addRating} from '../Utils/Utils';
 import RatingTableEntry from '../Objects/RatingTableEntry.jsx';
 import { withRouter } from 'react-router-dom';
 
@@ -14,6 +14,10 @@ class TestComponent extends React.Component {
     }
 
     sendReview=(userReview)=>{
+        // If you pass undefined as the imdbID, then it gets the ratings for all movies.
+        getRatings(undefined, ['test', 'callumb']).then(response => {
+            console.log(response)
+        })
         const {rating,review} = userReview;
         const ratingTableEntry = new RatingTableEntry("tt0319343",this.props.username,Number(rating),review);
         this.setState({errorMessage:'',success:''});
