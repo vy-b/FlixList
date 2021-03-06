@@ -1,6 +1,6 @@
 import './App.css'
-import React, {useState} from 'react'
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import React, { useState } from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import TopNavView from "./Components/TopNavView"
 import TestComponent from "./Components/TestComponent"
 import SearchController from "./Components/MovieSearch/SearchController"
@@ -10,22 +10,22 @@ import ProfileTabController from "./Components/ProfileTab/ProfileTabController"
 import ReviewTab from "./Components/ReviewTab"
 
 function App() {
-  const [username,setUsername] = useState('')
-  return(
+  const [username, setUsername] = useState('')
+  return (
     <React.Fragment>
       <Router>
-        <TopNavView />
+        <TopNavView username={username} setUsername={setUsername} />
         <Switch>
           <Route exact path="/">
-            <TestComponent username={username}/>
+            <TestComponent username={username} />
           </Route>
           <Route exact path="/SignUp" component={SignUpController} />
-          <Route exact path = "/Review" component = {ReviewTab}/>
+          <Route exact path="/Review" component={ReviewTab} />
           <Route exact path="/Login">
-            <LoginController setUsername={setUsername}/>
+            <LoginController setUsername={setUsername} />
           </Route>
           <Route exact path="/Profile">
-            <ProfileTabController username={username}/>
+            <ProfileTabController username={username} />
           </Route>
           <Route exact path="/Search" component={SearchController} />
         </Switch>
