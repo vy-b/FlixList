@@ -31,7 +31,7 @@ class Movie extends React.Component {
                             <h1 className="title">{title}</h1>
                             <h5 className="text-muted"><span className="year">{year}</span> | <span className="rated">{rated}</span></h5>
 
-                            <Rating name="half-rating-read" value={movieRating} precision={0.5}
+                            <Rating name="half-rating-read" value={movieRating} precision={0.1}
                             emptyIcon={ <Star style={{ color: "grey" }} fontSize="inherit"/>} 
                             readOnly /> 
                             <p className="text-muted" style={{fontSize:"16px"}}>(from {totalUsersRated} total ratings)</p>
