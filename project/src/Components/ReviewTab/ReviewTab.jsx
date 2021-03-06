@@ -50,6 +50,7 @@ class ReviewTab extends React.Component {
       rated,
       totalRating,
       totalUsersRated,
+      imdbID
     } = this.props.location.state.movieInfo;
     const movieRating = totalRating / totalUsersRated;
     return (
@@ -92,7 +93,7 @@ class ReviewTab extends React.Component {
                 <p className="plot">{plot}</p>
 
                 <UserReviewController
-                  imdbID={this.props.location.state.movieInfo.imdbID}
+                  imdbID={imdbID}
                   username={this.props.username}
                 />
 
