@@ -1,5 +1,5 @@
 import React from 'react';
-import UserReview from './UserReview'
+import UserReviewView from './UserReviewView'
 import {addRating} from '../../Utils/Utils';
 import RatingTableEntry from '../../Objects/RatingTableEntry.jsx';
 class UserReviewController extends React.Component {
@@ -42,7 +42,7 @@ class UserReviewController extends React.Component {
 render(){
     return(
     <div>
-        <UserReview onReview={this.sendReview} err={this.state.errorMessage} success={this.state.success}/>
+        <UserReviewView onReview={this.sendReview} err={this.state.errorMessage} success={this.state.success}/>
     </div>
     );
 }

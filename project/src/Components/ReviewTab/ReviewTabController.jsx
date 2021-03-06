@@ -1,5 +1,5 @@
 import React from 'react';
-import ReviewTab from './ReviewTab'
+import ReviewTab from './ReviewTabView'
 class ReviewTabController extends React.Component {
     render() {
         return(

@@ -5,7 +5,7 @@ import Rating from '@material-ui/lab/Rating'
 import './ReviewTab.css'
 import Star from "@material-ui/icons/Star";
 
-class UserReview extends React.Component {
+class UserReviewView extends React.Component {
     constructor(){
         super()
         this.state = {
@@ -61,4 +61,4 @@ class UserReview extends React.Component {
        )
    }
 }
-export default UserReview;
+export default UserReviewView;
