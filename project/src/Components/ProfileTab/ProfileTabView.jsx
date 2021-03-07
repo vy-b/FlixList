@@ -12,7 +12,9 @@ class ProfileTabView extends React.Component{
                         <div className = "name">{this.props.username}</div>
                         <div className = "friendSearch">
                             <div className = "friends">Friends List</div>
-                            <UserSearchController username = {this.props.username} />
+                            <div className = "friendList">
+                                <UserSearchController username = {this.props.username} />
+                            </div>
                         </div>
                     </div>
                </header>

@@ -29,14 +29,16 @@ class UserSearchController extends React.Component {
     render() {
         return(
             <div className = "App">
-                <header className="friendSearch">
-                <UserSearchView onRequest={this.sendRequest} error={this.state.error} success={this.state.success} />
-                {
-                this.state.users.map((searchUser, i) => {
-                return <User username={searchUser} key={i}/>
-                })
-                }
+                <header className="searchUser">
+                    <UserSearchView onRequest={this.sendRequest} error={this.state.error} success={this.state.success} />
                 </header>
+                <div className="listFriends">
+                    {
+                        this.state.users.map((searchUser, i) => {
+                            return <User username={searchUser} key={i}/>
+                        })
+                    }
+                </div>
             </div>
         )
     }

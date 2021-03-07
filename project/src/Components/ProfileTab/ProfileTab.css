@@ -30,6 +30,12 @@
     font-size: calc(5px + 1.75vmin);
 }
 
+.listFriends{
+    flex: 1;
+    max-height: 40vh;
+    overflow-y: scroll;
+}
+
 .User{
     padding-left: 1vh;
     text-align: left;
@@ -44,7 +50,7 @@
     font-size: calc(5px + 1.5vmin);
 }
 
-input-group mb-3{
+.input-group mb-3{
     padding-left: 10px;
     width: auto;
     height: auto;
