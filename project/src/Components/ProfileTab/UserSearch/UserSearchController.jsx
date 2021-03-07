@@ -12,7 +12,22 @@ class UserSearchController extends React.Component {
 
     componentDidMount(){
         getFriends(this.props.username).then((response) => {
-            this.setState({users: response})
+            const mappedUsers = response.map(function(elem, i) {
+                return {username: elem.toLowerCase(), key: i};
+            })
+            mappedUsers.sort(function(a, b) {
+                if (a.username > b.username){
+                    return 1;
+                }
+                else if (a.username < b.username){
+                    return -1;
+                }
+                return 0;
+            });
+            const usersResult = mappedUsers.map(function(elem) {
+                return response[elem.key];
+            });
+            this.setState({users: usersResult})
         })
     }
 
