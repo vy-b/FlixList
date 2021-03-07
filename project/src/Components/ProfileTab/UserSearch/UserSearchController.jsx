@@ -12,22 +12,8 @@ class UserSearchController extends React.Component {
 
     componentDidMount(){
         getFriends(this.props.username).then((response) => {
-            const mappedUsers = response.map(function(elem, i) {
-                return {username: elem.toLowerCase(), key: i};
-            })
-            mappedUsers.sort(function(a, b) {
-                if (a.username > b.username){
-                    return 1;
-                }
-                else if (a.username < b.username){
-                    return -1;
-                }
-                return 0;
-            });
-            const usersResult = mappedUsers.map(function(elem) {
-                return response[elem.key];
-            });
-            this.setState({users: usersResult})
+            const sorted = response.sort((a, b) => a.toLowerCase() < b.toLowerCase() ? -1 : 1);
+            this.setState({users: sorted})
         })
     }
 
@@ -37,7 +23,8 @@ class UserSearchController extends React.Component {
             this.setState({error: '', success: `You are now following ${searchUser}`});
             const addToList = this.state.users;
             addToList.push(searchUser);
-            this.setState({users: addToList});
+            const sorted = addToList.sort((a, b) => a.toLowerCase() < b.toLowerCase() ? -1 : 1);
+            this.setState({users: sorted});
         }).catch(err => this.setState({error: err, success: ''}));
     }
 
