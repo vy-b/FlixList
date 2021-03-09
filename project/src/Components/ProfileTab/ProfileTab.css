@@ -32,7 +32,8 @@
 }
 
 .listFriends{
-    flex: 1;
+    flex: 1;    
+    min-height: 5vh;
     max-height: 40vh;
     overflow-y: auto;
 }

@@ -26,7 +26,8 @@ class UserSearchView extends React.Component {
                     <div className="input-group-append">
                         <button type="submit" className="btn btn-secondary" onClick={this.onSubmit} value="Add">
                             <FaUserPlus className="addUserIcon" /> Add
-                        </button></div>
+                        </button>
+                    </div>
                 </div>
                 <div className="message">
                     <div className="error">{error}</div>
