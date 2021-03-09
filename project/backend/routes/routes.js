@@ -83,7 +83,13 @@ router.post('/addRating', (request, response) => {
 })
 
 router.get('/getRatings', (req, res, next) => {
-    ratingTableEntry.find({imdbID: req.query.imdbID, username: {$in: req.query.usernameList}}).exec().then(doc => {
+    let query = {
+        username: {$in: req.query.usernameList}
+    }
+    if(req.query.imdbID){
+        query.imdbID = req.query.imdbID;
+    }
+    ratingTableEntry.find(query).exec().then(doc => {
         res.json(doc)
     }).catch( err => res.json(err));
 })
