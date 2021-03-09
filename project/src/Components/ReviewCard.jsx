@@ -4,6 +4,7 @@ import Star from "@material-ui/icons/Star";
 import {Button} from 'react-bootstrap'
 import {getMovieDetails} from '../Utils/Utils'
 import './ReviewCard.css'
+import { withRouter } from "react-router-dom"
 class ReviewCard extends React.Component{
     constructor(props) {
         super(props);
@@ -60,4 +61,4 @@ class ReviewCard extends React.Component{
     }
 }
 
-export default ReviewCard
+export default withRouter(ReviewCard)
