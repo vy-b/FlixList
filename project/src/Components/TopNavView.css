@@ -3,6 +3,11 @@
     margin-top: 0vh !important; 
 }
 
+#dropdown-right{
+    background-color: transparent;
+    margin-left: 4vh;
+}
+
 .navbar .navbar-nav .nav-link:hover{
     color: #2b2a2a;
 }
@@ -17,17 +22,8 @@
     text-align: center;
 }
 
-#dropdown-right{
-    background-color: transparent;
-    margin-left: 4vh;
-}
-
 .btn-primary{
     border-color: white;
-}
-
-.btn-toggle{
-    border-color: red;
 }
 
 .dropdown-content{
