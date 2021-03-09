@@ -19,7 +19,6 @@ class ReviewCard extends React.Component{
     }
 
     componentDidMount() {
-        setTimeout(() => this.setState({ show: true}), 2000)
         getMovieDetails(this.props.review.imdbID).then((details) => {
             this.setState({movieInfo: details});
         })

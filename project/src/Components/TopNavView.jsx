@@ -13,7 +13,7 @@ class TopNavView extends React.Component {
         return (
             <div>
                 <Navbar fixed="top" variant="dark" id="topNav">
-                    <Navbar.Brand as={Link} to="/SignUp">
+                    <Navbar.Brand as={Link} to="/">
                         <img src={FlixListLogo} alt="FlixList Logo" />
                     </Navbar.Brand>
                     <Nav className="mr-auto">

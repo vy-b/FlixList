@@ -8,7 +8,7 @@ class BrowseTabView extends React.Component{
     }
 
     componentDidMount() {
-        setTimeout(() => this.setState({ show: true}), 1000)
+        setTimeout(() => this.setState({ show: true}), 500)
         let reviewArr = [];
         const username = this.props.username;
         getFriends(username).then((friendsList) => {
