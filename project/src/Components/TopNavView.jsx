@@ -14,7 +14,7 @@ class TopNavView extends React.Component {
         return (
             <div>
                 <Navbar fixed="top" variant="dark" id="topNav">
-                    <Navbar.Brand className="navElement" as={Link} to="/SignUp">
+                    <Navbar.Brand as={Link} to="/SignUp">
                         <img src={FlixListLogo} alt="FlixList Logo" />
                     </Navbar.Brand>
                     <Nav className="mr-auto">
@@ -42,6 +42,7 @@ class TopNavView extends React.Component {
                                     </Dropdown.Item>
                                 </div>
                             </DropdownButton>
+                            <span/>
                             </> :
                             <>
 
