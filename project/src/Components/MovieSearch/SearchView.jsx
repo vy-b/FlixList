@@ -2,6 +2,8 @@ import React from 'react';
 import '../SignUp/SignUp.css'
 import "bootstrap/dist/css/bootstrap.min.css";
 import '../SignUp/SignUp.css'
+import { FaSearch } from 'react-icons/fa';
+
 class SearchView extends React.Component {
     state= {
         title: ''
@@ -22,8 +24,12 @@ class SearchView extends React.Component {
         return (
             <div className="search">
                 <div className="input-group mb-3">
-                    <input className="form-control search-box" type="text" onChange={this.onInput} value={title}/>
-                    <div className="input-group-append"><button type="submit" className="btn btn-secondary" onClick={this.onSubmit} value="Search">Search </button></div>
+                    <input className="form-control search-box" type="text" onChange={this.onInput} placeholder="Movie Title" value={title}/>
+                    <div className="input-group-append">
+                        <button type="submit" className="btn btn-secondary" onClick={this.onSubmit} value="Search">
+                            <FaSearch className="searchIcon" /> Search 
+                        </button>
+                    </div>
                 </div>
                 <div className="error">{error}</div>
             </div>
