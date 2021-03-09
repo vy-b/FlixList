@@ -19,7 +19,7 @@ class Movie extends React.Component {
         const movieRating = totalRating/totalUsersRated;
         return (
         <div className= "card movie-card">
-            <div className="card-block stretched-link text-decoration clickable-card" onClick={this.onMovieClick}>
+            <div className="card-block stretched-link text-decoration" onClick={this.onMovieClick}>
                 <div className="row no-gutters">
                     <div className="col-auto">
                     <div className="card-block px-2">

@@ -10,7 +10,7 @@ class SearchController extends React.Component {
     }
 
     sendRequest=(title)=>{
-        setTimeout(() => this.setState({ show: true}), 500)
+        setTimeout(() => this.setState({ show: true}), 600)
         let movieArr = [];
         if (title.length < 3){
             this.setState({error:'Please enter 3 characters or more'})
