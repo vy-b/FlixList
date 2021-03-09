@@ -34,7 +34,6 @@ class TopNavView extends React.Component {
                                             <FaUser className="profileIcon" /> Profile
                                         </Nav.Link>
                                     </Dropdown.Item>
-                                    <Dropdown.Divider/>
                                     <Dropdown.Item>
                                         <Nav.Link className="dropdownElement" onClick={this.signOut} as={Link} to="/Login">
                                             <FaSignOutAlt className="signOutIcon" /> Sign Out
