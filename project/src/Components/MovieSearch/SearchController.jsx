@@ -10,6 +10,8 @@ class SearchController extends React.Component {
     }
 
     sendRequest=(title)=>{
+        setTimeout(() => this.setState({ show: true}), 500)
+        let movieArr = [];
         if (title.length < 3){
             this.setState({error:'Please enter 3 characters or more'})
             return null;
@@ -25,24 +27,27 @@ class SearchController extends React.Component {
                 this.setState({movies:[], error:''})
                 movies.forEach( movie => {
                 getMovieDetails(movie.imdbID).then( details => {
-                    this.setState({ movies: [...this.state.movies, details] })
+                    movieArr.push(details);
                 });
                 
-        })
-        }
+                })
+                this.setState({ movies: movieArr })
+                }
     });
     }
 }
 
     render() {
         return(
+            <div className={this.state.show ? 'show' : null}>
             <div className = "App">
                 <header className="App-header">
                     <SearchView onRequest={this.sendRequest} error={this.state.error}/>
                     {this.state.movies.map((movie, i) => {
-                        return <Movie movieInfo={movie} clickable={true} key={i}/>
+                        return <Movie movieInfo={movie} key={i}/>
                     })}
                 </header>
+            </div>
             </div>
         )
     }

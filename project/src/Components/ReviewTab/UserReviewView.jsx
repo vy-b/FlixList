@@ -2,24 +2,17 @@ import React from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Form } from "react-bootstrap";
 import Rating from '@material-ui/lab/Rating'
-import './UserReview.css'
+import './ReviewTab.css'
 import Star from "@material-ui/icons/Star";
 
-class UserReview extends React.Component {
+class UserReviewView extends React.Component {
     constructor(){
         super()
         this.state = {
             rating:'',
             review:''
         }
-        this.changeRating = this.changeRating.bind(this)
         this.changeReview = this.changeReview.bind(this)
-    }
-    changeRating(event){
-        event.preventDefault();
-        this.setState({
-            rating:event.target.value
-        })
     }
     changeReview(event){
         event.preventDefault();
@@ -44,16 +37,15 @@ class UserReview extends React.Component {
                     <h3>Leave a review</h3>
                     <Rating
                     name="customized"
-                    defaultValue={0}
                     emptyIcon={
                         <Star
                           style={{ color: "#111111" }}
                           fontSize="inherit"
                         />
                       }
-                    onChange={this.changeRating}
+                    onChange={(event,newValue) => this.setState({rating: newValue})}
                     />
-                    <Form.Control className="review-box" as="textarea" rows={3} placeholder="What did you think about the movie? (Optional)" onChange={this.changeReview}/>
+                    <Form.Control style={{marginTop:"10px"}} as="textarea" rows={3} placeholder="What did you think about the movie? (Optional)" onChange={this.changeReview}/>
                 </Form.Group>
                 <Button className="form-control my-button"variant="outline-dark" type="submit" onClick={this.onSubmit}>
                     Submit
@@ -69,4 +61,4 @@ class UserReview extends React.Component {
        )
    }
 }
-export default UserReview;
+export default UserReviewView;

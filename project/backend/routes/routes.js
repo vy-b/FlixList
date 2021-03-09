@@ -48,6 +48,7 @@ router.get('/getFriends', (req, res, next) => {
 router.post('/addRating', (request, response) => {
     const {imdbID, username, rating} = request.body;
     ratingTableEntry.findOne({imdbID: imdbID, username: username}).exec().then(doc => {
+        const newStars = Number(rating.stars);
         if(doc){
             // Rating already exists for this imdbID and username -> need to update.
             const oldStars = doc.rating.stars;
@@ -56,7 +57,7 @@ router.post('/addRating', (request, response) => {
             doc.save().then(data => {
                 // Need to update the movie totalRating
                 movieTableEntry.findOne({imdbID: imdbID}).exec().then(movie => {
-                    movie.totalRating += rating.stars - oldStars;
+                    movie.totalRating += newStars - oldStars;
                     movie.save(); 
                 });
                 response.json(data);
@@ -71,7 +72,7 @@ router.post('/addRating', (request, response) => {
             ratingEntry.save().then(data => {
                 // Need to update the movie totalRating
                 movieTableEntry.findOne({imdbID: imdbID}).exec().then(movie => {
-                    movie.totalRating += rating.stars;
+                    movie.totalRating += newStars;
                     movie.totalUsersRated += 1;
                     movie.save(); 
                 });
@@ -82,8 +83,7 @@ router.post('/addRating', (request, response) => {
 })
 
 router.get('/getRatings', (req, res, next) => {
-    const query = {movieId: req.query.imdbID, username: {$in: req.query.usernameList}}
-    ratingTableEntry.find({movieId: req.query.imdbID, username: {$in: req.query.usernameList}}).exec().then(doc => {
+    ratingTableEntry.find({imdbID: req.query.imdbID, username: {$in: req.query.usernameList}}).exec().then(doc => {
         res.json(doc)
     }).catch( err => res.json(err));
 })
