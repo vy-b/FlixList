@@ -2,12 +2,13 @@ import './App.css'
 import React, { useState } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import TopNavView from "./Components/TopNavView"
-import TestComponent from "./Components/TestComponent"
+// import TestComponent from "./Components/TestComponent"
 import SearchController from "./Components/MovieSearch/SearchController"
 import SignUpController from "./Components/SignUp/SignUpController"
 import LoginController from "./Components/Login/LoginController"
 import ProfileTabController from "./Components/ProfileTab/ProfileTabController"
 import ReviewTabController from './Components/ReviewTab/ReviewTabController'
+import BrowseTabController from './Components/BrowseTab/BrowseTabController'
 
 function App() {
   const [username, setUsername] = useState('')
@@ -17,7 +18,10 @@ function App() {
         <TopNavView username={username} setUsername={setUsername} />
         <Switch>
           <Route exact path="/">
-            <TestComponent username={username} />
+            { username===''
+            ? <LoginController setUsername={setUsername} />
+            : <BrowseTabController username={username}></BrowseTabController>
+            }
           </Route>
           <Route exact path="/SignUp" component={SignUpController} />
           <Route exact path="/Review">
