@@ -4,7 +4,8 @@ import {setupServer} from 'msw/node'
 import {render, fireEvent, screen} from '@testing-library/react'
 import {BrowserRouter as Router} from 'react-router-dom'
 import '@testing-library/jest-dom/extend-expect'
-import LoginController from '../Components/LoginController'
+import LoginController from '../Components/Login/LoginController'
+import {changeAndVerify} from '../Utils/TestUtils'
 
 const server = setupServer(
     rest.get('http://localhost:3001/getUser', (req, res, ctx) => {
@@ -69,9 +70,3 @@ test('Username updated after successful login', async () => {
     await screen.findByText('login successful');
     expect(username).toBe('testUsername');
 })
-
-function changeAndVerify(placeholderText, newValue){
-    const input = screen.getByPlaceholderText(placeholderText);
-    fireEvent.change(input, {target: {value: newValue}});
-    expect(input.value).toBe(newValue);
-}
