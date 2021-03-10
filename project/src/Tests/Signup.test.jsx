@@ -1,8 +1,7 @@
 import React from 'react';
 import {rest} from 'msw';
 import {setupServer} from 'msw/node'
-import { createMemoryHistory } from 'history'
-import {render, fireEvent, screen, waitForElementToBeRemoved} from '@testing-library/react'
+import {render, fireEvent, screen} from '@testing-library/react'
 import {BrowserRouter as Router} from 'react-router-dom'
 import '@testing-library/jest-dom/extend-expect'
 import SignUpController from '../Components/SignUp/SignUpController'
@@ -18,7 +17,7 @@ beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
-test('Renders without creashing', () => {
+test('Renders without crashing', () => {
     render(<Router><SignUpController/></Router>);
 });
 

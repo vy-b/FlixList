@@ -10,36 +10,34 @@ class SearchController extends React.Component {
     }
 
     sendRequest=(title)=>{
-        setTimeout(() => this.setState({ show: true}), 600)
-        let movieArr = [];
         if (title.length < 3){
             this.setState({error:'Please enter 3 characters or more'})
             return null;
         }
         else{
-        getSearchResults(title).then(movies => {
-            if(!movies)
-            {
-                this.setState({error:'Movie not found'})
-                return null;
-            }
-            else{
-                this.setState({movies:[], error:''})
-                movies.forEach( movie => {
-                getMovieDetails(movie.imdbID).then( details => {
-                    movieArr.push(details);
-                });
-                
-                })
-                this.setState({ movies: movieArr })
+            getSearchResults(title).then(movies => {
+                if(!movies)
+                {
+                    this.setState({error:'Movie not found'})
+                    return null;
                 }
-    });
+                else{
+                    const movieArr = [];
+                    movies.forEach( movie => {
+                        getMovieDetails(movie.imdbID).then( details => {
+                            movieArr.push(details);
+                            if(movieArr.length === movies.length){
+                                this.setState({ movies: movieArr, error: ''});
+                            }
+                        });
+                    })
+                }
+            });
+        }
     }
-}
 
     render() {
         return(
-            <div className={this.state.show ? 'show' : null}>
             <div className = "App">
                 <header className="App-header">
                     <SearchView onRequest={this.sendRequest} error={this.state.error}/>
@@ -47,7 +45,6 @@ class SearchController extends React.Component {
                         return <Movie movieInfo={movie} key={i}/>
                     })}
                 </header>
-            </div>
             </div>
         )
     }
