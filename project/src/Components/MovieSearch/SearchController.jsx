@@ -23,10 +23,13 @@ class SearchController extends React.Component {
                 }
                 else{
                     const movieArr = [];
+                    let completed = 0;
                     movies.forEach( movie => {
                         getMovieDetails(movie.imdbID).then( details => {
                             movieArr.push(details);
-                            if(movieArr.length === movies.length){
+                        }).finally( () => {
+                            completed++;
+                            if(completed === movies.length){
                                 this.setState({ movies: movieArr, error: ''});
                             }
                         });
