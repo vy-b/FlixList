@@ -41,7 +41,7 @@ class TopNavView extends React.Component {
                                     </Dropdown.Item>
                                 </div>
                             </DropdownButton>
-                            <span/>
+                            <span style={{marginRight:"2vh"}}/>
                             </> :
                             <>
 
