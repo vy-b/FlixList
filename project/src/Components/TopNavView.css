@@ -5,11 +5,20 @@
 
 #dropdown-right{
     background-color: transparent;
+    color: rgba(255,255,255,.5);
+    border-color: rgba(255,255,255,.5);
     margin-left: 4vh;
 }
 
-.navbar .navbar-nav .nav-link:hover{
-    color: #2b2a2a;
+a.dropdown-item:hover{
+    background-color: #2b2a2a;
+}
+
+.dropdown-menu{
+    padding: 0;
+    background-color: #191414;
+    border: 1px solid rgba(255,255,255,.5);
+    border-radius: .25rem;
 }
 
 .loggedOut{
@@ -20,20 +29,6 @@
     margin-left: 2vh;
     margin-right: 2vh;
     text-align: center;
-}
-
-.btn-primary{
-    border-color: white;
-}
-
-.dropdown-content{
-    margin: 0vh;
-    background-color: #191414;
-}
-
-.dropdown-menu{
-    padding: 0vh;
-    background-color: transparent;
 }
 
 span{
