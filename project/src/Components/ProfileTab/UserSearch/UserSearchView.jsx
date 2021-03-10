@@ -1,5 +1,6 @@
 import React from 'react';
 import '.././ProfileTab.css'
+import { FaUserPlus } from 'react-icons/fa'
 
 class UserSearchView extends React.Component {
     state= {
@@ -15,13 +16,25 @@ class UserSearchView extends React.Component {
         const searchUser = event.target.value;
         this.setState({searchUser});
     }
+    onSearch = (event) => {
+        if (event.keyCode === 13){
+            event.preventDefault();
+            this.onSubmit();
+        }
+    }
     render() {
         const {searchUser} = this.state;
         const {error, success} = this.props
         return (
             <div className="search">
-                <input className="search-box" type="text" onChange={this.onInput} placeholder="Friend name" value={searchUser}/>
-                <input className="button" type="submit" onClick={this.onSubmit} value="Add"/>  
+                <div className="input-group mb-3">
+                    <input className="form-control search-box" type="text" onChange={this.onInput} onKeyDown={this.onSearch} placeholder="Friend Username" value={searchUser}/>
+                    <div className="input-group-append">
+                        <button type="submit" className="btn btn-secondary" onClick={this.onSubmit} value="Add">
+                            <FaUserPlus className="addUserIcon" /> Add
+                        </button>
+                    </div>
+                </div>
                 <div className="message">
                     <div className="error">{error}</div>
                     <div className="success">{success}</div>

@@ -6,9 +6,12 @@
     margin-top: 71px;
 }
 
-.name{
-    margin-top: 20vh;
+.parent{
+    margin-top: 10vh;
     margin-left: 20vh;
+}
+
+.name{
     position: absolute;
     font-size: calc(5px + 1.75vmin);
     font-weight: 500;
@@ -19,21 +22,24 @@
 }
 
 .friendSearch{
-    margin: auto;
-    margin-top: 2vh;
     position: relative;
 }
 
 .friends{
-    margin-top: 20vh;
+    padding-top: 20vh;
     font-size: calc(5px + 1.75vmin);
+    font-weight: 500;
+}
 
+.listFriends{
+    flex: 1;    
+    min-height: 5vh;
+    max-height: 40vh;
+    overflow-y: auto;
 }
 
 .User{
-    margin-top: 1vh;
-    margin-left: 0.2vh;
-    padding-left: 10px;
+    padding-left: 1vh;
     text-align: left;
     display: flex;
     justify-content: left;
@@ -42,17 +48,14 @@
 }
 
 .search{
+    padding-top: 2vh;
     font-size: calc(5px + 1.5vmin);
 }
 
-.search-box{
+.input-group mb-3{
     padding-left: 10px;
     width: auto;
     height: auto;
-}
-
-.button{
-    margin-top:10px
 }
 
 .error{

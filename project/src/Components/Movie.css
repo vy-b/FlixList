@@ -1,5 +1,5 @@
-.card {
-    max-width:60%;
+.movie-card {
+    width:900px;
     background-color: #2b2a2a;
     color:white;
     padding: 10px;
@@ -8,10 +8,12 @@
 }
 .movie-card{
     margin-top: 20px;
+    color:white;
 }
 .movie-card:hover{
     transform: scale(1.02);
     box-shadow: 0px 0px 9px rgb(240, 231, 231);
+    color:white;
 }
 
 img {
@@ -23,10 +25,3 @@ img {
     font-weight: lighter !important;
 }
 
-.clickable-card{
-    color:white;
-}
-
-.clickable-card:hover{
-    color:white;
-}

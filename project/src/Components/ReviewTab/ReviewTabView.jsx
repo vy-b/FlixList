@@ -60,7 +60,7 @@ class ReviewTab extends React.Component {
           <div className="row no-gutters review-page">
             <div className="col-auto">
               <div className="card-block px-2" style={{ marginRight: "10px" }}>
-                <img className="poster" src={poster} alt="movie cover" />
+                <img className="movie-poster" src={poster} alt="movie cover" />
 
                 <div style={{ marginTop: "13px" }}>
                   {this.state.ratingsOnly.map((review, i) => {

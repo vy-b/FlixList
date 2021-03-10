@@ -1,0 +1,18 @@
+.browse-card{
+    width:500px;
+    background-color: #2b2a2a;
+    margin-top: 20px;
+    color:white;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.card-header{
+    background-color:#202020;
+    margin-bottom:10px;
+}
+
+.date{
+    font-size:12px;
+    margin-bottom:0px;
+}
