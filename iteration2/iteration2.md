@@ -30,8 +30,9 @@
 ![Add Friend (Error 3)](https://csil-git1.cs.surrey.sfu.ca/sjanke/301396991_group_project/-/blob/master/iteration2/AddFriendError3/search.png?raw=true)
 
 ![Add Friend (Error 4)](https://csil-git1.cs.surrey.sfu.ca/sjanke/301396991_group_project/-/blob/master/iteration2/AddFriendError4/search.png?raw=true)
----
-# Trello Board:
+
+
+## Trello Board:
 
 ![Trello Board 1](https://csil-git1.cs.surrey.sfu.ca/sjanke/301396991_group_project/-/blob/master/iteration2/images/Trello1.png?raw=true)
 
