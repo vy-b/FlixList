@@ -14,7 +14,7 @@ class ReviewTab extends React.Component {
   }
 
   componentDidMount() {
-    setTimeout(() => this.setState({ show: true}), 100)
+    setTimeout(() => this.setState({ show: true}), 200)
     let reviewArr = [];
     let ratingsArr = [];
     const username = this.props.username;
