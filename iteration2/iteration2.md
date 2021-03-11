@@ -2,37 +2,51 @@
 
 ## Screenshots:
 ![Login](https://csil-git1.cs.surrey.sfu.ca/sjanke/301396991_group_project/-/blob/master/iteration2/images/Login.png?raw=true)
+
 ![Signup](https://csil-git1.cs.surrey.sfu.ca/sjanke/301396991_group_project/-/blob/master/iteration2/images/Signup.png?raw=true)
+
 ![Logged In](https://csil-git1.cs.surrey.sfu.ca/sjanke/301396991_group_project/-/blob/master/iteration2/images/LoggedIn1.png?raw=true)
 
 ![Browse](https://csil-git1.cs.surrey.sfu.ca/sjanke/301396991_group_project/-/blob/master/iteration2/images/Browse.png?raw=true)
+
 ![Dropdown Menu](https://csil-git1.cs.surrey.sfu.ca/sjanke/301396991_group_project/-/blob/master/iteration2/images/Search-Dropdown.png?raw=true)
 
 ![Search Result - No Hover](https://csil-git1.cs.surrey.sfu.ca/sjanke/301396991_group_project/-/blob/master/iteration2/SearchResult-NoHover/search.png?raw=true)
+
 ![Search Result - Hover](https://csil-git1.cs.surrey.sfu.ca/sjanke/301396991_group_project/-/blob/master/iteration2/SearchResult-Hover/search.png?raw=true)
 
 ![Movie Info](https://csil-git1.cs.surrey.sfu.ca/sjanke/301396991_group_project/-/blob/master/iteration2/MovieInfo/search.png?raw=true)
+
 ![Movie Ratings](https://csil-git1.cs.surrey.sfu.ca/sjanke/301396991_group_project/-/blob/master/iteration2/MovieInfo-Ratings/search.png?raw=true)
 
 ![Profile](https://csil-git1.cs.surrey.sfu.ca/sjanke/301396991_group_project/-/blob/master/iteration2/Profile-FriendList/search.png?raw=true)
+
 ![Add Friend (Success)](https://csil-git1.cs.surrey.sfu.ca/sjanke/301396991_group_project/-/blob/master/iteration2/AddFriendSuccess/search.png?raw=true)
+
 ![Add Friend (Error 1)](https://csil-git1.cs.surrey.sfu.ca/sjanke/301396991_group_project/-/blob/master/iteration2/AddFriendError1/search.png?raw=true)
+
 ![Add Friend (Error 2)](https://csil-git1.cs.surrey.sfu.ca/sjanke/301396991_group_project/-/blob/master/iteration2/AddFriendError2/search.png?raw=true)
+
 ![Add Friend (Error 3)](https://csil-git1.cs.surrey.sfu.ca/sjanke/301396991_group_project/-/blob/master/iteration2/AddFriendError3/search.png?raw=true)
+
 ![Add Friend (Error 4)](https://csil-git1.cs.surrey.sfu.ca/sjanke/301396991_group_project/-/blob/master/iteration2/AddFriendError4/search.png?raw=true)
+---
+# Trello Board:
 
 ![Trello Board 1](https://csil-git1.cs.surrey.sfu.ca/sjanke/301396991_group_project/-/blob/master/iteration2/images/Trello1.png?raw=true)
+
 ![Trello Board 2](https://csil-git1.cs.surrey.sfu.ca/sjanke/301396991_group_project/-/blob/master/iteration2/images/Trello2.png?raw=true)
+
 ![Trello Board 3](https://csil-git1.cs.surrey.sfu.ca/sjanke/301396991_group_project/-/blob/master/iteration2/images/Trello3.png?raw=true)
+
 ![Trello Board 4](https://csil-git1.cs.surrey.sfu.ca/sjanke/301396991_group_project/-/blob/master/iteration2/images/Trello4.png?raw=true)
+
 ![Trello Board 5](https://csil-git1.cs.surrey.sfu.ca/sjanke/301396991_group_project/-/blob/master/iteration2/images/Trello5.png?raw=true)
+
 ![Trello Board 6](https://csil-git1.cs.surrey.sfu.ca/sjanke/301396991_group_project/-/blob/master/iteration2/images/Trello6.png?raw=true)
 
 
 ## Requirements:
-
-#### Abstract:
-We are planning to make a website that allows users to easily rate and recommend movies to their friends. Once a new user signs into the app, they will be able to add friends like any other social media site. The user will then be able to rate, recommend, and comment on movies that they have seen, which will be visible to their friends. If a user has seen a movie a long time ago and forgotten if it is any good, they will be able to refer to their previous review. We will use a database to store information about each user, including their list of friends and movies that they have rated. We are planning to use the IMDB API **(this has been changed to rapidapi)** to retrieve general information about the movies (year the movie was made, summary, etc.) that we can show to the users. The goal is ultimately to have a peer reviewed list of movies catered to the individual using our platform. This would be based on similar interests and previous reviews.
 
 #### User Stories:
 As a user, I want to be able to have a social media platform where I can share with my friends the movies that I like so that we can find mutual interests, share our thoughts on movies and share recommendations to each other.
