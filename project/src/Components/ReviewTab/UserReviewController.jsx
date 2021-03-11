@@ -32,6 +32,7 @@ class UserReviewController extends React.Component {
             }
             else{
                 this.setState({success:'Your review has been posted!'})
+                this.props.submitHandler(response.data)
             }
         })
     }).catch(err =>{
@@ -42,7 +43,7 @@ class UserReviewController extends React.Component {
 render(){
     return(
     <div>
-        <UserReviewView onReview={this.sendReview} err={this.state.errorMessage} success={this.state.success}/>
+        <UserReviewView onReview={this.sendReview} err={this.state.errorMessage} success={this.state.success} />
     </div>
     );
 }

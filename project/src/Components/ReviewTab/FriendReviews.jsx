@@ -7,6 +7,7 @@ import {Card} from 'react-bootstrap'
 class FriendReviews extends React.Component{
     render(){
         const {username,rating,date} = this.props.review;
+        
         return(
             <div style={{marginTop:"10px"}}>
                 <Card className="reviews-card">

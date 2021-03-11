@@ -7,7 +7,6 @@ import { withRouter } from "react-router-dom";
 import UserReviewController from "./UserReviewController";
 import { getFriends, getRatings } from "../../Utils/Utils.jsx";
 import FriendReviews from "./FriendReviews.jsx";
-
 class ReviewTab extends React.Component {
   constructor(props) {
     super(props);
@@ -39,6 +38,11 @@ class ReviewTab extends React.Component {
         this.setState({ myRating: [...this.state.myRating, response] });
       });
     });
+  }
+
+  submitHandler = (newReview) =>{
+    this.setState({ myRating: [] });
+    this.setState({ myRating: [...this.state.myRating, newReview] });
   }
 
   render() {
@@ -95,6 +99,7 @@ class ReviewTab extends React.Component {
                 <UserReviewController
                   imdbID={imdbID}
                   username={this.props.username}
+                  submitHandler={this.submitHandler}
                 />
 
                 <div style={{ marginTop: "14px" }}>
