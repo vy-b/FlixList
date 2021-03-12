@@ -75,7 +75,7 @@ As a signed-in user, I want to be able to add my friends and keep a friend list 
 - [x] Drop down menu in nav bar
 - [x] Branding/favicon/site information
 - [x] View recent reviews from all friends in profile tab
+- [x] Store session information (stay signed in after page refresh)
 
 ## Planned Features:
 - [ ] View friends profile (clickable from our own friends list)
-- [ ] Store session information (stay signed in after page refresh)
