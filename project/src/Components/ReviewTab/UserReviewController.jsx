@@ -32,7 +32,8 @@ class UserReviewController extends React.Component {
             }
             else{
                 this.setState({success:'Your review has been posted!'})
-                this.props.submitHandler(response.data)
+                this.props.submitHandler(response.data);
+                
             }
         })
     }).catch(err =>{

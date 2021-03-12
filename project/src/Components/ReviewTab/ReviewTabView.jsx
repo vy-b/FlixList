@@ -5,12 +5,12 @@ import Star from "@material-ui/icons/Star";
 import "./ReviewTab.css";
 import { withRouter } from "react-router-dom";
 import UserReviewController from "./UserReviewController";
-import { getFriends, getRatings } from "../../Utils/Utils.jsx";
+import { getFriends, getMovieDetails, getRatings } from "../../Utils/Utils.jsx";
 import FriendReviews from "./FriendReviews.jsx";
 class ReviewTab extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { reviews: [], ratingsOnly: [], myRating: [] };
+    this.state = { reviews: [], ratingsOnly: [], myRating: '', movieRating:{totalRating:'',totalUsersRated:''}};
   }
 
   componentDidMount() {
@@ -34,15 +34,18 @@ class ReviewTab extends React.Component {
     });
     // get my rating
     getRatings(imdbID, username).then((myRating) => {
-      myRating.forEach((response) => {
-        this.setState({ myRating: [...this.state.myRating, response] });
-      });
+      this.setState({myRating:myRating[0]})
+    });
+    getMovieDetails(imdbID).then( details => {
+      this.setState({movieRating:{totalRating: details.totalRating,totalUsersRated:details.totalUsersRated}});
     });
   }
 
-  submitHandler = (newReview) =>{
-    this.setState({ myRating: [] });
-    this.setState({ myRating: [...this.state.myRating, newReview] });
+  submitHandler = (newReview, newMovieRating) =>{
+    this.setState({ myRating: newReview });
+    getMovieDetails(newReview.imdbID).then( details => {
+      this.setState({movieRating:{totalRating: details.totalRating,totalUsersRated:details.totalUsersRated}});
+    });
   }
 
   render() {
@@ -52,11 +55,8 @@ class ReviewTab extends React.Component {
       year,
       plot,
       rated,
-      totalRating,
-      totalUsersRated,
       imdbID
     } = this.props.location.state.movieInfo;
-    const movieRating = totalRating / totalUsersRated;
     return (
       <div className={this.state.show ? 'show' : null}>
       <div className="App ">
@@ -83,7 +83,7 @@ class ReviewTab extends React.Component {
 
                 <Rating
                   name="half-rating-read"
-                  value={movieRating}
+                  value={this.state.movieRating.totalRating/this.state.movieRating.totalUsersRated}
                   precision={0.5}
                   emptyIcon={
                     <Star style={{ color: "grey" }} fontSize="inherit" />
@@ -91,7 +91,7 @@ class ReviewTab extends React.Component {
                   readOnly
                 />
                 <p className="text-muted" style={{ fontSize: "16px" }}>
-                  (from {totalUsersRated} total ratings)
+                  (from {this.state.movieRating.totalUsersRated} total ratings)
                 </p>
 
                 <p className="plot">{plot}</p>
@@ -103,9 +103,11 @@ class ReviewTab extends React.Component {
                 />
 
                 <div style={{ marginTop: "14px" }}>
-                  {this.state.myRating.map((review, i) => {
-                    return <FriendReviews review={review} key={i} />;
-                  })}
+                  {this.state.myRating !== '' && this.state.myRating !== undefined
+                  ? <FriendReviews review={this.state.myRating} />
+                  : undefined 
+                  }
+                     
 
                   {this.state.reviews.map((review, i) => {
                     return <FriendReviews review={review} key={i} />;
