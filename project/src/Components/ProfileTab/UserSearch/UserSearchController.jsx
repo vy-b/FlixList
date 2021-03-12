@@ -5,15 +5,36 @@ import User from "./User.jsx";
 import UserSearchView from "./UserSearchView.jsx";
 
 class UserSearchController extends React.Component {
+    _isMounted = false;
+
     constructor(props) {
         super(props);
         this.state = { users: [], error: '', success: '' };
     }
 
+
+
     componentDidMount(){
+        this._isMounted = true;
+        this.updateFriends();
+    }
+
+    componentWillUnmount(){
+        this._isMounted = false;
+    }
+
+    componentDidUpdate(prevProps){
+        if(prevProps.username !== this.props.username){
+            this.updateFriends();
+        }
+    }
+
+    updateFriends = () => {
         getFriends(this.props.username).then((response) => {
             const sorted = response.sort((a, b) => a.toLowerCase() < b.toLowerCase() ? -1 : 1);
-            this.setState({users: sorted})
+            if(this._isMounted){
+                this.setState({users: sorted})
+            }
         })
     }
 
@@ -24,7 +45,9 @@ class UserSearchController extends React.Component {
             const addToList = this.state.users;
             addToList.push(searchUser);
             const sorted = addToList.sort((a, b) => a.toLowerCase() < b.toLowerCase() ? -1 : 1);
-            this.setState({users: sorted});
+            if(this._isMounted){
+                this.setState({users: sorted});
+            }
         }).catch(err => this.setState({error: err, success: ''}));
     }
 

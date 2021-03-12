@@ -2,12 +2,18 @@ import React from 'react';
 import "./ProfileTab.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import UserSearchController from "./UserSearch/UserSearchController"
+import ReviewCard from '../ReviewCard.jsx'
 
 class ProfileTabView extends React.Component{
     render(){
         return(
             <div>
                 <header className = "profile">
+                    <div className = "reviewcard">
+                            {this.props.reviews.map((review, i) => {
+                                return i<10 ? <ReviewCard review={review} key={i} />:undefined;
+                            })}
+                        </div>
                     <div className = "parent">
                         <div className = "name">{this.props.username}</div>
                         <div className = "friendSearch">

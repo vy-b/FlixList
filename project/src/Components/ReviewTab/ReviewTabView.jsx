@@ -13,24 +13,32 @@ class ReviewTab extends React.Component {
     this.state = { reviews: [], ratingsOnly: [], myRating: '', movieRating:{totalRating:'',totalUsersRated:''}};
   }
 
-  componentDidMount() {
-    setTimeout(() => this.setState({ show: true}), 200)
-    let reviewArr = [];
-    let ratingsArr = [];
+  componentDidMount(){
+    this.fetchRatings();
+  }
+
+  componentDidUpdate(prevProps) {
+    if(prevProps.username !== this.props.username){
+      this.fetchRatings();
+    }
+  }
+
+  fetchRatings = () => {
     const username = this.props.username;
     const imdbID = this.props.location.state.movieInfo.imdbID;
     getFriends(username).then((friendsList) => {
       getRatings(imdbID, friendsList).then((friendreviews) => {
+        let reviewArr = [];
+        let ratingsArr = [];
         friendreviews.forEach((response) => {
           if (response.rating.review !== "") {
             reviewArr.push(response);
-          } else if (response.rating.review === "") {
+          } else {
             ratingsArr.push(response);
           }
         });
+        this.setState({reviews: reviewArr, ratingsOnly: ratingsArr});
       });
-      this.setState({reviews: reviewArr});
-      this.setState({ratingsOnly: ratingsArr});
     });
     // get my rating
     getRatings(imdbID, username).then((myRating) => {
@@ -58,7 +66,6 @@ class ReviewTab extends React.Component {
       imdbID
     } = this.props.location.state.movieInfo;
     return (
-      <div className={this.state.show ? 'show' : null}>
       <div className="App ">
         <header className="Review-header">
           <div className="row no-gutters review-page">
@@ -117,7 +124,6 @@ class ReviewTab extends React.Component {
             </div>
           </div>
         </header>
-      </div>
       </div>
     );
   }
