@@ -1,4 +1,4 @@
-# Iteration1
+# Iteration2
 
 ## Screenshots:
 ![Login](https://csil-git1.cs.surrey.sfu.ca/sjanke/301396991_group_project/-/blob/master/iteration2/images/Login.png?raw=true)
@@ -74,8 +74,8 @@ As a signed-in user, I want to be able to add my friends and keep a friend list 
 - [x] Change nav bar when user is signed in
 - [x] Drop down menu in nav bar
 - [x] Branding/favicon/site information
+- [x] View recent reviews from all friends in profile tab
 
 ## Planned Features:
 - [ ] View friends profile (clickable from our own friends list)
 - [ ] Store session information (stay signed in after page refresh)
-- [ ] View recent reviews from all friends in profile tab
