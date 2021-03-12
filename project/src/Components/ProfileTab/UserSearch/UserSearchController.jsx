@@ -16,16 +16,26 @@ class UserSearchController extends React.Component {
 
     componentDidMount(){
         this._isMounted = true;
+        this.updateFriends();
+    }
+
+    componentWillUnmount(){
+        this._isMounted = false;
+    }
+
+    componentDidUpdate(prevProps){
+        if(prevProps.username !== this.props.username){
+            this.updateFriends();
+        }
+    }
+
+    updateFriends = () => {
         getFriends(this.props.username).then((response) => {
             const sorted = response.sort((a, b) => a.toLowerCase() < b.toLowerCase() ? -1 : 1);
             if(this._isMounted){
                 this.setState({users: sorted})
             }
         })
-    }
-
-    componentWillUnmount(){
-        this._isMounted = false;
     }
 
     sendRequest=(searchUser)=>{        

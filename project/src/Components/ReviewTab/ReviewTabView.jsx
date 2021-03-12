@@ -14,7 +14,17 @@ class ReviewTab extends React.Component {
     this.state = { reviews: [], ratingsOnly: [], myRating: [] };
   }
 
-  componentDidMount() {
+  componentDidMount(){
+    this.fetchRatings();
+  }
+
+  componentDidUpdate(prevProps) {
+    if(prevProps.username !== this.props.username){
+      this.fetchRatings();
+    }
+  }
+
+  fetchRatings = () => {
     const username = this.props.username;
     const imdbID = this.props.location.state.movieInfo.imdbID;
     getFriends(username).then((friendsList) => {
