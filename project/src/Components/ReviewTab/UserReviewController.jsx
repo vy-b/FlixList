@@ -20,7 +20,6 @@ class UserReviewController extends React.Component {
         }
         const ratingTableEntry = new RatingTableEntry(this.props.imdbID,this.props.username,Number(rating),review);
         
-        new Promise((resolve, reject) => {
         addRating(ratingTableEntry).then((response)=> {
             if (response.data.errors){
                 if (response.data.errors.username){
@@ -36,9 +35,6 @@ class UserReviewController extends React.Component {
                 
             }
         })
-    }).catch(err =>{
-        console.log(err)
-    })
     }
 
 render(){
