@@ -3,27 +3,15 @@ import "./ProfileTab.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import UserSearchController from "./UserSearch/UserSearchController"
 import ReviewCard from '../ReviewCard.jsx'
-import {getRatings} from '../../Utils/Utils.jsx'
 
 class ProfileTabView extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state = { reviews: [] };
-    }
-    componentDidMount() {
-        const username = this.props.username;
-            getRatings(undefined, username).then((userReviews) => {
-                this.setState({reviews: userReviews});
-            });
-    }
-
     render(){
         return(
             <div>
                 <header className = "profile">
                     <div className = "reviewcard">
-                            {this.state.reviews.map((review, i) => {
-                                if (i<10) return <ReviewCard review={review} key={i} />;
+                            {this.props.reviews.map((review, i) => {
+                                return i<10 ? <ReviewCard review={review} key={i} />:undefined;
                             })}
                         </div>
                     <div className = "parent">
