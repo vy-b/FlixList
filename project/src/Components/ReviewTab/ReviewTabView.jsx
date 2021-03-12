@@ -3,64 +3,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Rating from "@material-ui/lab/Rating";
 import Star from "@material-ui/icons/Star";
 import "./ReviewTab.css";
-import { withRouter } from "react-router-dom";
 import UserReviewController from "./UserReviewController";
-import { getFriends, getRatings } from "../../Utils/Utils.jsx";
 import FriendReviews from "./FriendReviews.jsx";
-
-class ReviewTab extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { reviews: [], ratingsOnly: [], myRating: [] };
-  }
-
-  componentDidMount(){
-    this.fetchRatings();
-  }
-
-  componentDidUpdate(prevProps) {
-    if(prevProps.username !== this.props.username){
-      this.fetchRatings();
-    }
-  }
-
-  fetchRatings = () => {
-    const username = this.props.username;
-    const imdbID = this.props.location.state.movieInfo.imdbID;
-    getFriends(username).then((friendsList) => {
-      getRatings(imdbID, friendsList).then((friendreviews) => {
-        let reviewArr = [];
-        let ratingsArr = [];
-        friendreviews.forEach((response) => {
-          if (response.rating.review !== "") {
-            reviewArr.push(response);
-          } else {
-            ratingsArr.push(response);
-          }
-        });
-        this.setState({reviews: reviewArr, ratingsOnly: ratingsArr});
-      });
-    });
-    // get my rating
-    getRatings(imdbID, username).then((myRating) => {
-      myRating.forEach((response) => {
-        this.setState({ myRating: [...this.state.myRating, response] });
-      });
-    });
-  }
+class ReviewTabView extends React.Component {
 
   render() {
-    const {
-      title,
-      poster,
-      year,
-      plot,
-      rated,
-      totalRating,
-      totalUsersRated,
-      imdbID
-    } = this.props.location.state.movieInfo;
-    const movieRating = totalRating / totalUsersRated;
+    const {username, ratingsOnly, reviews, myRating, movieRating, submitHandler,
+      movieInfo: {title, poster, year, plot, rated, imdbID}} = this.props;
+    
     return (
       <div className="App ">
         <header className="Review-header">
@@ -70,7 +20,7 @@ class ReviewTab extends React.Component {
                 <img className="movie-poster" src={poster} alt="movie cover" />
 
                 <div style={{ marginTop: "13px" }}>
-                  {this.state.ratingsOnly.map((review, i) => {
+                  {ratingsOnly.map((review, i) => {
                     return <FriendReviews review={review} key={i} />;
                   })}
                 </div>
@@ -86,30 +36,27 @@ class ReviewTab extends React.Component {
 
                 <Rating
                   name="half-rating-read"
-                  value={movieRating}
-                  precision={0.5}
+                  value={movieRating.totalRating/movieRating.totalUsersRated}
+                  precision={0.1}
                   emptyIcon={
                     <Star style={{ color: "grey" }} fontSize="inherit" />
                   }
                   readOnly
                 />
                 <p className="text-muted" style={{ fontSize: "16px" }}>
-                  (from {totalUsersRated} total ratings)
+                  (from {movieRating.totalUsersRated} total ratings)
                 </p>
 
                 <p className="plot">{plot}</p>
 
                 <UserReviewController
                   imdbID={imdbID}
-                  username={this.props.username}
-                />
+                  username={username}
+                  submitHandler={submitHandler}/>
 
                 <div style={{ marginTop: "14px" }}>
-                  {this.state.myRating.map((review, i) => {
-                    return <FriendReviews review={review} key={i} />;
-                  })}
-
-                  {this.state.reviews.map((review, i) => {
+                  {myRating !== '' && myRating !== undefined ? <FriendReviews review={myRating} /> : undefined}
+                  {reviews.map((review, i) => {
                     return <FriendReviews review={review} key={i} />;
                   })}
                 </div>
@@ -122,4 +69,4 @@ class ReviewTab extends React.Component {
   }
 }
 
-export default withRouter(ReviewTab);
+export default ReviewTabView;
