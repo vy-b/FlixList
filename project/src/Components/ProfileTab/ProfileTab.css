@@ -67,3 +67,9 @@
     color: chartreuse;
     font-size: calc(5px + 1vmin);
 }
+.reviewcard{
+    position: absolute;
+    right: 800px;
+    width: 200px;
+    height: 120px;
+}
