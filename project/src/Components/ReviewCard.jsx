@@ -33,7 +33,7 @@ class ReviewCard extends React.Component{
                 <div className="card browse-card">
                 <div className="card-header">
                     <span className="font-weight-bold">{username}</span>
-                    <p className="text-muted date" >{date}</p>
+                    <p className="text-muted date" >{date ? date.slice(0,10): undefined}</p>
                 </div>
                     <div className="row no-gutters" style={{padding:"5px"}}>
                         <div className="col-auto">

@@ -12,7 +12,7 @@ class FriendReviews extends React.Component{
                 <Card className="reviews-card">
                     <Card.Body className="reviews-cardbody">
                         <Card.Title>{username}</Card.Title>
-                        <p className="text-muted" style={{fontSize:"12px"}}>{date}</p>
+                        <p className="text-muted" style={{fontSize:"12px"}}>{date ? date.slice(0,10): undefined}</p>
                         <Rating name="read-only customized" defaultValue={0}
                         emptyIcon={ <Star style={{ color: "grey" }} fontSize="inherit"/>} 
                         value={rating.stars} readOnly /> 
