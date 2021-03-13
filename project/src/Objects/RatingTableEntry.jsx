@@ -5,6 +5,6 @@ function RatingTableEntry(imdbID, username, stars, review, date) {
         "stars": stars,
         "review": review
     }
-    this.date = date.slice(0, 10);
+    this.date = date;
 }
 export default RatingTableEntry;
