@@ -16,15 +16,15 @@ router.post('/addUser', (request, response) => {
     })
     user.save().then(data => {
         response.json(data);
-    }).catch( error => {
+    }).catch(error => {
         response.json(error);
     });
 });
 
-router.get('/getUser', (req, res, next) =>{
-    userTableEntry.findOne({username: req.query.username}).exec().then(doc => {
+router.get('/getUser', (req, res, next) => {
+    userTableEntry.findOne({ username: req.query.username }).exec().then(doc => {
         res.json(doc)
-    }).catch( err => console.log(err));
+    }).catch(err => console.log(err));
 })
 
 router.post('/addFriend', (request, response) => {
@@ -34,35 +34,35 @@ router.post('/addFriend', (request, response) => {
     })
     friendEntry.save().then(data => {
         response.json(data);
-    }).catch( error => {
+    }).catch(error => {
         response.json(error);
     });
 })
 
 router.get('/getFriends', (req, res, next) => {
-    friendTableEntry.find({username: req.query.username}).exec().then(doc => {
+    friendTableEntry.find({ username: req.query.username }).exec().then(doc => {
         res.json(doc)
-    }).catch( err => res.json(err));
+    }).catch(err => res.json(err));
 })
 
 router.post('/addRating', (request, response) => {
-    const {imdbID, username, rating} = request.body;
-    ratingTableEntry.findOne({imdbID: imdbID, username: username}).exec().then(doc => {
+    const { imdbID, username, rating } = request.body;
+    ratingTableEntry.findOne({ imdbID: imdbID, username: username }).exec().then(doc => {
         const newStars = Number(rating.stars);
-        if(doc){
+        if (doc) {
             // Rating already exists for this imdbID and username -> need to update.
             const oldStars = doc.rating.stars;
             doc.rating = rating;
             doc.date = Date.now();
             doc.save().then(data => {
                 // Need to update the movie totalRating
-                movieTableEntry.findOne({imdbID: imdbID}).exec().then(movie => {
+                movieTableEntry.findOne({ imdbID: imdbID }).exec().then(movie => {
                     movie.totalRating += newStars - oldStars;
-                    movie.save(); 
+                    movie.save();
                 });
                 response.json(data);
             }).catch(err => response.json(err));
-        }else{
+        } else {
             // No rating exists for this imdbID and username -> need to add.
             const ratingEntry = new ratingTableEntry({
                 imdbID: imdbID,
@@ -71,10 +71,10 @@ router.post('/addRating', (request, response) => {
             });
             ratingEntry.save().then(data => {
                 // Need to update the movie totalRating
-                movieTableEntry.findOne({imdbID: imdbID}).exec().then(movie => {
+                movieTableEntry.findOne({ imdbID: imdbID }).exec().then(movie => {
                     movie.totalRating += newStars;
                     movie.totalUsersRated += 1;
-                    movie.save(); 
+                    movie.save();
                 });
                 response.json(data);
             }).catch(err => response.json(err));
@@ -84,58 +84,58 @@ router.post('/addRating', (request, response) => {
 
 router.get('/getRatings', (req, res, next) => {
     let query = {
-        username: {$in: req.query.usernameList}
+        username: { $in: req.query.usernameList }
     }
-    if(req.query.imdbID){
+    if (req.query.imdbID) {
         query.imdbID = req.query.imdbID;
     }
     ratingTableEntry.find(query).exec().then(doc => {
         res.json(doc)
-    }).catch( err => res.json(err));
+    }).catch(err => res.json(err));
 })
 
-router.get('/getSearchResults', function(req, res, next) {
+router.get('/getSearchResults', function (req, res, next) {
     const target = req.query.title;
     axios.request({
-      method: 'GET',
-      url: 'https://movie-database-imdb-alternative.p.rapidapi.com/',
-      params: {s: target, page: '1', r: 'json'},
-      headers: {
-        'x-rapidapi-key': process.env.API_KEY,
-        'x-rapidapi-host': 'movie-database-imdb-alternative.p.rapidapi.com'
-      }
-    }).then(movie=> {
-    	res.json(movie.data.Search);
+        method: 'GET',
+        url: 'https://movie-database-imdb-alternative.p.rapidapi.com/',
+        params: { s: target, page: '1', r: 'json' },
+        headers: {
+            'x-rapidapi-key': process.env.API_KEY,
+            'x-rapidapi-host': 'movie-database-imdb-alternative.p.rapidapi.com'
+        }
+    }).then(movie => {
+        res.json(movie.data.Search);
     }).catch(function (error) {
-    	console.error(error);
+        console.error(error);
     });
 });
 
-router.get('/getRapidApiMovieDetails', function(req, res, next) {
+router.get('/getRapidApiMovieDetails', function (req, res, next) {
     const target = req.query.imdbID;
     axios.request({
-      method: 'GET',
-      url: 'https://movie-database-imdb-alternative.p.rapidapi.com/',
-      params: {i: target, r: 'json'},
-      headers: {
-        'x-rapidapi-key': process.env.API_KEY,
-        'x-rapidapi-host': 'movie-database-imdb-alternative.p.rapidapi.com'
-      }
-    }).then(movie=> {
-    	res.json(movie.data);
+        method: 'GET',
+        url: 'https://movie-database-imdb-alternative.p.rapidapi.com/',
+        params: { i: target, r: 'json' },
+        headers: {
+            'x-rapidapi-key': process.env.API_KEY,
+            'x-rapidapi-host': 'movie-database-imdb-alternative.p.rapidapi.com'
+        }
+    }).then(movie => {
+        res.json(movie.data);
     }).catch(function (error) {
-    	console.error(error);
+        console.error(error);
     });
 });
 
-router.get('/getTableMovieDetails', function(req, res, next) {
-    movieTableEntry.findOne({imdbID: req.query.imdbID}).exec().then( doc => {
+router.get('/getTableMovieDetails', function (req, res, next) {
+    movieTableEntry.findOne({ imdbID: req.query.imdbID }).exec().then(doc => {
         res.json(doc);
     }).catch(err => res.json(err));
 });
 
 router.post('/addMovieDetails', (request, response) => {
-    const {imdbID, title, plot, poster, rated, year, runtime, genre, actors} = request.body;
+    const { imdbID, title, plot, poster, rated, year, runtime, genre, actors } = request.body;
     const movieEntry = new movieTableEntry({
         imdbID: imdbID,
         title: title,
@@ -151,7 +151,7 @@ router.post('/addMovieDetails', (request, response) => {
     })
     movieEntry.save().then(data => {
         response.json(data);
-    }).catch( error => {
+    }).catch(error => {
         response.json(error);
     });
 })
