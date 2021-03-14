@@ -37,7 +37,7 @@ class ReviewCard extends React.Component{
             <div style={{marginTop:"10px"}}>
                 <div className="card browse-card">
                 <div className="card-header">
-                    <a className="font-weight-bold reviewUser" href="/FriendsProfile" onClick={this.onProfileClick}>{username}</a>
+                    <p className="font-weight-bold reviewUser" onClick={this.onProfileClick}>{username}</p>
                     <p className="text-muted date" >{date ? date.slice(0,10): undefined}</p>
                 </div>
                     <div className="row no-gutters" style={{padding:"5px"}}>

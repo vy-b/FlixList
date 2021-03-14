@@ -15,8 +15,6 @@ class FriendsProfileView extends React.Component{
     }
 
     render(){
-        console.log(this.state.reviews)
-        console.log(this.props.username)
         return(
             <div className="App" >
                 <header className="App-header">

@@ -10,7 +10,7 @@ class User extends React.Component {
     }
    render() {
        return (
-            <a href="/FriendsProfile" className="User" onClick={this.onProfileClick} >{this.props.username}</a>
+            <p className="User" onClick={this.onProfileClick} >{this.props.username}</p>
        )
    }
 }

@@ -41,7 +41,6 @@ class App extends React.Component{
   render(){
     const username = this.state.username;
     const setUsername = this.setUsername;
-    console.log(username)
     return (
       <React.Fragment>
         <Router>
