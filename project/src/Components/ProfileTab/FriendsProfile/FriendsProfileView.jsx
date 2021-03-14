@@ -1,7 +1,7 @@
 import React from 'react';
-import {getFriends, getRatings} from '../../Utils/Utils.jsx'
-import ReviewCard from '../ReviewCard.jsx'
-class BrowseTabView extends React.Component{
+import {getRatings} from '../../../Utils/Utils.jsx'
+import ReviewCard from '../../ReviewCard.jsx'
+class FriendsProfileView extends React.Component{
     constructor(props) {
         super(props);
         this.state = { reviews: [] };
@@ -9,18 +9,18 @@ class BrowseTabView extends React.Component{
 
     componentDidMount() {
         const username = this.props.username;
-        getFriends(username).then((friendsList) => {
-            getRatings(undefined, friendsList).then((friendreviews) => {
-                this.setState({reviews: friendreviews});
-            });
+            getRatings(undefined, username).then((reviews) => {
+                this.setState({reviews: reviews});
         });
     }
 
     render(){
+        console.log(this.state.reviews)
+        console.log(this.props.username)
         return(
             <div className="App" >
                 <header className="App-header">
-                <h1 style={{marginTop:"20px"}}> What your friends reviewed recently: </h1>
+                <h1 style={{marginTop:"20px"}}>{this.props.username}'s reviews</h1>
                 {this.state.reviews.map((review, i) => {
                     return <ReviewCard review={review} key={i} />;
                 })}
@@ -30,4 +30,4 @@ class BrowseTabView extends React.Component{
     }
 }
 
-export default BrowseTabView
+export default FriendsProfileView

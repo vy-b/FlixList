@@ -17,7 +17,12 @@ class ReviewCard extends React.Component{
             state: {movieInfo: this.state.movieInfo}
         })
     }
-
+    onProfileClick = () => {
+        this.props.history.push({
+            pathname:"/FriendsProfile",
+            state: {username: this.props.review.username}
+        })
+    }
     componentDidMount() {
         getMovieDetails(this.props.review.imdbID).then((details) => {
             this.setState({movieInfo: details});
@@ -32,7 +37,7 @@ class ReviewCard extends React.Component{
             <div style={{marginTop:"10px"}}>
                 <div className="card browse-card">
                 <div className="card-header">
-                    <span className="font-weight-bold">{username}</span>
+                    <a className="font-weight-bold reviewUser" href="/FriendsProfile" onClick={this.onProfileClick}>{username}</a>
                     <p className="text-muted date" >{date ? date.slice(0,10): undefined}</p>
                 </div>
                     <div className="row no-gutters" style={{padding:"5px"}}>

@@ -16,3 +16,11 @@
     font-size:12px;
     margin-bottom:0px;
 }
+
+.reviewUser{
+    color:white;
+}
+
+.reviewUser:hover{
+    color:white;
+}

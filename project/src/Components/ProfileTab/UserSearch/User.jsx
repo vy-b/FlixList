@@ -1,13 +1,17 @@
 import React from 'react';
 import '.././ProfileTab.css'
-
+import { withRouter } from "react-router-dom";
 class User extends React.Component {
+    onProfileClick = () => {
+        this.props.history.push({
+            pathname:"/FriendsProfile",
+            state: {username: this.props.username}
+        })
+    }
    render() {
        return (
-        <div className="User">
-            <p>{this.props.username}</p>
-        </div>
+            <a href="/FriendsProfile" className="User" onClick={this.onProfileClick} >{this.props.username}</a>
        )
    }
 }
-export default User;
+export default withRouter(User);
