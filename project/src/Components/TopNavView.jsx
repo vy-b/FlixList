@@ -29,15 +29,11 @@ class TopNavView extends React.Component {
                             <DropdownButton id="dropdown-right" menuAlign="right"
                                             title={<FaUser className="profileIcon" />}>
                                 <div className="dropdown-content">
-                                    <Dropdown.Item>
-                                        <Nav.Link className="dropdownElement" as={Link} to="/Profile">
+                                    <Dropdown.Item as={Link} to="/Profile">
                                             <FaUser className="profileIcon" /> Profile
-                                        </Nav.Link>
                                     </Dropdown.Item>
-                                    <Dropdown.Item>
-                                        <Nav.Link className="dropdownElement" onClick={this.signOut} as={Link} to="/Login">
+                                    <Dropdown.Item onClick={this.signOut} as={Link} to="/Login">
                                             <FaSignOutAlt className="signOutIcon" /> Sign Out
-                                        </Nav.Link>
                                     </Dropdown.Item>
                                 </div>
                             </DropdownButton>
