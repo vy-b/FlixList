@@ -14,7 +14,7 @@ class FriendsProfileView extends React.Component{
                         : undefined
                         }
                         {reviews.map((review, i) => {
-                            return i<10 ? <ReviewCard review={review} key={i} />:undefined;
+                            return i<10 ? <ReviewCard username={myUsername} review={review} key={i} />:undefined;
                         })}
 
                     </div>

@@ -18,11 +18,20 @@ class ReviewCard extends React.Component{
         })
     }
     onProfileClick = () => {
+        if(this.props.review.username===this.props.username){
+            this.props.history.push("/Profile")
+        }
+        else{
         this.props.history.push({
             pathname:"/FriendsProfile",
-            state: {username: this.props.review.username}
+            state: {
+                friendUsername: this.props.review.username,
+                myUsername: this.props.username
+            }
         })
+        }
     }
+    
     componentDidMount() {
         getMovieDetails(this.props.review.imdbID).then((details) => {
             this.setState({movieInfo: details});

@@ -23,7 +23,7 @@ class BrowseTabView extends React.Component{
                 <header className="App-header" style={{justifyContent:"flex-start"}}>
                 <h1 style={{marginTop:"20px"}}> What your friends reviewed recently: </h1>
                 {this.state.reviews.map((review, i) => {
-                    return <ReviewCard review={review} key={i} />;
+                    return <ReviewCard username={this.props.username} review={review} key={i} />;
                 })}
               </header>
             </div>

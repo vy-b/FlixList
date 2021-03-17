@@ -11,7 +11,7 @@ class ProfileTabView extends React.Component{
                 <header className = "profile">
                     <div className = "reviewcard">
                             {this.props.reviews.map((review, i) => {
-                                return i<10 ? <ReviewCard review={review} key={i} />:undefined;
+                                return i<10 ? <ReviewCard username={this.props.username} review={review} key={i} />:undefined;
                             })}
                         </div>
                     <div className = "parent">
