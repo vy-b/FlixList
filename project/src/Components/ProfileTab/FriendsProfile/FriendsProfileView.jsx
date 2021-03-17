@@ -1,28 +1,48 @@
 import React from 'react';
-import {getRatings} from '../../../Utils/Utils.jsx'
 import ReviewCard from '../../ReviewCard.jsx'
+import User from '../UserSearch/User'
+import {Button} from 'react-bootstrap'
 class FriendsProfileView extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state = { reviews: [] };
-    }
-
-    componentDidMount() {
-        const username = this.props.username;
-            getRatings(undefined, username).then((reviews) => {
-                this.setState({reviews: reviews});
-        });
-    }
-
+    
+    
     render(){
+        const {reviews,users,friendUsername,isMyFriend,myUsername} = this.props
         return(
-            <div className="App" >
-                <header className="App-header">
-                <h1 style={{marginTop:"20px"}}>{this.props.username}'s reviews</h1>
-                {this.state.reviews.map((review, i) => {
-                    return <ReviewCard review={review} key={i} />;
-                })}
-              </header>
+            <div>
+                <header className = "profile">
+                    <div className = "reviewcard">
+                        {reviews.length === 0 
+                            ? <i style={{paddingTop:"90px"}}> {friendUsername} has not reviewed anything</i>
+                            : undefined
+                            }
+                        {reviews.map((review, i) => {
+                            return i<10 ? <ReviewCard review={review} key={i} />:undefined;
+                        })}
+                        </div>
+                        <div className = "parent">
+                            <div className = "name">
+                                {this.props.friendUsername}
+                            </div>
+                            <Button className="my-button" variant="outline-dark" style={{marginTop:"70px"}} onClick={this.props.clickHandler}>
+                                {isMyFriend === true
+                                ?<div>following</div> 
+                                : <div>follow</div> 
+                                }
+                                
+                            </Button>
+                            {users.length !== 0 
+                            ? <div className = "friends" style={{marginBottom:"10px",paddingTop:"10vh"}}>{friendUsername}'s Friends List</div>
+                            : <div className="font-italic" style={{marginTop:"10px"}}>{friendUsername} is not following anyone</div>
+                            }
+                            <div className="listFriends">
+                            {
+                            users.map((searchUser, i) => {
+                                return <User username={searchUser} myUsername={myUsername} key={i}/>
+                            })
+                            }
+                            </div>
+                        </div>
+               </header>
             </div>
         )
     }

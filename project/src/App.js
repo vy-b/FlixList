@@ -47,7 +47,7 @@ class App extends React.Component{
           <TopNavView username={username} setUsername={setUsername} />
           <Switch>
             <Route exact path="/">
-              { username==='' || username===null
+              { !username
               ? <LoginController setUsername={setUsername} />
               : <BrowseTabController username={username}></BrowseTabController>
               }

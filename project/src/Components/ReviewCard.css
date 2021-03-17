@@ -13,12 +13,13 @@
 }
 
 .date{
-    font-size:12px;
+    font-size:calc(5px + 1vmin);;
     margin-bottom:0px;
 }
 
 .reviewUser{
     color:white;
+    font-size:calc(5px + 2vmin);
 }
 
 .reviewUser:hover{

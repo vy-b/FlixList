@@ -5,7 +5,10 @@ class User extends React.Component {
     onProfileClick = () => {
         this.props.history.push({
             pathname:"/FriendsProfile",
-            state: {username: this.props.username}
+            state: {
+                friendUsername: this.props.username,
+                myUsername: this.props.myUsername
+            }
         })
     }
    render() {

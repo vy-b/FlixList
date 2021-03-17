@@ -60,7 +60,7 @@ class UserSearchController extends React.Component {
                 <div className="listFriends">
                     {
                         this.state.users.map((searchUser, i) => {
-                            return <User username={searchUser} key={i}/>
+                            return <User username={searchUser} myUsername={this.props.username} key={i}/>
                         })
                     }
                 </div>

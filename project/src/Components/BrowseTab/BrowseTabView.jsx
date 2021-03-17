@@ -1,6 +1,7 @@
 import React from 'react';
 import {getFriends, getRatings} from '../../Utils/Utils.jsx'
 import ReviewCard from '../ReviewCard.jsx'
+
 class BrowseTabView extends React.Component{
     constructor(props) {
         super(props);
@@ -19,7 +20,7 @@ class BrowseTabView extends React.Component{
     render(){
         return(
             <div className="App" >
-                <header className="App-header">
+                <header className="App-header" style={{justifyContent:"flex-start"}}>
                 <h1 style={{marginTop:"20px"}}> What your friends reviewed recently: </h1>
                 {this.state.reviews.map((review, i) => {
                     return <ReviewCard review={review} key={i} />;
