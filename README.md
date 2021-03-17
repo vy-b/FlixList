@@ -1,5 +1,8 @@
 # 301396991_Group_Project
 
+## Deployed website
+https://flixxlist.herokuapp.com/
+
 ## Initial setup
 1. Navigate a terminal into the project/backend/ directory.
 2. Run the command `npm install`.
