@@ -20,6 +20,7 @@
 .reviewUser{
     color:white;
     font-size:calc(5px + 2vmin);
+    font-weight: bold;
 }
 
 .reviewUser:hover{
@@ -27,3 +28,4 @@
     text-decoration: underline;
     cursor: pointer;
 }
+

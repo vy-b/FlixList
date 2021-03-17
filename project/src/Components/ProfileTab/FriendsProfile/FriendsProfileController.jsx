@@ -24,8 +24,7 @@ class FriendsProfileController extends React.Component {
         });
 
         getFriends(friendUsername).then((response) => {
-            const sorted = response.sort((a, b) => a.toLowerCase() < b.toLowerCase() ? -1 : 1);
-                this.setState({users: sorted})
+            this.setState({users: response})
         })
 
         getFriends(myUsername).then((response) => {
@@ -44,13 +43,14 @@ class FriendsProfileController extends React.Component {
             this.setState({isMyFriend:true})
         }).catch(err=>console.log(err))
     }
-    
+
     render() {
 
         return(
             <FriendsProfileView myUsername={this.props.location.state.myUsername}
                                 friendUsername={this.props.location.state.friendUsername} 
-                                reviews={this.state.reviews} users={this.state.users} 
+                                reviews={this.state.reviews} 
+                                users={this.state.users} 
                                 isMyFriend={this.state.isMyFriend}
                                 clickHandler={this.followButtonHandler}/>
         )

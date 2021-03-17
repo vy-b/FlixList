@@ -22,7 +22,7 @@ class FriendsProfileView extends React.Component{
                         <div className = "name">
                             {this.props.friendUsername}
                         </div>
-                        <Button className="my-button" variant="outline-dark" style={{marginTop:"70px"}} onClick={this.props.clickHandler}>
+                        <Button className="my-button" variant="outline-dark" style={{marginTop:"10vh"}} onClick={this.props.clickHandler}>
                             {isMyFriend === true
                             ?<div>following</div> 
                             : <div>follow</div> 
@@ -36,7 +36,7 @@ class FriendsProfileView extends React.Component{
                         <div className="listFriends">
                         {
                         users.map((searchUser, i) => {
-                            return <User username={searchUser} myUsername={myUsername} key={i}/>
+                            return <User username={searchUser} myUsername={myUsername} userClass={'User'} key={i}/>
                         })
                         }
                         </div>
