@@ -3,6 +3,10 @@ import '.././ProfileTab.css'
 import { withRouter } from "react-router-dom";
 class User extends React.Component {
     onProfileClick = () => {
+        if(this.props.username===this.props.myUsername){
+            this.props.history.push("/Profile")
+        }
+        else{
         this.props.history.push({
             pathname:"/FriendsProfile",
             state: {
@@ -10,6 +14,7 @@ class User extends React.Component {
                 myUsername: this.props.myUsername
             }
         })
+        }
     }
    render() {
        return (

@@ -3,8 +3,6 @@ import ReviewCard from '../../ReviewCard.jsx'
 import User from '../UserSearch/User'
 import {Button} from 'react-bootstrap'
 class FriendsProfileView extends React.Component{
-    
-    
     render(){
         const {reviews,users,friendUsername,isMyFriend,myUsername} = this.props
         return(
