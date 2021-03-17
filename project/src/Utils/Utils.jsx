@@ -2,6 +2,9 @@ import axios from 'axios';
 import MovieTableEntry from '../Objects/MovieTableEntry';
 import RatingTableEntry from '../Objects/RatingTableEntry';
 
+const url = process.env.NODE_ENV === 'production' ? 'https://cmpt-276-project.herokuapp.com' : 'http://localhost:3001/'
+console.log(url);
+
 function addFriend(friendTableEntry){
     return new Promise((resolve, reject) => {
         if (friendTableEntry.username.trim() === friendTableEntry.friendUsername.trim()){
@@ -94,7 +97,7 @@ function getRatings(imdbID, usernameList){
 // Returns user
 function getUser(username){
     return new Promise((resolve, reject) => {
-        axios.get('http://localhost:3001/getUser', {params: {username: username}}).then( (response) => {
+        axios.get(`${url}/getUser`, {params: {username: username}}).then( (response) => {
             if(response.status === 200){
                 resolve(response);
             }else{
