@@ -8,7 +8,7 @@
     "install-client": "cd project && npm install",
     "install-server": "cd project/backend && npm install",
     "heroku-postbuild": "npm run install-client && npm run install-server && npm run build",
-    "start": "cd project/backend && node server.js",
+    "start": "npm run install-server && cd project/backend && node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
