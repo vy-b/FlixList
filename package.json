@@ -7,7 +7,7 @@
     "build": "cd project && npm run build",
     "install-client": "cd project && npm install",
     "heroku-postbuild": "npm run install-client && npm run build",
-    "start": "cd project/backend && npm start",
+    "start": "cd project/backend && node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
