@@ -2,7 +2,7 @@ import axios from 'axios';
 import MovieTableEntry from '../Objects/MovieTableEntry';
 import RatingTableEntry from '../Objects/RatingTableEntry';
 
-const baseUrl = process.env.NODE_ENV === 'production' ? 'https://cmpt-276-project.herokuapp.com' : 'http://localhost:3001'
+const baseUrl = process.env.NODE_ENV === 'production' ? 'https://flixxlist.herokuapp.com' : 'http://localhost:3001'
 
 function addFriend(friendTableEntry){
     return new Promise((resolve, reject) => {
