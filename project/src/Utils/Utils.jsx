@@ -2,8 +2,7 @@ import axios from 'axios';
 import MovieTableEntry from '../Objects/MovieTableEntry';
 import RatingTableEntry from '../Objects/RatingTableEntry';
 
-const url = process.env.NODE_ENV === 'production' ? 'https://cmpt-276-project.herokuapp.com' : 'http://localhost:3001/'
-console.log(url);
+const baseUrl = process.env.NODE_ENV === 'production' ? 'https://cmpt-276-project.herokuapp.com' : 'http://localhost:3001'
 
 function addFriend(friendTableEntry){
     return new Promise((resolve, reject) => {
@@ -24,7 +23,7 @@ function addFriend(friendTableEntry){
                             reject(`You are already following ${friendTableEntry.friendUsername}`);
                         }
                         else{
-                            axios.post('http://localhost:3001/addFriend', friendTableEntry).then( (response) => {
+                            axios.post(`${baseUrl}/addFriend`, friendTableEntry).then( (response) => {
                                 if(response.status === 200){
                                     resolve(response);
                                 }
@@ -44,7 +43,7 @@ function addFriend(friendTableEntry){
 // Returns an array of the friend usernames.
 function getFriends(username){
     return new Promise((resolve, reject) => {
-        axios.get('http://localhost:3001/getFriends', {params: {username: username}}).then( (response) => {
+        axios.get(`${baseUrl}/getFriends`, {params: {username: username}}).then( (response) => {
             if(response.status === 200){
                 resolve(response.data.map(result => result.friendUsername));
             }else{
@@ -57,7 +56,7 @@ function getFriends(username){
 // Adds the rating, or updates it if a rating already exists for that username and movieId.
 function addRating(ratingTableEntry){
     return new Promise((resolve, reject) => {
-        axios.post('http://localhost:3001/addRating', ratingTableEntry).then( (response) => {
+        axios.post(`${baseUrl}/addRating`, ratingTableEntry).then( (response) => {
             if(response.status === 200){
                 resolve(response);
             }else{
@@ -79,7 +78,7 @@ function getRatings(imdbID, usernameList){
         usernameList: usernameList
     }
     return new Promise((resolve, reject) => {
-        axios.get('http://localhost:3001/getRatings', {params: searchParamaters}).then( (response) => {
+        axios.get(`${baseUrl}/getRatings`, {params: searchParamaters}).then( (response) => {
             if(response.status === 200){
                 let results = response.data.map(result => {
                     return new RatingTableEntry(result.imdbID, result.username, result.rating.stars, result.rating.review, result.date);
@@ -97,7 +96,7 @@ function getRatings(imdbID, usernameList){
 // Returns user
 function getUser(username){
     return new Promise((resolve, reject) => {
-        axios.get(`${url}/getUser`, {params: {username: username}}).then( (response) => {
+        axios.get(`${baseUrl}/getUser`, {params: {username: username}}).then( (response) => {
             if(response.status === 200){
                 resolve(response);
             }else{
@@ -110,7 +109,7 @@ function getUser(username){
 // Returns the movie results from the search query.
 function getSearchResults(movieTitle){
     return new Promise((resolve, reject) => {
-        axios.get('http://localhost:3001/getSearchResults', {params: {title: movieTitle}}).then( (response) => {
+        axios.get(`${baseUrl}/getSearchResults`, {params: {title: movieTitle}}).then( (response) => {
             if(response.status === 200){
                 resolve(response.data);
             }else{
@@ -124,17 +123,17 @@ function getSearchResults(movieTitle){
 function getMovieDetails(imdbID){
     return new Promise((resolve, reject) => {
         // First search our own movie table in mongoDB
-        axios.get('http://localhost:3001/getTableMovieDetails', {params: {imdbID: imdbID}}).then( (response) => {
+        axios.get(`${baseUrl}/getTableMovieDetails`, {params: {imdbID: imdbID}}).then( (response) => {
             if(response.status === 200 && response.data){
                 resolve(response.data);
             }else{
                 // If can't find in mongoDB, get from rapidApi
-                axios.get('http://localhost:3001/getRapidApiMovieDetails', {params: {imdbID: imdbID}}).then( (response) => {
+                axios.get(`${baseUrl}/getRapidApiMovieDetails`, {params: {imdbID: imdbID}}).then( (response) => {
                     if(response.status === 200 && response.data){
                         const {imdbID, Title, Plot, Poster, Rated, Year, Runtime, Genre, Actors} = response.data;
                         const movieTableEntry = new MovieTableEntry(imdbID, Title, Plot, Poster, Rated, Year, Runtime, Genre, Actors, 0, 0);
                         // Add result to mongoDB for next time.
-                        axios.post('http://localhost:3001/addMovieDetails', movieTableEntry).catch( err => console.log(err));
+                        axios.post(`${baseUrl}/addMovieDetails`, movieTableEntry).catch( err => console.log(err));
                         resolve(movieTableEntry);
                     }else{
                         reject(response);
@@ -145,4 +144,16 @@ function getMovieDetails(imdbID){
     }).catch(err => console.log(err));
 }
 
-export {addFriend, getFriends, getUser, addRating, getRatings, getSearchResults, getMovieDetails}
+function addUser(newUser){
+    return new Promise((resolve, reject) => {
+        axios.post(`${baseUrl}/addUser`, newUser).then(response => {
+            if(response.status === 200){
+                resolve(response);
+            }else{
+                reject(response);
+            }
+        });
+    })
+}
+
+export {addFriend, addUser, getFriends, getUser, addRating, getRatings, getSearchResults, getMovieDetails}
