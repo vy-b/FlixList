@@ -15,14 +15,12 @@
 
 .my-button{
     color:#ff6400;
-    border-radius:50px;
     border-color:#ff6400;
 }
 
 .my-button:hover{
     background-color: #ff6400;
     color:white;
-    border-radius:50px;
     border-color:#ff6400;
 }
 
