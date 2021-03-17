@@ -1,47 +1,33 @@
 import React from 'react';
 import LoginView from './LoginView'
-import {getUser} from '../../Utils/Utils';
+import { login } from '../../Utils/Utils';
 import { withRouter } from 'react-router-dom';
 
 class LoginController extends React.Component {
-    constructor(){
+    constructor() {
         super()
         this.state = {
-            errorMessage:''
+            errorMessage: ''
         }
     }
 
-    sendLogin=(loginUser)=>{
-        const {username,password} = loginUser;
-
-        new Promise((resolve, reject) => {
-            getUser(username).then( (response) => {
-                if(response.data === null){
-                    this.setState({errorMessage: 'user does not exist'})
-                }
-                else if (password !== response.data.password){
-                    this.setState({errorMessage: 'wrong password'})
-                }
-                else{
-                    this.props.setUsername(username)
-                    this.setState({errorMessage: 'login successful'})
-                    resolve(this.redirectToBrowse());
-                    
-                }    
-            })
-            }).catch( err => {
-                console.log(err)
-            });
-
+    sendLogin = async (loginUser) => {
+        const { username, password } = loginUser;
+        const res = await login(username, password);
+        if (res === null) {
+            this.setState({ errorMessage: 'error occured' })
+        } else if (!res.valid) {
+            this.setState({ errorMessage: 'user does not exist or wrong password' })
+        } else {
+            this.props.setUsername(username)
+            this.props.history.push('/')
+        }
     }
 
-    redirectToBrowse = () => {
-        this.props.history.push('/')
-    }
 
     render() {
         return (
-            <LoginView onLogin={this.sendLogin} errorMessage={this.state.errorMessage}/>
+            <LoginView onLogin={this.sendLogin} errorMessage={this.state.errorMessage} />
         )
     }
 }
