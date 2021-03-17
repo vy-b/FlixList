@@ -18,7 +18,7 @@ class User extends React.Component {
     }
    render() {
        return (
-            <p className="User" onClick={this.onProfileClick} >{this.props.username}</p>
+            <p className={this.props.userClass} onClick={this.onProfileClick} >{this.props.username}</p>
        )
    }
 }
