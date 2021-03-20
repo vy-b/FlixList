@@ -13,8 +13,8 @@ function addFriend(friendTableEntry){
             reject(`Please enter a valid username`);
         }
         else {
-            getUser(friendTableEntry.friendUsername.trim()).then((response) => {
-                if (response.data === null) {
+            getUser(friendTableEntry.friendUsername.trim()).then((exists) => {
+                if (!exists) {
                     reject(`User '${friendTableEntry.friendUsername}' does not exist`);
                 }
                 else {
@@ -92,42 +92,23 @@ function getRatings(imdbID, usernameList) {
     }).catch(err => console.log(err));
 }
 
+/*
+username: The username of the user.
+password: The password of the user. This parameter is optional.
 
-// Returns user
+Returns true if a user exists that satisfies the parameters, false otherwise.
+*/
 function getUser(username, password) {
     return new Promise((resolve, reject) => {
-        axios.get(`${baseUrl}/getUser`, {params: {username: username}}).then( (response) => {
+        axios.get(`${baseUrl}/getUser`, {params: {username: username, password: password}}).then( (response) => {
             if(response.status === 200){
-                resolve(response);
+                resolve(response.data.exists);
             } else {
                 reject(response);
             }
         });
-    }).catch(err => console.log(err));
+    });
 }
-
-// Login
-async function login(username, password) {
-    let res;
-    try {
-        res = await axios.get('http://localhost:3001/login', { params: { username: username, password: password } })
-    } catch (error) {
-        console.log(error)
-    }
-    return res.data;
-}
-
-// Login
-async function signup(username) {
-    let res;
-    try {
-        res = await axios.get('http://localhost:3001/signup', { params: { username: username } })
-    } catch (error) {
-        console.log(error)
-    }
-    return res.data;
-}
-
 
 
 // Returns the movie results from the search query.
@@ -180,4 +161,4 @@ function addUser(newUser){
     })
 }
 
-export {signup, login, addFriend, addUser, getFriends, getUser, addRating, getRatings, getSearchResults, getMovieDetails}
+export {addFriend, addUser, getFriends, getUser, addRating, getRatings, getSearchResults, getMovieDetails}

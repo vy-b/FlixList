@@ -40,20 +40,12 @@ router.post('/addUser', (request, response) => {
 });
 
 router.get('/getUser', (req, res, next) => {
-    userTableEntry.findOne({ username: req.query.username }).exec().then(doc => {
-        res.json(doc)
-    }).catch(err => console.log(err));
-})
-
-router.get('/login', (req, res, next) => {
-    userTableEntry.findOne({ username: req.query.username, password: req.query.password }).exec().then(doc => {
-        res.json({ valid: !!doc })
-    }).catch(err => console.log(err));
-})
-
-router.get('/signup', (req, res, next) => {
-    userTableEntry.findOne({ username: req.query.username }).exec().then(doc => {
-        res.json({ valid: !!doc })
+    let databaseQuery = {username: req.query.username}
+    if(req.query.password){
+        databaseQuery.password = req.query.password;
+    }
+    userTableEntry.findOne(databaseQuery).exec().then(doc => {
+        res.json({exists: !!doc});
     }).catch(err => console.log(err));
 })
 
