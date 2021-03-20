@@ -15,8 +15,9 @@ class LoginController extends React.Component {
         const { username, password } = loginUser;
         getUser(username, password).then((exists) => {
             if(exists){
-                this.props.setUsername(username)
-                this.props.history.push('/')
+                this.setState({ errorMessage: 'login successful'});
+                this.props.setUsername(username);
+                this.props.history.push('/');
             }else{
                 this.setState({ errorMessage: 'invalid credentials'});
             }

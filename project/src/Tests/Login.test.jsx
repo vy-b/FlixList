@@ -9,7 +9,7 @@ import {changeAndVerify} from '../Utils/TestUtils'
 
 const server = setupServer(
     rest.get('http://localhost:3001/getUser', (req, res, ctx) => {
-        return res(ctx.json({username: 'testUsername', password: 'testPassword'}));    
+        return res(ctx.json({exists: false}));    
     })
 )
 
@@ -27,25 +27,7 @@ test('Can change form fields', () => {
     changeAndVerify('Password', 'testPassword');
 })
 
-test('Wrong password', async () => {
-    let username = undefined;
-    const setUsername = (name) => {
-        username = name;
-    }
-    render(<Router><LoginController setUsername={setUsername}/></Router>);
-    changeAndVerify('examplename123', 'testUsername');
-    changeAndVerify('Password', 'pass');
-    fireEvent.click(screen.getByText('Login'));
-    await screen.findByText('wrong password');
-    expect(username).toBe(undefined);
-})
-
-test('No username match', async () => {
-    server.use(
-        rest.get('http://localhost:3001/getUser', (req, res, ctx) => {
-            return res(ctx.json(null));    
-        })
-    )
+test('Invalid credentials', async () => {
     let username = undefined;
     const setUsername = (name) => {
         username = name;
@@ -54,11 +36,16 @@ test('No username match', async () => {
     changeAndVerify('examplename123', 'testUser');
     changeAndVerify('Password', 'pass');
     fireEvent.click(screen.getByText('Login'));
-    await screen.findByText('user does not exist');
+    await screen.findByText('invalid credentials');
     expect(username).toBe(undefined);
 })
 
 test('Username updated after successful login', async () => {
+    server.use(
+        rest.get('http://localhost:3001/getUser', (req, res, ctx) => {
+            return res(ctx.json({exists: true}));    
+        })
+    )
     let username = undefined;
     const setUsername = (name) => {
         username = name;

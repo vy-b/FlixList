@@ -17,7 +17,7 @@ class SignUpController extends React.Component {
         const { username, password, confirmPassword } = signUpUser;
         getUser(username).then(exists => {
             if (exists) {
-                this.setState({ errorMessage: "username already exists" })
+                this.setState({ errorMessage: "username taken" })
             } else{
                 if (password.length < 6) {
                     this.setState({ errorMessage: 'passwords must be 6 characters or more' })
