@@ -8,6 +8,7 @@ import LoginController from "./Components/Login/LoginController"
 import ProfileTabController from "./Components/ProfileTab/ProfileTabController"
 import ReviewTabController from './Components/ReviewTab/ReviewTabController'
 import BrowseTabController from './Components/BrowseTab/BrowseTabController'
+import FriendsProfileController from './Components/ProfileTab/FriendsProfile/FriendsProfileController'
 
 class App extends React.Component{
   _isMounted = false;
@@ -46,12 +47,13 @@ class App extends React.Component{
           <TopNavView username={username} setUsername={setUsername} />
           <Switch>
             <Route exact path="/">
-              { username===''
+              { !username
               ? <LoginController setUsername={setUsername} />
               : <BrowseTabController username={username}></BrowseTabController>
               }
             </Route>
             <Route exact path="/SignUp" component={SignUpController} />
+            <Route exact path="/FriendsProfile" component={FriendsProfileController} />
             <Route exact path="/Review">
               <ReviewTabController username={username}/>
             </Route>

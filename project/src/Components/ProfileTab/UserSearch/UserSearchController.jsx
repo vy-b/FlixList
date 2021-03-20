@@ -31,9 +31,8 @@ class UserSearchController extends React.Component {
 
     updateFriends = () => {
         getFriends(this.props.username).then((response) => {
-            const sorted = response.sort((a, b) => a.toLowerCase() < b.toLowerCase() ? -1 : 1);
             if(this._isMounted){
-                this.setState({users: sorted})
+                this.setState({users: response})
             }
         })
     }
@@ -44,9 +43,8 @@ class UserSearchController extends React.Component {
             this.setState({error: '', success: `You are now following ${searchUser}`});
             const addToList = this.state.users;
             addToList.push(searchUser);
-            const sorted = addToList.sort((a, b) => a.toLowerCase() < b.toLowerCase() ? -1 : 1);
             if(this._isMounted){
-                this.setState({users: sorted});
+                this.setState({users: addToList});
             }
         }).catch(err => this.setState({error: err, success: ''}));
     }
@@ -60,7 +58,7 @@ class UserSearchController extends React.Component {
                 <div className="listFriends">
                     {
                         this.state.users.map((searchUser, i) => {
-                            return <User username={searchUser} key={i}/>
+                            return <User username={searchUser} myUsername={this.props.username} userClass={'User'} key={i}/>
                         })
                     }
                 </div>
