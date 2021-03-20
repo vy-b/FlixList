@@ -4,6 +4,7 @@ import Star from "@material-ui/icons/Star";
 import {Button} from 'react-bootstrap'
 import {getMovieDetails} from '../Utils/Utils'
 import './ReviewCard.css'
+import User from "./ProfileTab/UserSearch/User.jsx"; 
 import { withRouter } from "react-router-dom"
 class ReviewCard extends React.Component{
     constructor(props) {
@@ -16,20 +17,6 @@ class ReviewCard extends React.Component{
             pathname:"/Review",
             state: {movieInfo: this.state.movieInfo}
         })
-    }
-    onProfileClick = () => {
-        if(this.props.review.username===this.props.username){
-            this.props.history.push("/Profile")
-        }
-        else{
-        this.props.history.push({
-            pathname:"/FriendsProfile",
-            state: {
-                friendUsername: this.props.review.username,
-                myUsername: this.props.username
-            }
-        })
-        }
     }
     
     componentDidMount() {
@@ -46,7 +33,7 @@ class ReviewCard extends React.Component{
             <div style={{marginTop:"10px"}}>
                 <div className="card browse-card">
                 <div className="card-header">
-                    <span className="font-weight-bold reviewUser" onClick={this.onProfileClick}>{username}</span>
+                    <User username={username} myUsername={this.props.username} userClass={'reviewUser'}/>
                     <p className="text-muted date" >{date ? date.slice(0,10): undefined}</p>
                 </div>
                     <div className="row no-gutters" style={{padding:"5px"}}>
