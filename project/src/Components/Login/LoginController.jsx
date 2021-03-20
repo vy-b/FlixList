@@ -1,47 +1,33 @@
 import React from 'react';
 import LoginView from './LoginView'
-import {getUser} from '../../Utils/Utils';
+import { getUser, login } from '../../Utils/Utils';
 import { withRouter } from 'react-router-dom';
 
 class LoginController extends React.Component {
-    constructor(){
+    constructor() {
         super()
         this.state = {
-            errorMessage:''
+            errorMessage: ''
         }
     }
 
-    sendLogin=(loginUser)=>{
-        const {username,password} = loginUser;
-
-        new Promise((resolve, reject) => {
-            getUser(username).then( (response) => {
-                if(response.data === null){
-                    this.setState({errorMessage: 'user does not exist'})
-                }
-                else if (password !== response.data.password){
-                    this.setState({errorMessage: 'wrong password'})
-                }
-                else{
-                    this.props.setUsername(username)
-                    this.setState({errorMessage: 'login successful'})
-                    resolve(this.redirectToBrowse());
-                    
-                }    
-            })
-            }).catch( err => {
-                console.log(err)
-            });
-
+    sendLogin = (loginUser) => {
+        const { username, password } = loginUser;
+        getUser(username, password).then((exists) => {
+            if(exists){
+                this.setState({ errorMessage: 'login successful'});
+                this.props.setUsername(username);
+                this.props.history.push('/');
+            }else{
+                this.setState({ errorMessage: 'invalid credentials'});
+            }
+        }).catch(()=> this.setState({ errorMessage: 'an error occurred'}));
     }
 
-    redirectToBrowse = () => {
-        this.props.history.push('/')
-    }
 
     render() {
         return (
-            <LoginView onLogin={this.sendLogin} errorMessage={this.state.errorMessage}/>
+            <LoginView onLogin={this.sendLogin} errorMessage={this.state.errorMessage} />
         )
     }
 }

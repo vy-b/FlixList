@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const express = require('express');
 const router = express.Router();
 const userTableEntry = require('../models/UserTableEntry.js');
@@ -6,8 +7,25 @@ const ratingTableEntry = require('../models/RatingTableEntry');
 const axios = require('axios');
 const dotenv = require('dotenv');
 const movieTableEntry = require('../models/MovieTableEntry.js');
-
+const secret = "this is the encryption string";
 dotenv.config();
+
+const withAuth = (req, res, next) => {
+    const { token } = req.cookies;
+    if (!token) {
+        res.status(403).send('Unauthorized: No token provided');
+    } else {
+        jwt.verify(token, secret, (err, decoded) => {
+            if (err) {
+                res.status(403).send('Unauthorized: Invalid token');
+            } else {
+                req.userName = decoded.userName;
+                next();
+            }
+        });
+    }
+};
+
 
 router.post('/addUser', (request, response) => {
     const user = new userTableEntry({
@@ -22,8 +40,12 @@ router.post('/addUser', (request, response) => {
 });
 
 router.get('/getUser', (req, res, next) => {
-    userTableEntry.findOne({ username: req.query.username }).exec().then(doc => {
-        res.json(doc)
+    let databaseQuery = {username: req.query.username}
+    if(req.query.password){
+        databaseQuery.password = req.query.password;
+    }
+    userTableEntry.findOne(databaseQuery).exec().then(doc => {
+        res.json({exists: !!doc});
     }).catch(err => console.log(err));
 })
 

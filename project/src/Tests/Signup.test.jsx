@@ -9,7 +9,7 @@ import {changeAndVerify} from '../Utils/TestUtils'
 
 const server = setupServer(
     rest.get('http://localhost:3001/getUser', (req, res, ctx) => {
-        return res(ctx.json({username: 'testUsername', password: 'testPassword'}));    
+        return res(ctx.json({exists: true}));    
     })
 )
 
@@ -33,7 +33,7 @@ test('Username already taken', async () => {
 test('Password too short', async () => {
     server.use(
         rest.get('http://localhost:3001/getUser', (req, res, ctx) => {
-            return res(ctx.json(null));    
+            return res(ctx.json({exists: false}));    
         })
     )
     render(<Router><SignUpController/></Router>);
@@ -47,7 +47,7 @@ test('Password too short', async () => {
 test('Passwords do not match', async () => {
     server.use(
         rest.get('http://localhost:3001/getUser', (req, res, ctx) => {
-            return res(ctx.json(null));    
+            return res(ctx.json({exists: false}));    
         })
     )
     render(<Router><SignUpController/></Router>);
