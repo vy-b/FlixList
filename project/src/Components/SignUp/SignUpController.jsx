@@ -1,7 +1,6 @@
 import React from 'react';
 import SignUpView from './SignUpView'
-import axios from 'axios'
-import { addUser, getUser, signup } from '../../Utils/Utils';
+import { addUser, getUser} from '../../Utils/Utils';
 
 class SignUpController extends React.Component {
     constructor(props) {

@@ -41,7 +41,7 @@ router.post('/addUser', (request, response) => {
 
 router.get('/getUser', (req, res, next) => {
     let databaseQuery = {username: req.query.username}
-    if(req.query.password){
+    if(req.query.password !== undefined){
         databaseQuery.password = req.query.password;
     }
     userTableEntry.findOne(databaseQuery).exec().then(doc => {

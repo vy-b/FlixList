@@ -1,6 +1,6 @@
 import React from 'react';
 import LoginView from './LoginView'
-import { getUser, login } from '../../Utils/Utils';
+import { getUser} from '../../Utils/Utils';
 import { withRouter } from 'react-router-dom';
 
 class LoginController extends React.Component {
