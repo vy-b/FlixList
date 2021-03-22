@@ -6,6 +6,7 @@ const friendTableEntry = require('../models/FriendTableEntry');
 const ratingTableEntry = require('../models/RatingTableEntry');
 const axios = require('axios');
 const dotenv = require('dotenv');
+const cryptoJS = require('crypto-js')
 const movieTableEntry = require('../models/MovieTableEntry.js');
 const secret = "this is the encryption string";
 dotenv.config();
@@ -28,9 +29,10 @@ const withAuth = (req, res, next) => {
 
 
 router.post('/addUser', (request, response) => {
+    const encryptedPassword = cryptoJS.AES.encrypt(JSON.stringify(request.body.password), process.env.ENCRYPTION_KEY).toString();
     const user = new userTableEntry({
         username: request.body.username,
-        password: request.body.password
+        password: encryptedPassword
     })
     user.save().then(data => {
         response.json(data);
@@ -40,12 +42,20 @@ router.post('/addUser', (request, response) => {
 });
 
 router.get('/getUser', (req, res, next) => {
-    let databaseQuery = {username: req.query.username}
-    if(req.query.password !== undefined){
-        databaseQuery.password = req.query.password;
-    }
-    userTableEntry.findOne(databaseQuery).exec().then(doc => {
-        res.json({exists: !!doc});
+    userTableEntry.findOne({username: req.query.username}).exec().then(doc => {
+        if(doc){
+            if(req.query.password !== undefined){
+                // Need to validate password.
+                const decryptedBytes = cryptoJS.AES.decrypt(doc.password,process.env.ENCRYPTION_KEY);
+                const decryptedPassword = JSON.parse(decryptedBytes.toString(cryptoJS.enc.Utf8));
+                res.json({exists: decryptedPassword === req.query.password});
+            }else{
+                // Just checking if usename exists in database, so don't need to validate password
+                res.json({exists: true});
+            }
+        }else{
+            res.json({exists: false});
+        }
     }).catch(err => console.log(err));
 })
 

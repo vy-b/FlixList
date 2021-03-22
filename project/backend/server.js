@@ -17,5 +17,10 @@ app.use('/', routesUrls);
 
 if(process.env.NODE_ENV === 'production'){
     app.use(express.static('../build'))
+    // Express serve up index.html file if it doesn't recognize route
+    const path = require('path');
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
+    });
 }
 app.listen(PORT, () => console.log("Server is running on localhost:3001."));
