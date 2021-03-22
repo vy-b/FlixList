@@ -10,6 +10,7 @@ https://flixxlist.herokuapp.com/
 4. Inside the .env file that you just created, paste the folowing lines: 
 DATABASE_ACCESS = "mongodb+srv://Members:UNqI03KnqB5O8U5x@cmpt276-project.7wuwo.mongodb.net/signup?retryWrites=true&w=majority"
 API_KEY = '16721c88c9msh639b77d27c7427cp1bc563jsnd47d06966083'
+ENCRYPTION_KEY = 'U2FsdGVkX18F6qRlv55nOzWa3rsFqZ9rsWwHJmVxSXE='
 5. Run the command `npm start` to start the server.
 6. Create a second terminal, and navigate to the project/ directory.
 7. Run the command `npm install`.
