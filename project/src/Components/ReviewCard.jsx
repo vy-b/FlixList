@@ -25,6 +25,14 @@ class ReviewCard extends React.Component{
         })
     }
 
+    componentDidUpdate(prevProps){
+        if(prevProps.review.imdbID !== this.props.review.imdbID){
+            getMovieDetails(this.props.review.imdbID).then((details) => {
+                this.setState({movieInfo: details});
+            })
+        }
+    }
+
     render(){
         const {username,rating,date} = this.props.review;
         const {title,poster,year,rated} = this.state.movieInfo;
