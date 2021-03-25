@@ -28,7 +28,7 @@ class UserSearchView extends React.Component {
         return (
             <div className="search">
                 <div className="input-group mb-3">
-                    <input className="form-control search-box" type="text" onChange={this.onInput} onKeyDown={this.onSearch} placeholder="Friend Username" value={searchUser}/>
+                    <input className="form-control search-box" type="text" onChange={this.onInput} onKeyDown={this.onSearch} placeholder="Username" value={searchUser}/>
                     <div className="input-group-append">
                         <button type="submit" className="btn btn-secondary" onClick={this.onSubmit} value="Add">
                             <FaUserPlus className="addUserIcon" /> Add
