@@ -8,7 +8,6 @@ const axios = require('axios');
 const dotenv = require('dotenv');
 const cryptoJS = require('crypto-js')
 const movieTableEntry = require('../models/MovieTableEntry.js');
-const { request } = require('express');
 const secret = "this is the encryption string";
 dotenv.config();
 
