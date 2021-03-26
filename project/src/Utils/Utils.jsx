@@ -4,6 +4,22 @@ import RatingTableEntry from '../Objects/RatingTableEntry';
 
 const baseUrl = process.env.NODE_ENV === 'production' ? 'https://flixxlist.herokuapp.com' : 'http://localhost:3001'
 
+const api = axios.create({withCredentials: true, baseURL: baseUrl})
+
+api.interceptors.response.use(
+    (success) => {
+      return success;
+    },
+    (error) => {
+      if (error.response && error.response.status === 403) {
+        window.location = `http://localhost:3000`;
+        throw error;
+      } else {
+        throw error;
+      }
+    }
+  );
+
 function addFriend(friendTableEntry){
     return new Promise((resolve, reject) => {
         if (friendTableEntry.username.trim() === friendTableEntry.friendUsername.trim()) {
@@ -23,7 +39,7 @@ function addFriend(friendTableEntry){
                             reject(`You are already following ${friendTableEntry.friendUsername}`);
                         }
                         else{
-                            axios.post(`${baseUrl}/addFriend`, friendTableEntry).then( (response) => {
+                            api.post(`/addFriend`, friendTableEntry).then( (response) => {
                                 if(response.status === 200){
                                     resolve(response);
                                 }
@@ -43,7 +59,7 @@ function addFriend(friendTableEntry){
 // Returns an array of the friend usernames.
 function getFriends(username) {
     return new Promise((resolve, reject) => {
-        axios.get(`${baseUrl}/getFriends`, {params: {username: username}}).then( (response) => {
+        api.get(`/getFriends`, {params: {username: username}}).then( (response) => {
             if(response.status === 200){
                 resolve(response.data.map( result => result.friendUsername ).sort((a, b) => a.toLowerCase() < b.toLowerCase() ? -1 : 1));
             }else{
@@ -56,7 +72,7 @@ function getFriends(username) {
 // Adds the rating, or updates it if a rating already exists for that username and movieId.
 function addRating(ratingTableEntry) {
     return new Promise((resolve, reject) => {
-        axios.post(`${baseUrl}/addRating`, ratingTableEntry).then( (response) => {
+        api.post(`/addRating`, ratingTableEntry).then( (response) => {
             if(response.status === 200){
                 resolve(response);
             } else {
@@ -78,7 +94,7 @@ function getRatings(imdbID, usernameList) {
         usernameList: usernameList
     }
     return new Promise((resolve, reject) => {
-        axios.get(`${baseUrl}/getRatings`, {params: searchParamaters}).then( (response) => {
+        api.get(`/getRatings`, {params: searchParamaters}).then( (response) => {
             if(response.status === 200){
                 let results = response.data.map(result => {
                     return new RatingTableEntry(result.imdbID, result.username, result.rating.stars, result.rating.review, result.date);
@@ -100,7 +116,7 @@ Returns true if a user exists that satisfies the parameters, false otherwise.
 */
 function getUser(username, password) {
     return new Promise((resolve, reject) => {
-        axios.get(`${baseUrl}/getUser`, {params: {username: username, password: password}}).then( (response) => {
+        api.get(`/getUser`, {params: {username: username, password: password}}).then( (response) => {
             if(response.status === 200){
                 resolve(response.data.exists);
             } else {
@@ -114,7 +130,7 @@ function getUser(username, password) {
 // Returns the movie results from the search query.
 function getSearchResults(movieTitle) {
     return new Promise((resolve, reject) => {
-        axios.get(`${baseUrl}/getSearchResults`, {params: {title: movieTitle}}).then( (response) => {
+        api.get(`/getSearchResults`, {params: {title: movieTitle}}).then( (response) => {
             if(response.status === 200){
                 resolve(response.data);
             } else {
@@ -128,17 +144,17 @@ function getSearchResults(movieTitle) {
 function getMovieDetails(imdbID) {
     return new Promise((resolve, reject) => {
         // First search our own movie table in mongoDB
-        axios.get(`${baseUrl}/getTableMovieDetails`, {params: {imdbID: imdbID}}).then( (response) => {
+        api.get(`/getTableMovieDetails`, {params: {imdbID: imdbID}}).then( (response) => {
             if(response.status === 200 && response.data){
                 resolve(response.data);
             } else {
                 // If can't find in mongoDB, get from rapidApi
-                axios.get(`${baseUrl}/getRapidApiMovieDetails`, {params: {imdbID: imdbID}}).then( (response) => {
+                api.get(`/getRapidApiMovieDetails`, {params: {imdbID: imdbID}}).then( (response) => {
                     if(response.status === 200 && response.data){
                         const {imdbID, Title, Plot, Poster, Rated, Year, Runtime, Genre, Actors} = response.data;
                         const movieTableEntry = new MovieTableEntry(imdbID, Title, Plot, Poster, Rated, Year, Runtime, Genre, Actors, 0, 0);
                         // Add result to mongoDB for next time.
-                        axios.post(`${baseUrl}/addMovieDetails`, movieTableEntry).catch( err => console.log(err));
+                        api.post(`/addMovieDetails`, movieTableEntry).catch( err => console.log(err));
                         resolve(movieTableEntry);
                     } else {
                         reject(response);
@@ -151,7 +167,7 @@ function getMovieDetails(imdbID) {
 
 function addUser(newUser){
     return new Promise((resolve, reject) => {
-        axios.post(`${baseUrl}/addUser`, newUser).then(response => {
+        api.post(`/addUser`, newUser).then(response => {
             if(response.status === 200){
                 resolve(response);
             }else{
@@ -161,4 +177,28 @@ function addUser(newUser){
     })
 }
 
-export {addFriend, addUser, getFriends, getUser, addRating, getRatings, getSearchResults, getMovieDetails}
+function signOut(){
+    return new Promise((resolve, reject) => {
+        api.get(`/logout`).then(response => {
+            if(response.status === 200){
+                resolve(response);
+            }else{
+                reject(response);
+            }
+        });
+    })
+}
+
+function getUsername(){
+    return new Promise((resolve, reject) => {
+        api.get(`/getUsername`).then(response => {
+            if(response.status === 200){
+                resolve(response.data.username);
+            }else{
+                reject(response);
+            }
+        });
+    })
+}
+
+export {addFriend, addUser, getFriends, getUser, addRating, getRatings, getSearchResults, getMovieDetails, signOut, getUsername}

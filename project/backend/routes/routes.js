@@ -8,6 +8,7 @@ const axios = require('axios');
 const dotenv = require('dotenv');
 const cryptoJS = require('crypto-js')
 const movieTableEntry = require('../models/MovieTableEntry.js');
+const { request } = require('express');
 const secret = "this is the encryption string";
 dotenv.config();
 
@@ -20,7 +21,7 @@ const withAuth = (req, res, next) => {
             if (err) {
                 res.status(403).send('Unauthorized: Invalid token');
             } else {
-                req.userName = decoded.userName;
+                req.username = decoded.username;
                 next();
             }
         });
@@ -48,7 +49,12 @@ router.get('/getUser', (req, res, next) => {
                 // Need to validate password.
                 const decryptedBytes = cryptoJS.AES.decrypt(doc.password,process.env.ENCRYPTION_KEY);
                 const decryptedPassword = JSON.parse(decryptedBytes.toString(cryptoJS.enc.Utf8));
-                res.json({exists: decryptedPassword === req.query.password});
+                const payload = { username: req.query.username };
+                const token = jwt.sign(payload, secret, {
+                    expiresIn: '1h',
+                });
+                return res.cookie('token', token, { httpOnly: true }).json({exists: decryptedPassword === req.query.password});
+    
             }else{
                 // Just checking if usename exists in database, so don't need to validate password
                 res.json({exists: true});
@@ -59,9 +65,9 @@ router.get('/getUser', (req, res, next) => {
     }).catch(err => console.log(err));
 })
 
-router.post('/addFriend', (request, response) => {
+router.post('/addFriend', withAuth, (request, response) => {
     const friendEntry = new friendTableEntry({
-        username: request.body.username,
+        username: request.username,
         friendUsername: request.body.friendUsername
     })
     friendEntry.save().then(data => {
@@ -72,14 +78,14 @@ router.post('/addFriend', (request, response) => {
 })
 
 router.get('/getFriends', (req, res, next) => {
-    friendTableEntry.find({ username: req.query.username }).exec().then(doc => {
+    friendTableEntry.find({ username: req.query.username}).exec().then(doc => {
         res.json(doc)
     }).catch(err => res.json(err));
 })
 
-router.post('/addRating', (request, response) => {
+router.post('/addRating', withAuth, (request, response) => {
     const { imdbID, username, rating } = request.body;
-    ratingTableEntry.findOne({ imdbID: imdbID, username: username }).exec().then(doc => {
+    ratingTableEntry.findOne({ imdbID: imdbID, username: request.username }).exec().then(doc => {
         const newStars = Number(rating.stars);
         if (doc) {
             // Rating already exists for this imdbID and username -> need to update.
@@ -98,7 +104,7 @@ router.post('/addRating', (request, response) => {
             // No rating exists for this imdbID and username -> need to add.
             const ratingEntry = new ratingTableEntry({
                 imdbID: imdbID,
-                username: username,
+                username: request.username,
                 rating: rating
             });
             ratingEntry.save().then(data => {
@@ -187,5 +193,31 @@ router.post('/addMovieDetails', (request, response) => {
         response.json(error);
     });
 })
+
+router.get('/logout', function (req, res, next) {
+    res.cookie('token', 'none', {
+        expires: new Date(Date.now() + 5 * 1000),
+        httpOnly: true,
+      });
+      res
+        .status(200)
+        .json({ success: true, message: 'User logged out successfully' });
+});
+
+router.get('/getUsername', function (req, res, next) {
+    const { token } = req.cookies;
+    if (!token) {
+        res.json({username: '' });
+    } else {
+        jwt.verify(token, secret, (err, decoded) => {
+            if (err) {
+                res.json({username: '' });
+            } else {
+                res.json({username: decoded.username });
+            }
+        });
+    }
+    res.json({username: req.username})
+});
 
 module.exports = router;

@@ -5,9 +5,18 @@ import './TopNavView.css'
 import { Link } from 'react-router-dom'
 import { FaSearch, FaUser, FaSignOutAlt } from 'react-icons/fa';
 import FlixListLogo from '../Logos/Logo.svg';
+import {signOut} from '../Utils/Utils'
 
 class TopNavView extends React.Component {
-    signOut = () => {
+    signOutHandler = () => {
+        try {
+            signOut();  
+        } catch (error) {
+            console.log(1);
+            console.log(error.response);
+            console.log(2);
+        }
+        
         this.props.setUsername(undefined)
     }
     render() {
@@ -32,7 +41,7 @@ class TopNavView extends React.Component {
                                     <Dropdown.Item as={Link} to="/Profile">
                                             <FaUser className="profileIcon" /> Profile
                                     </Dropdown.Item>
-                                    <Dropdown.Item onClick={this.signOut} as={Link} to="/Login">
+                                    <Dropdown.Item onClick={this.signOutHandler} as={Link} to="/Login">
                                             <FaSignOutAlt className="signOutIcon" /> Sign Out
                                     </Dropdown.Item>
                                 </div>
