@@ -12,9 +12,7 @@ class TopNavView extends React.Component {
         try {
             signOut();  
         } catch (error) {
-            console.log(1);
             console.log(error.response);
-            console.log(2);
         }
         
         this.props.setUsername(undefined)
