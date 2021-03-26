@@ -30,7 +30,7 @@ class FriendsProfileView extends React.Component{
                             
                         </Button>
                         {users.length !== 0 
-                        ? <div className = "friends" style={{marginBottom:"10px",paddingTop:"10vh"}}>{friendUsername}'s Friends List</div>
+                        ? <div className = "friends" style={{marginBottom:"10px",paddingTop:"10vh"}}>{friendUsername} Is Following</div>
                         : <div className="font-italic" style={{marginTop:"10px"}}>{friendUsername} is not following anyone</div>
                         }
                         <div className="listFriends">
