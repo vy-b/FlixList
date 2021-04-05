@@ -3,23 +3,8 @@ import MovieTableEntry from '../Objects/MovieTableEntry';
 import RatingTableEntry from '../Objects/RatingTableEntry';
 
 const baseUrl = process.env.NODE_ENV === 'production' ? 'https://flixxlist.herokuapp.com' : 'http://localhost:3001'
-const windowUrl = process.env.NODE_ENV === 'production' ? 'https://flixxlist.herokuapp.com' : 'http://localhost:3000'
 
 const api = axios.create({withCredentials: true, baseURL: baseUrl})
-
-api.interceptors.response.use(
-    (success) => {
-      return success;
-    },
-    (error) => {
-      if (error.response && error.response.status === 403) {
-        window.location = windowUrl;
-        throw error;
-      } else {
-        throw error;
-      }
-    }
-  );
 
 function addFriend(friendTableEntry){
     return new Promise((resolve, reject) => {
