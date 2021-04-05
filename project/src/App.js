@@ -9,6 +9,8 @@ import ProfileTabController from "./Components/ProfileTab/ProfileTabController"
 import ReviewTabController from './Components/ReviewTab/ReviewTabController'
 import BrowseTabController from './Components/BrowseTab/BrowseTabController'
 import FriendsProfileController from './Components/ProfileTab/FriendsProfile/FriendsProfileController'
+import {getUsername} from './Utils/Utils'
+
 
 class App extends React.Component{
   _isMounted = false;
@@ -18,12 +20,13 @@ class App extends React.Component{
     this.state = {username: ''}
   }
 
+
+
   componentDidMount(){
     this._isMounted = true;
-    var username = sessionStorage.getItem('username');
-    if(this._isMounted){
-      this.setState({username: username});
-    }
+    getUsername().then(response => {
+        this.setState({username: response});
+    });
   }
  
   setUsername = (username) => {
@@ -31,7 +34,6 @@ class App extends React.Component{
     if(this._isMounted){
       this.setState({username: newUsername});
     }
-    sessionStorage.setItem('username', newUsername);
   }
 
   componentWillUnmount(){
