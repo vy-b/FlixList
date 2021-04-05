@@ -64,6 +64,9 @@ test('Valid friend username', async () => {
     server.use(
         rest.get('http://localhost:3001/getUser', (req, res, ctx) => {
             return res(ctx.json({exists: true}));    
+        }),
+        rest.get('http://localhost:3001/getFriends', (req, res, ctx) => {
+            return res(ctx.json(['test1']));
         })
     )
     render(<Router><ProfileTabController username={'testUsername'}/></Router>);

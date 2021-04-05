@@ -24,13 +24,9 @@ class App extends React.Component{
 
   componentDidMount(){
     this._isMounted = true;
-    new Promise((resolve, reject) => {
-      getUsername().then(response => {
-          this.setState({username: response});
-          resolve();
-      });
-  })
-    
+    getUsername().then(response => {
+        this.setState({username: response});
+    });
   }
  
   setUsername = (username) => {
@@ -38,7 +34,6 @@ class App extends React.Component{
     if(this._isMounted){
       this.setState({username: newUsername});
     }
-    sessionStorage.setItem('username', newUsername);
   }
 
   componentWillUnmount(){
