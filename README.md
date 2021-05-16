@@ -1,7 +1,7 @@
 # 301396991_Group_Project
 
 ## Deployed website
-https://flixxlist.herokuapp.com/
+https://flixlist-production.herokuapp.com
 ## demo login:
 username: demoUser1  
 password: 123456
